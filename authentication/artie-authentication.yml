@@ -1,0 +1,21 @@
+generated: '2026-07-18'
+method: searched
+source: openapi/artie-openapi-original.yml
+docs: https://www.artie.com/docs/api-reference
+summary:
+  types:
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: ApiKey
+  type: http
+  scheme: bearer
+  description: >-
+    API key passed as a Bearer token in the Authorization header
+    (Authorization: Bearer <key>). Keys are generated from the Artie dashboard
+    and exposed to the CLI via the ARTIE_API_KEY environment variable.
+  header: Authorization
+  env: ARTIE_API_KEY
+  sources:
+  - openapi/artie-openapi-original.yml
