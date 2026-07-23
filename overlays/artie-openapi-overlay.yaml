@@ -1,0 +1,20 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Artie API
+  version: 1.0.0
+extends: openapi/artie-openapi-original.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-18'
+    x-api-evangelist-network: https://apis.io/provider/artie
+    x-auth-style: 'HTTP Bearer API key (Authorization: Bearer <ARTIE_API_KEY>)'
+    x-webhooks: Event surface documented in asyncapi/artie-webhooks-asyncapi.yml
+- target: $.tags
+  update:
+  - name: Pipelines
+    description: Create, configure, start, and monitor replication pipelines.
+  - name: Connectors
+    description: Source/destination database connectors and connection testing.
+  - name: Source Readers
+    description: CDC source reader deployment and lifecycle.

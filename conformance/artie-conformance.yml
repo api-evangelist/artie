@@ -1,0 +1,31 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/artie-openapi-original.yml
+standards:
+- id: oauth2
+  conforms: false
+  evidence: "No oauth2 security scheme; API uses HTTP Bearer API-key auth."
+- id: http-bearer-auth
+  conforms: true
+  evidence: "components.securitySchemes.ApiKey is type http, scheme bearer."
+- id: openapi-3.1
+  conforms: true
+  evidence: "openapi 3.1.0 document published at github.com/artie-labs/artie-api-spec."
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: "Errors return a plain '{ error: string }' body, not application/problem+json."
+- id: json-api
+  conforms: false
+  evidence: "List responses use a bespoke '{ items: [] }' envelope, not JSON:API."
+- id: webhooks-event-delivery
+  conforms: true
+  evidence: "Discriminated webhook Event Payload with delivery attempt counter and severity (17 event types)."
+- id: cursor-pagination
+  conforms: false
+  evidence: "List endpoints return the full '{ items: [] }' collection; no documented cursor/offset paging parameters."
+compliance:
+  note: >-
+    Artie operates a Trust Center at https://trust.artie.com/ but its
+    certification list is rendered client-side and could not be verified in this
+    pass. No named certification (SOC 2 / ISO 27001 / etc.) is asserted here, so
+    no `Compliance` pointer is emitted (no fabrication).

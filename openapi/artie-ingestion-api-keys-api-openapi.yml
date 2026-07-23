@@ -1,0 +1,150 @@
+openapi: 3.1.0
+info:
+  description: External API endpoints for Artie
+  title: Artie Column Hashing Salts Ingestion API Keys API
+  version: v1.0.51
+servers:
+- url: https://api.artie.com
+security:
+- ApiKey: []
+tags:
+- name: Ingestion API Keys
+paths:
+  /ingestion-api-keys:
+    post:
+      description: Creates a new ingestion API key for a source reader. Returns the key and its secret (only shown once).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterCreateIngestionAPIKeyRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouterCreateIngestionAPIKeyResponse'
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Create an ingestion API key
+      tags:
+      - Ingestion API Keys
+  /ingestion-api-keys/{uuid}:
+    delete:
+      description: Deletes an ingestion API key by UUID.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '500':
+          description: Internal Server Error
+      summary: Delete an ingestion API key
+      tags:
+      - Ingestion API Keys
+    post:
+      description: Updates an existing ingestion API key by UUID.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterUpdateIngestionAPIKeyRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsIngestionAPIKey'
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Update an ingestion API key
+      tags:
+      - Ingestion API Keys
+components:
+  schemas:
+    RouterCreateIngestionAPIKeyRequest:
+      properties:
+        name:
+          type: string
+        sourceReaderUUID:
+          format: uuid
+          type: string
+      required:
+      - sourceReaderUUID
+      type: object
+    PayloadsIngestionAPIKey:
+      properties:
+        companyUUID:
+          format: uuid
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        expiresAt:
+          format: date-time
+          type:
+          - 'null'
+          - string
+        last4:
+          type: string
+        name:
+          type: string
+        sourceReaderUUID:
+          format: uuid
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - createdAt
+      - updatedAt
+      - name
+      - last4
+      - sourceReaderUUID
+      - companyUUID
+      type: object
+    RouterCreateIngestionAPIKeyResponse:
+      properties:
+        ingestionAPIKey:
+          $ref: '#/components/schemas/PayloadsIngestionAPIKey'
+        secret:
+          type: string
+      required:
+      - ingestionAPIKey
+      - secret
+      type: object
+    RouterUpdateIngestionAPIKeyRequest:
+      properties:
+        expiresAt:
+          format: date-time
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+      type: object
+  securitySchemes:
+    ApiKey:
+      description: API key passed as a Bearer token in the Authorization header.
+      scheme: bearer
+      type: http

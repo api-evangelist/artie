@@ -1,0 +1,29 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/artie-labs/artiecli
+name: artiecli
+description: Command-line interface for interacting with the Artie API.
+repository: https://github.com/artie-labs/artiecli
+language: go
+install:
+- method: go
+  command: go install github.com/artie-labs/artiecli@latest
+- method: binary
+  command: Download a pre-built binary from the GitHub Releases page.
+  url: https://github.com/artie-labs/artiecli/releases
+authentication:
+  method: api-key
+  env: ARTIE_API_KEY
+  notes: Generate an API key from the Artie dashboard; exported as the ARTIE_API_KEY environment variable.
+commands:
+- name: list-deployments
+  summary: List all deployments (pipelines) for the authenticated company.
+- name: get-deployment
+  summary: Fetch a single deployment by UUID.
+  flags:
+  - --deployment-uuid
+- name: cancel-deployment-backfill
+  summary: Cancel an in-progress backfill for a deployment, optionally scoped to specific tables.
+  flags:
+  - --deployment-uuid
+  - --table-uuids

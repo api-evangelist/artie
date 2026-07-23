@@ -1,0 +1,170 @@
+openapi: 3.1.0
+info:
+  description: External API endpoints for Artie
+  title: Artie Column Hashing Salts SSH Tunnels API
+  version: v1.0.51
+servers:
+- url: https://api.artie.com
+security:
+- ApiKey: []
+tags:
+- name: SSH Tunnels
+paths:
+  /ssh-tunnels:
+    post:
+      description: Creates a new SSH tunnel for the authenticated company.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterSSHTunnelCreateRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsSSHTunnel'
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Create an SSH tunnel
+      tags:
+      - SSH Tunnels
+  /ssh-tunnels/{uuid}:
+    delete:
+      description: Permanently deletes an SSH tunnel by UUID. The tunnel must not be in use by any connectors or pipelines before it can be deleted.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Delete an SSH tunnel
+      tags:
+      - SSH Tunnels
+    get:
+      description: Retrieves the details of an SSH tunnel by UUID, including its host, port, username, public key, and whether it is currently in use.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsSSHTunnel'
+          description: OK
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Get an SSH tunnel
+      tags:
+      - SSH Tunnels
+    post:
+      description: Updates an existing SSH tunnel by UUID. You can modify the name, host, port, and username. Changes will mark associated pipelines as having undeployed changes.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsSSHTunnel'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsSSHTunnel'
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Update an SSH tunnel
+      tags:
+      - SSH Tunnels
+components:
+  schemas:
+    PayloadsSSHTunnel:
+      properties:
+        companyUUID:
+          format: uuid
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        environmentUUID:
+          format: uuid
+          type: string
+        host:
+          type: string
+        isInUse:
+          type:
+          - 'null'
+          - boolean
+        name:
+          type: string
+        port:
+          type: integer
+        publicKey:
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        username:
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - companyUUID
+      - environmentUUID
+      - name
+      - host
+      - port
+      - publicKey
+      - username
+      type: object
+    RouterSSHTunnelCreateRequest:
+      properties:
+        environmentUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        host:
+          type: string
+        name:
+          type: string
+        port:
+          type: integer
+        username:
+          type: string
+      required:
+      - host
+      - port
+      - username
+      type: object
+  securitySchemes:
+    ApiKey:
+      description: API key passed as a Bearer token in the Authorization header.
+      scheme: bearer
+      type: http

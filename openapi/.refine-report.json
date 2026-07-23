@@ -1,0 +1,30 @@
+{
+  "provider": "artie",
+  "sources": [
+    "artie-column-hashing-salts-api-openapi.yml",
+    "artie-connectors-api-openapi.yml",
+    "artie-data-catalog-api-openapi.yml",
+    "artie-encryption-keys-api-openapi.yml",
+    "artie-ingestion-api-keys-api-openapi.yml",
+    "artie-pipelines-api-openapi.yml",
+    "artie-privatelink-connections-api-openapi.yml",
+    "artie-source-readers-api-openapi.yml",
+    "artie-ssh-tunnels-api-openapi.yml"
+  ],
+  "outputs": [
+    "artie-column-hashing-salts-api-openapi.yml",
+    "artie-connectors-api-openapi.yml",
+    "artie-data-catalog-api-openapi.yml",
+    "artie-encryption-keys-api-openapi.yml",
+    "artie-ingestion-api-keys-api-openapi.yml",
+    "artie-pipelines-api-openapi.yml",
+    "artie-privatelink-connections-api-openapi.yml",
+    "artie-source-readers-api-openapi.yml",
+    "artie-ssh-tunnels-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

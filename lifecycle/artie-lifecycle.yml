@@ -1,0 +1,21 @@
+generated: '2026-07-18'
+method: searched
+source: https://www.artie.com/docs/changelog
+versioning:
+  scheme: date-based
+  api_spec_version: v1.0.51
+  current: April 2026
+  docs: https://www.artie.com/docs/changelog
+  note: >-
+    Product changelog is organized by month/year rather than semantic versions.
+    The OpenAPI document carries an internal info.version (v1.0.51).
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No formal deprecation/sunset (RFC 8594) policy was located.
+sla:
+  url: null
+status_page:
+  url: null
+  note: status.artie.com did not resolve during this pass; no public status page found.
+deprecated_operations: []

@@ -1,0 +1,210 @@
+openapi: 3.1.0
+info:
+  description: External API endpoints for Artie
+  title: Artie Column Hashing Salts PrivateLink Connections API
+  version: v1.0.51
+servers:
+- url: https://api.artie.com
+security:
+- ApiKey: []
+tags:
+- name: PrivateLink Connections
+paths:
+  /privatelink-connections:
+    post:
+      description: Creates a new PrivateLink connection for the authenticated company.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterPrivateLinkConnectionCreateRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsPrivateLinkConnection'
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Create a PrivateLink connection
+      tags:
+      - PrivateLink Connections
+  /privatelink-connections/{uuid}:
+    delete:
+      description: Permanently deletes a PrivateLink connection by UUID. This action cannot be undone and will remove the connection from your account.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Delete a PrivateLink connection
+      tags:
+      - PrivateLink Connections
+    get:
+      description: Retrieves the details of a PrivateLink connection by UUID, including its status, VPC service name, region, DNS entry, and availability zones.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsPrivateLinkConnection'
+          description: OK
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Get a PrivateLink connection
+      tags:
+      - PrivateLink Connections
+    post:
+      description: Updates an existing PrivateLink connection by UUID. The name can always be updated. The config fields (region / VPC service name / data plane / availability zones) are only mutable while the connection is under review or errored — once it is being provisioned or live they are immutable.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterPrivateLinkConnectionUpdateRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsPrivateLinkConnection'
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Update a PrivateLink connection
+      tags:
+      - PrivateLink Connections
+components:
+  schemas:
+    RouterPrivateLinkConnectionUpdateRequest:
+      properties:
+        availabilityZoneIds:
+          items:
+            type: string
+          type: array
+        dataPlaneName:
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+        vpcServiceName:
+          type: string
+      required:
+      - name
+      - vpcServiceName
+      - availabilityZoneIds
+      type: object
+    PayloadsPrivateLinkConnection:
+      properties:
+        approvedAt:
+          format: date-time
+          type:
+          - 'null'
+          - string
+        availabilityZoneIds:
+          items:
+            type: string
+          type: array
+        companyUUID:
+          format: uuid
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        createdBy:
+          type: string
+        dataPlaneName:
+          type:
+          - 'null'
+          - string
+        dnsEntry:
+          type: string
+        environmentUUID:
+          format: uuid
+          type: string
+        name:
+          type: string
+        provisioningError:
+          type: string
+        region:
+          type: string
+        status:
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
+          type: string
+        vpcEndpointId:
+          type: string
+        vpcServiceName:
+          type: string
+      required:
+      - uuid
+      - companyUUID
+      - environmentUUID
+      - createdAt
+      - updatedAt
+      - name
+      - vpcServiceName
+      - status
+      - region
+      - dnsEntry
+      - availabilityZoneIds
+      type: object
+    RouterPrivateLinkConnectionCreateRequest:
+      properties:
+        availabilityZoneIds:
+          items:
+            type: string
+          type: array
+        dataPlaneName:
+          type:
+          - 'null'
+          - string
+        environmentUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+        vpcServiceName:
+          type: string
+      required:
+      - vpcServiceName
+      - availabilityZoneIds
+      type: object
+  securitySchemes:
+    ApiKey:
+      description: API key passed as a Bearer token in the Authorization header.
+      scheme: bearer
+      type: http

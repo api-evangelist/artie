@@ -1,0 +1,37 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/artie-openapi-original.yml
+authentication:
+  style: http-bearer
+  header: 'Authorization: Bearer <API key>'
+  scheme_name: ApiKey
+  env: ARTIE_API_KEY
+  cross_ref: authentication/artie-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    No Idempotency-Key header/parameter is documented in the OpenAPI. Creates are
+    plain POSTs. (No `Idempotency` pointer emitted — not fabricating support.)
+pagination:
+  style: none-documented
+  response_field: items
+  note: >-
+    List endpoints return a '{ items: [...] }' envelope containing the full
+    collection; no cursor/offset/limit paging parameters are declared in the spec.
+identifiers:
+  scheme: uuid
+  note: All top-level resources are addressed by a UUID path parameter (/{uuid}).
+error_envelope:
+  shape: '{ "error": "<message>" }'
+  schema: RouterValidateErrorResponse
+  rfc9457: false
+  cross_ref: errors/artie-problem-types.yml
+versioning:
+  scheme: date-based
+  cross_ref: lifecycle/artie-lifecycle.yml
+webhooks:
+  supported: true
+  delivery: POST Event Payload (discriminated by `event`) with an attempt counter and severity.
+  cross_ref: asyncapi/artie-webhooks-asyncapi.yml
+rate_limiting:
+  signaling: not-documented

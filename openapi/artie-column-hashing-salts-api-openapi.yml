@@ -1,0 +1,247 @@
+openapi: 3.1.0
+info:
+  description: External API endpoints for Artie
+  title: Artie Column Hashing Salts API
+  version: v1.0.51
+servers:
+- url: https://api.artie.com
+security:
+- ApiKey: []
+tags:
+- name: Column Hashing Salts
+paths:
+  /column-hashing-salts:
+    get:
+      description: Lists all column hashing salts for the authenticated company.
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseBodyColumnHashingSalt'
+          description: OK
+        '500':
+          description: Internal Server Error
+      summary: List column hashing salts
+      tags:
+      - Column Hashing Salts
+    post:
+      description: Creates a new column hashing salt for the authenticated company.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterCreateColumnHashingSaltRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouterCreateColumnHashingSaltResponse'
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Create a column hashing salt
+      tags:
+      - Column Hashing Salts
+  /column-hashing-salts/{uuid}:
+    delete:
+      description: Deletes a column hashing salt by UUID.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Delete a column hashing salt
+      tags:
+      - Column Hashing Salts
+    get:
+      description: Retrieves a column hashing salt by UUID, including the decrypted salt. Requires company admin.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsColumnHashingSaltDetail'
+          description: OK
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Get a column hashing salt
+      tags:
+      - Column Hashing Salts
+    post:
+      description: Updates the name and description of a column hashing salt.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterUpdateColumnHashingSaltRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsColumnHashingSalt'
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Update a column hashing salt
+      tags:
+      - Column Hashing Salts
+  /column-hashing-salts/{uuid}/preview:
+    post:
+      description: Hashes a sample string value with this salt using the same function used by Artie's pipelines (HMAC-SHA256 keyed on the salt, or SHA-256 if the salt is empty). Returns the hex-encoded hash.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterPreviewColumnHashingSaltRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouterPreviewColumnHashingSaltResponse'
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Preview a column hashing salt
+      tags:
+      - Column Hashing Salts
+components:
+  schemas:
+    RouterUpdateColumnHashingSaltRequest:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    RouterPreviewColumnHashingSaltResponse:
+      properties:
+        hash:
+          type: string
+      required:
+      - hash
+      type: object
+    RouterPreviewColumnHashingSaltRequest:
+      properties:
+        value:
+          type: string
+      required:
+      - value
+      type: object
+    RouterCreateColumnHashingSaltResponse:
+      properties:
+        columnHashingSalt:
+          $ref: '#/components/schemas/PayloadsColumnHashingSalt'
+        salt:
+          type: string
+      required:
+      - columnHashingSalt
+      - salt
+      type: object
+    PayloadsColumnHashingSalt:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - name
+      type: object
+    RouterCreateColumnHashingSaltRequest:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        salt:
+          type: string
+      required:
+      - name
+      type: object
+    PayloadsColumnHashingSaltDetail:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+        salt:
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - name
+      - salt
+      type: object
+    ListResponseBodyColumnHashingSalt:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsColumnHashingSalt'
+          type: array
+      required:
+      - items
+      type: object
+  securitySchemes:
+    ApiKey:
+      description: API key passed as a Bearer token in the Authorization header.
+      scheme: bearer
+      type: http

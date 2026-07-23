@@ -1,0 +1,30 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/artie-openapi-original.yml
+note: >-
+  Generated packaged Agent Skills grounded in real Artie API operations
+  (method + path, from the published OpenAPI — the spec declares no operationIds,
+  so operations are referenced by their HTTP method and path). No provider-published
+  Agent Skills / AGENTS.md were found.
+skills:
+- file: artie-create-and-start-pipeline.md
+  name: Create and start a replication pipeline
+  api: openapi/artie-openapi-original.yml
+  operations:
+  - POST /source-readers
+  - POST /connectors
+  - POST /pipelines/create-from-source
+  - POST /pipelines
+  - POST /pipelines/{uuid}/start
+- file: artie-secure-columns.md
+  name: Configure column encryption and hashing
+  api: openapi/artie-openapi-original.yml
+  operations:
+  - POST /encryption-keys
+  - POST /column-hashing-salts
+  - POST /column-hashing-salts/{uuid}/preview
+- file: artie-search-data-catalog.md
+  name: Search the data catalog
+  api: openapi/artie-openapi-original.yml
+  operations:
+  - POST /data-catalog/search

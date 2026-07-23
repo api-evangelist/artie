@@ -1,0 +1,432 @@
+generated: '2026-07-18'
+method: derived
+status: candidate
+source: openapi/artie-openapi-original.yml
+note: No official hosted/remote Artie MCP server was found. This is a CANDIDATE tool list derived one-per-operation
+  from the published OpenAPI, provided as a starting point for an MCP server.
+server:
+  name: artie
+  transport: http
+  auth: bearer (ARTIE_API_KEY)
+  base: https://api.artie.com
+tools:
+- name: get_column_hashing_salts
+  description: List column hashing salts
+  source_operation: openapi/artie-openapi-original.yml#GET /column-hashing-salts
+  method: GET
+  path: /column-hashing-salts
+  tags:
+  - Column Hashing Salts
+- name: post_column_hashing_salts
+  description: Create a column hashing salt
+  source_operation: openapi/artie-openapi-original.yml#POST /column-hashing-salts
+  method: POST
+  path: /column-hashing-salts
+  tags:
+  - Column Hashing Salts
+- name: delete_column_hashing_salts_uuid
+  description: Delete a column hashing salt
+  source_operation: openapi/artie-openapi-original.yml#DELETE /column-hashing-salts/{uuid}
+  method: DELETE
+  path: /column-hashing-salts/{uuid}
+  tags:
+  - Column Hashing Salts
+- name: get_column_hashing_salts_uuid
+  description: Get a column hashing salt
+  source_operation: openapi/artie-openapi-original.yml#GET /column-hashing-salts/{uuid}
+  method: GET
+  path: /column-hashing-salts/{uuid}
+  tags:
+  - Column Hashing Salts
+- name: post_column_hashing_salts_uuid
+  description: Update a column hashing salt
+  source_operation: openapi/artie-openapi-original.yml#POST /column-hashing-salts/{uuid}
+  method: POST
+  path: /column-hashing-salts/{uuid}
+  tags:
+  - Column Hashing Salts
+- name: post_column_hashing_salts_uuid_preview
+  description: Preview a column hashing salt
+  source_operation: openapi/artie-openapi-original.yml#POST /column-hashing-salts/{uuid}/preview
+  method: POST
+  path: /column-hashing-salts/{uuid}/preview
+  tags:
+  - Column Hashing Salts
+- name: post_connectors
+  description: Create a connector
+  source_operation: openapi/artie-openapi-original.yml#POST /connectors
+  method: POST
+  path: /connectors
+  tags:
+  - Connectors
+- name: delete_connectors_uuid
+  description: Delete a connector
+  source_operation: openapi/artie-openapi-original.yml#DELETE /connectors/{uuid}
+  method: DELETE
+  path: /connectors/{uuid}
+  tags:
+  - Connectors
+- name: get_connectors_uuid
+  description: Get a connector
+  source_operation: openapi/artie-openapi-original.yml#GET /connectors/{uuid}
+  method: GET
+  path: /connectors/{uuid}
+  tags:
+  - Connectors
+- name: post_connectors_uuid
+  description: Update a connector
+  source_operation: openapi/artie-openapi-original.yml#POST /connectors/{uuid}
+  method: POST
+  path: /connectors/{uuid}
+  tags:
+  - Connectors
+- name: get_connectors_uuid_detail
+  description: Fetch table detail for a saved connector
+  source_operation: openapi/artie-openapi-original.yml#GET /connectors/{uuid}/detail
+  method: GET
+  path: /connectors/{uuid}/detail
+  tags:
+  - Connectors
+- name: post_connectors_uuid_generate_shadow_script
+  description: Generate Oracle shadow table script
+  source_operation: openapi/artie-openapi-original.yml#POST /connectors/{uuid}/generate-shadow-script
+  method: POST
+  path: /connectors/{uuid}/generate-shadow-script
+  tags:
+  - Connectors
+- name: post_connectors_uuid_postgres_drop_replication_slot
+  description: Drop a PostgreSQL replication slot
+  source_operation: openapi/artie-openapi-original.yml#POST /connectors/{uuid}/postgres-drop-replication-slot
+  method: POST
+  path: /connectors/{uuid}/postgres-drop-replication-slot
+  tags:
+  - Connectors
+- name: post_connectors_uuid_start_dynamodb_export
+  description: Start a DynamoDB export
+  source_operation: openapi/artie-openapi-original.yml#POST /connectors/{uuid}/start-dynamodb-export
+  method: POST
+  path: /connectors/{uuid}/start-dynamodb-export
+  tags:
+  - Connectors
+- name: post_connectors_databases
+  description: Fetch databases for an unsaved connector
+  source_operation: openapi/artie-openapi-original.yml#POST /connectors/databases
+  method: POST
+  path: /connectors/databases
+  tags:
+  - Connectors
+- name: post_connectors_new_database
+  description: Create a database on an unsaved connector
+  source_operation: openapi/artie-openapi-original.yml#POST /connectors/new-database
+  method: POST
+  path: /connectors/new-database
+  tags:
+  - Connectors
+- name: post_connectors_new_schema
+  description: Create a schema on an unsaved connector
+  source_operation: openapi/artie-openapi-original.yml#POST /connectors/new-schema
+  method: POST
+  path: /connectors/new-schema
+  tags:
+  - Connectors
+- name: post_connectors_new_snowflake_warehouse
+  description: Create a Snowflake warehouse on an unsaved connector
+  source_operation: openapi/artie-openapi-original.yml#POST /connectors/new-snowflake-warehouse
+  method: POST
+  path: /connectors/new-snowflake-warehouse
+  tags:
+  - Connectors
+- name: post_connectors_ping
+  description: Ping a connector
+  source_operation: openapi/artie-openapi-original.yml#POST /connectors/ping
+  method: POST
+  path: /connectors/ping
+  tags:
+  - Connectors
+- name: post_connectors_postgres_publications
+  description: List PostgreSQL publications for an unsaved connector
+  source_operation: openapi/artie-openapi-original.yml#POST /connectors/postgres-publications
+  method: POST
+  path: /connectors/postgres-publications
+  tags:
+  - Connectors
+- name: post_connectors_schemas
+  description: Fetch schemas for an unsaved connector
+  source_operation: openapi/artie-openapi-original.yml#POST /connectors/schemas
+  method: POST
+  path: /connectors/schemas
+  tags:
+  - Connectors
+- name: post_connectors_tables
+  description: Fetch tables for an unsaved connector
+  source_operation: openapi/artie-openapi-original.yml#POST /connectors/tables
+  method: POST
+  path: /connectors/tables
+  tags:
+  - Connectors
+- name: post_data_catalog_search
+  description: Search the data catalog
+  source_operation: openapi/artie-openapi-original.yml#POST /data-catalog/search
+  method: POST
+  path: /data-catalog/search
+  tags:
+  - Data Catalog
+- name: get_encryption_keys
+  description: List encryption keys
+  source_operation: openapi/artie-openapi-original.yml#GET /encryption-keys
+  method: GET
+  path: /encryption-keys
+  tags:
+  - Encryption Keys
+- name: post_encryption_keys
+  description: Create an encryption key
+  source_operation: openapi/artie-openapi-original.yml#POST /encryption-keys
+  method: POST
+  path: /encryption-keys
+  tags:
+  - Encryption Keys
+- name: delete_encryption_keys_uuid
+  description: Delete an encryption key
+  source_operation: openapi/artie-openapi-original.yml#DELETE /encryption-keys/{uuid}
+  method: DELETE
+  path: /encryption-keys/{uuid}
+  tags:
+  - Encryption Keys
+- name: get_encryption_keys_uuid
+  description: Get an encryption key
+  source_operation: openapi/artie-openapi-original.yml#GET /encryption-keys/{uuid}
+  method: GET
+  path: /encryption-keys/{uuid}
+  tags:
+  - Encryption Keys
+- name: post_encryption_keys_uuid
+  description: Update an encryption key
+  source_operation: openapi/artie-openapi-original.yml#POST /encryption-keys/{uuid}
+  method: POST
+  path: /encryption-keys/{uuid}
+  tags:
+  - Encryption Keys
+- name: post_ingestion_api_keys
+  description: Create an ingestion API key
+  source_operation: openapi/artie-openapi-original.yml#POST /ingestion-api-keys
+  method: POST
+  path: /ingestion-api-keys
+  tags:
+  - Ingestion API Keys
+- name: delete_ingestion_api_keys_uuid
+  description: Delete an ingestion API key
+  source_operation: openapi/artie-openapi-original.yml#DELETE /ingestion-api-keys/{uuid}
+  method: DELETE
+  path: /ingestion-api-keys/{uuid}
+  tags:
+  - Ingestion API Keys
+- name: post_ingestion_api_keys_uuid
+  description: Update an ingestion API key
+  source_operation: openapi/artie-openapi-original.yml#POST /ingestion-api-keys/{uuid}
+  method: POST
+  path: /ingestion-api-keys/{uuid}
+  tags:
+  - Ingestion API Keys
+- name: get_pipelines
+  description: List pipelines
+  source_operation: openapi/artie-openapi-original.yml#GET /pipelines
+  method: GET
+  path: /pipelines
+  tags:
+  - Pipelines
+- name: post_pipelines
+  description: Create a pipeline
+  source_operation: openapi/artie-openapi-original.yml#POST /pipelines
+  method: POST
+  path: /pipelines
+  tags:
+  - Pipelines
+- name: delete_pipelines_uuid
+  description: Delete pipeline
+  source_operation: openapi/artie-openapi-original.yml#DELETE /pipelines/{uuid}
+  method: DELETE
+  path: /pipelines/{uuid}
+  tags:
+  - Pipelines
+- name: get_pipelines_uuid
+  description: Get pipeline by UUID
+  source_operation: openapi/artie-openapi-original.yml#GET /pipelines/{uuid}
+  method: GET
+  path: /pipelines/{uuid}
+  tags:
+  - Pipelines
+- name: post_pipelines_uuid
+  description: Update pipeline
+  source_operation: openapi/artie-openapi-original.yml#POST /pipelines/{uuid}
+  method: POST
+  path: /pipelines/{uuid}
+  tags:
+  - Pipelines
+- name: post_pipelines_uuid_backfill_cancel
+  description: Cancel backfill
+  source_operation: openapi/artie-openapi-original.yml#POST /pipelines/{uuid}/backfill/cancel
+  method: POST
+  path: /pipelines/{uuid}/backfill/cancel
+  tags:
+  - Pipelines
+- name: post_pipelines_uuid_detect_schema_changes
+  description: Detect schema changes
+  source_operation: openapi/artie-openapi-original.yml#POST /pipelines/{uuid}/detect-schema-changes
+  method: POST
+  path: /pipelines/{uuid}/detect-schema-changes
+  tags:
+  - Pipelines
+- name: post_pipelines_uuid_start
+  description: Start pipeline
+  source_operation: openapi/artie-openapi-original.yml#POST /pipelines/{uuid}/start
+  method: POST
+  path: /pipelines/{uuid}/start
+  tags:
+  - Pipelines
+- name: post_pipelines_uuid_status
+  description: Update pipeline status
+  source_operation: openapi/artie-openapi-original.yml#POST /pipelines/{uuid}/status
+  method: POST
+  path: /pipelines/{uuid}/status
+  tags:
+  - Pipelines
+- name: post_pipelines_uuid_update_with_source_reader
+  description: Update pipeline with source reader
+  source_operation: openapi/artie-openapi-original.yml#POST /pipelines/{uuid}/update-with-source-reader
+  method: POST
+  path: /pipelines/{uuid}/update-with-source-reader
+  tags:
+  - Pipelines
+- name: post_pipelines_create_from_source
+  description: Create pipeline from source
+  source_operation: openapi/artie-openapi-original.yml#POST /pipelines/create-from-source
+  method: POST
+  path: /pipelines/create-from-source
+  tags:
+  - Pipelines
+- name: post_pipelines_validate_unsaved_destination
+  description: Validate unsaved destination
+  source_operation: openapi/artie-openapi-original.yml#POST /pipelines/validate-unsaved-destination
+  method: POST
+  path: /pipelines/validate-unsaved-destination
+  tags:
+  - Pipelines
+- name: post_pipelines_validate_unsaved_source
+  description: Validate unsaved source
+  source_operation: openapi/artie-openapi-original.yml#POST /pipelines/validate-unsaved-source
+  method: POST
+  path: /pipelines/validate-unsaved-source
+  tags:
+  - Pipelines
+- name: post_privatelink_connections
+  description: Create a PrivateLink connection
+  source_operation: openapi/artie-openapi-original.yml#POST /privatelink-connections
+  method: POST
+  path: /privatelink-connections
+  tags:
+  - PrivateLink Connections
+- name: delete_privatelink_connections_uuid
+  description: Delete a PrivateLink connection
+  source_operation: openapi/artie-openapi-original.yml#DELETE /privatelink-connections/{uuid}
+  method: DELETE
+  path: /privatelink-connections/{uuid}
+  tags:
+  - PrivateLink Connections
+- name: get_privatelink_connections_uuid
+  description: Get a PrivateLink connection
+  source_operation: openapi/artie-openapi-original.yml#GET /privatelink-connections/{uuid}
+  method: GET
+  path: /privatelink-connections/{uuid}
+  tags:
+  - PrivateLink Connections
+- name: post_privatelink_connections_uuid
+  description: Update a PrivateLink connection
+  source_operation: openapi/artie-openapi-original.yml#POST /privatelink-connections/{uuid}
+  method: POST
+  path: /privatelink-connections/{uuid}
+  tags:
+  - PrivateLink Connections
+- name: get_source_readers
+  description: List source readers
+  source_operation: openapi/artie-openapi-original.yml#GET /source-readers
+  method: GET
+  path: /source-readers
+  tags:
+  - Source Readers
+- name: post_source_readers
+  description: Create a source reader
+  source_operation: openapi/artie-openapi-original.yml#POST /source-readers
+  method: POST
+  path: /source-readers
+  tags:
+  - Source Readers
+- name: delete_source_readers_uuid
+  description: Delete a source reader
+  source_operation: openapi/artie-openapi-original.yml#DELETE /source-readers/{uuid}
+  method: DELETE
+  path: /source-readers/{uuid}
+  tags:
+  - Source Readers
+- name: get_source_readers_uuid
+  description: Get a source reader
+  source_operation: openapi/artie-openapi-original.yml#GET /source-readers/{uuid}
+  method: GET
+  path: /source-readers/{uuid}
+  tags:
+  - Source Readers
+- name: post_source_readers_uuid
+  description: Update a source reader
+  source_operation: openapi/artie-openapi-original.yml#POST /source-readers/{uuid}
+  method: POST
+  path: /source-readers/{uuid}
+  tags:
+  - Source Readers
+- name: post_source_readers_uuid_deploy
+  description: Deploy a source reader
+  source_operation: openapi/artie-openapi-original.yml#POST /source-readers/{uuid}/deploy
+  method: POST
+  path: /source-readers/{uuid}/deploy
+  tags:
+  - Source Readers
+- name: post_source_readers_uuid_status
+  description: Update source reader status
+  source_operation: openapi/artie-openapi-original.yml#POST /source-readers/{uuid}/status
+  method: POST
+  path: /source-readers/{uuid}/status
+  tags:
+  - Source Readers
+- name: post_source_readers_validate_unsaved
+  description: Validate an unsaved source reader
+  source_operation: openapi/artie-openapi-original.yml#POST /source-readers/validate-unsaved
+  method: POST
+  path: /source-readers/validate-unsaved
+  tags:
+  - Source Readers
+- name: post_ssh_tunnels
+  description: Create an SSH tunnel
+  source_operation: openapi/artie-openapi-original.yml#POST /ssh-tunnels
+  method: POST
+  path: /ssh-tunnels
+  tags:
+  - SSH Tunnels
+- name: delete_ssh_tunnels_uuid
+  description: Delete an SSH tunnel
+  source_operation: openapi/artie-openapi-original.yml#DELETE /ssh-tunnels/{uuid}
+  method: DELETE
+  path: /ssh-tunnels/{uuid}
+  tags:
+  - SSH Tunnels
+- name: get_ssh_tunnels_uuid
+  description: Get an SSH tunnel
+  source_operation: openapi/artie-openapi-original.yml#GET /ssh-tunnels/{uuid}
+  method: GET
+  path: /ssh-tunnels/{uuid}
+  tags:
+  - SSH Tunnels
+- name: post_ssh_tunnels_uuid
+  description: Update an SSH tunnel
+  source_operation: openapi/artie-openapi-original.yml#POST /ssh-tunnels/{uuid}
+  method: POST
+  path: /ssh-tunnels/{uuid}
+  tags:
+  - SSH Tunnels

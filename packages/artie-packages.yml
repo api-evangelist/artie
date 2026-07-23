@@ -1,0 +1,26 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/artie-labs
+packages:
+- language: go
+  registry: pkg.go.dev
+  name: github.com/artie-labs/artiecli
+  url: https://pkg.go.dev/github.com/artie-labs/artiecli
+  install: go install github.com/artie-labs/artiecli@latest
+  official: true
+  kind: cli
+  description: Command-line interface for interacting with the Artie API.
+- language: hcl
+  registry: terraform-registry
+  name: artie-labs/artie
+  url: https://registry.terraform.io/providers/artie-labs/artie/latest
+  install: |
+    terraform { required_providers { artie = { source = "artie-labs/artie" } } }
+  official: true
+  kind: terraform-provider
+  description: Terraform provider for managing Artie resources (deployments, connectors).
+notes: >-
+  Artie publishes first-party tooling (a Go CLI and a Terraform provider) rather
+  than per-language client SDKs. No official JavaScript/Python/Java/Ruby client
+  library was found on npm, PyPI, Maven Central, NuGet, RubyGems, Packagist, or
+  crates.io as of this pass.

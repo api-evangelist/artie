@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  description: External API endpoints for Artie
+  title: Artie Column Hashing Salts Data Catalog API
+  version: v1.0.51
+servers:
+- url: https://api.artie.com
+security:
+- ApiKey: []
+tags:
+- name: Data Catalog
+paths:
+  /data-catalog/search:
+    post:
+      description: Searches across the company's data catalog using full-text search.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsDataCatalogSearchRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseBodyDataCatalogMatch'
+          description: OK
+        '500':
+          description: Internal Server Error
+      summary: Search the data catalog
+      tags:
+      - Data Catalog
+components:
+  schemas:
+    PayloadsDataCatalogDatabase:
+      properties:
+        name:
+          type: string
+      type: object
+    PayloadsDataCatalogSchema:
+      properties:
+        databaseName:
+          type: string
+        name:
+          type: string
+      type: object
+    PayloadsDataCatalogMatch:
+      properties:
+        connectorUUID:
+          format: uuid
+          type: string
+        object:
+          $ref: '#/components/schemas/PayloadsDataCatalogMatchedObject'
+        score:
+          format: double
+          type: number
+      type: object
+    PayloadsDataCatalogMatchedObject:
+      properties:
+        database:
+          $ref: '#/components/schemas/PayloadsDataCatalogDatabase'
+        schema:
+          $ref: '#/components/schemas/PayloadsDataCatalogSchema'
+        table:
+          $ref: '#/components/schemas/PayloadsDataCatalogTable'
+      type: object
+    ListResponseBodyDataCatalogMatch:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsDataCatalogMatch'
+          type: array
+      required:
+      - items
+      type: object
+    PayloadsDataCatalogTable:
+      properties:
+        databaseName:
+          type: string
+        name:
+          type: string
+        schemaName:
+          type: string
+      type: object
+    PayloadsDataCatalogSearchRequest:
+      properties:
+        query:
+          type: string
+      type: object
+  securitySchemes:
+    ApiKey:
+      description: API key passed as a Bearer token in the Authorization header.
+      scheme: bearer
+      type: http

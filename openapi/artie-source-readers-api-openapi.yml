@@ -1,0 +1,462 @@
+openapi: 3.1.0
+info:
+  description: External API endpoints for Artie
+  title: Artie Column Hashing Salts Source Readers API
+  version: v1.0.51
+servers:
+- url: https://api.artie.com
+security:
+- ApiKey: []
+tags:
+- name: Source Readers
+paths:
+  /source-readers:
+    get:
+      description: Lists all source readers for the authenticated company.
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PayloadsSourceReader'
+                type: array
+          description: OK
+        '500':
+          description: Internal Server Error
+      summary: List source readers
+      tags:
+      - Source Readers
+    post:
+      description: Creates a new source reader for the authenticated company.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterSourceReaderCreateRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsSourceReader'
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Create a source reader
+      tags:
+      - Source Readers
+  /source-readers/{uuid}:
+    delete:
+      description: Permanently deletes a source reader by UUID. The source reader must not be associated with any active pipelines before deletion.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Delete a source reader
+      tags:
+      - Source Readers
+    get:
+      description: Retrieves the details of a source reader by UUID, including its configuration, status, connector association, and table settings.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsSourceReader'
+          description: OK
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Get a source reader
+      tags:
+      - Source Readers
+    post:
+      description: Updates an existing source reader by UUID. You can modify the name, settings, table configuration, and shared status of the source reader.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsSourceReader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsSourceReader'
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Update a source reader
+      tags:
+      - Source Readers
+  /source-readers/{uuid}/deploy:
+    post:
+      description: Deploys a shared source reader to the data plane. The source reader must be shared and pass validation before it can be deployed.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Deploy a source reader
+      tags:
+      - Source Readers
+  /source-readers/{uuid}/status:
+    post:
+      description: Changes the status of a shared source reader (e.g. running, paused). Only shared source readers are supported; for non-shared source readers, use the pipeline status endpoint instead.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterSourceReaderUpdateStatusRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsSourceReader'
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Update source reader status
+      tags:
+      - Source Readers
+  /source-readers/validate-unsaved:
+    post:
+      description: Validates a source reader configuration without persisting it.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterSourceReaderValidateUnsavedRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouterSourceReaderValidateUnsavedResponse'
+          description: OK
+        '204':
+          description: No Content
+        '500':
+          description: Internal Server Error
+      summary: Validate an unsaved source reader
+      tags:
+      - Source Readers
+components:
+  schemas:
+    RouterSourceReaderUpdateStatusRequest:
+      properties:
+        status:
+          $ref: '#/components/schemas/EnumsSourceReaderStatus'
+      required:
+      - status
+      type: object
+    PayloadsSourceReaderSettingsPayload:
+      properties:
+        archiveLogPassword:
+          type:
+          - 'null'
+          - string
+        archiveLogPath:
+          type:
+          - 'null'
+          - string
+        azureBlobStorageConfig:
+          $ref: '#/components/schemas/PayloadsAzureBlobStorageConfig'
+        backfillBatchSize:
+          minimum: 0
+          type:
+          - 'null'
+          - integer
+        compositeTypesAsText:
+          type:
+          - 'null'
+          - boolean
+        databasesToSync:
+          items:
+            type: string
+          type:
+          - 'null'
+          - array
+        disableAutoFetchTables:
+          type:
+          - 'null'
+          - boolean
+        disableFullDocumentBeforeChange:
+          type:
+          - 'null'
+          - boolean
+        disableNoCursorTimeout:
+          type:
+          - 'null'
+          - boolean
+        enableClientSideFullDocumentLookup:
+          type:
+          - 'null'
+          - boolean
+        enableHeartbeats:
+          type:
+          - 'null'
+          - boolean
+        enableSchemaHistoryCompaction:
+          type:
+          - 'null'
+          - boolean
+        maxConnIdleTimeSeconds:
+          type:
+          - 'null'
+          - integer
+        messageCompression:
+          enum:
+          - gzip
+          - ''
+          type:
+          - 'null'
+          - string
+        mssqlChangeTrackingConcurrency:
+          type:
+          - 'null'
+          - integer
+        mssqlChangeTrackingMaxIdleConns:
+          type:
+          - 'null'
+          - integer
+        mssqlChangeTrackingPollIntervalMs:
+          minimum: 0
+          type:
+          - 'null'
+          - integer
+        mssqlReplicationMethod:
+          type:
+          - 'null'
+          - string
+        oneTopicPerSchema:
+          type:
+          - 'null'
+          - boolean
+        publicationAutoCreateMode:
+          type:
+          - 'null'
+          - string
+        publicationNameOverride:
+          type:
+          - 'null'
+          - string
+        publishViaPartitionRoot:
+          type:
+          - 'null'
+          - boolean
+        replicationSlotOverride:
+          type:
+          - 'null'
+          - string
+        unifyAcrossDatabases:
+          type:
+          - 'null'
+          - boolean
+        unifyAcrossSchemas:
+          type:
+          - 'null'
+          - boolean
+        unifyAcrossSchemasMaxParallelism:
+          maximum: 3
+          minimum: 0
+          type:
+          - 'null'
+          - integer
+        unifyAcrossSchemasRegex:
+          type:
+          - 'null'
+          - string
+        useAdvanceOnPrimaryKeepAlive:
+          type:
+          - 'null'
+          - boolean
+        useNumericTypesForMoney:
+          type:
+          - 'null'
+          - boolean
+        useReaderForOracleStreaming:
+          type:
+          - 'null'
+          - boolean
+      type: object
+    PayloadsSourceReaderTablesConfig:
+      additionalProperties:
+        $ref: '#/components/schemas/PayloadsSourceReaderTable'
+      type:
+      - 'null'
+      - object
+    EnumsSourceReaderStatus:
+      enum:
+      - draft
+      - paused
+      - running
+      type: string
+    RouterSourceReaderValidateUnsavedResponse:
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    RouterSourceReaderValidateUnsavedRequest:
+      properties:
+        sourceReader:
+          $ref: '#/components/schemas/PayloadsSourceReader'
+      required:
+      - sourceReader
+      type: object
+    RouterSourceReaderCreateRequest:
+      properties:
+        connectorUUID:
+          format: uuid
+          type: string
+        containerName:
+          type: string
+        dataPlaneName:
+          type: string
+        database:
+          type: string
+        isShared:
+          type: boolean
+        name:
+          type: string
+        settings:
+          $ref: '#/components/schemas/PayloadsSourceReaderSettingsPayload'
+        tablesConfig:
+          $ref: '#/components/schemas/PayloadsSourceReaderTablesConfig'
+      required:
+      - connectorUUID
+      type: object
+    PayloadsSourceReaderTable:
+      properties:
+        excludeColumns:
+          items:
+            type: string
+          type: array
+        includeColumns:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        schema:
+          type: string
+        unifyAcrossDatabases:
+          type: boolean
+        unifyAcrossSchemas:
+          type: boolean
+      type: object
+    PayloadsSourceReader:
+      properties:
+        apiBaseURL:
+          type: string
+        companyUUID:
+          format: uuid
+          type: string
+        connectorUUID:
+          format: uuid
+          type: string
+        containerName:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        dataPlaneName:
+          type: string
+        database:
+          type: string
+        environmentUUID:
+          format: uuid
+          type: string
+        isShared:
+          type:
+          - 'null'
+          - boolean
+        isValid:
+          type: boolean
+        name:
+          type: string
+        settings:
+          $ref: '#/components/schemas/PayloadsSourceReaderSettingsPayload'
+        status:
+          $ref: '#/components/schemas/EnumsSourceReaderStatus'
+        tablesConfig:
+          $ref: '#/components/schemas/PayloadsSourceReaderTablesConfig'
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - name
+      - companyUUID
+      - dataPlaneName
+      - environmentUUID
+      - connectorUUID
+      - status
+      - isValid
+      - database
+      - containerName
+      - settings
+      type: object
+    PayloadsAzureBlobStorageConfig:
+      properties:
+        accountURL:
+          type: string
+        containerName:
+          type: string
+        sasToken:
+          type: string
+      type: object
+  securitySchemes:
+    ApiKey:
+      description: API key passed as a Bearer token in the Authorization header.
+      scheme: bearer
+      type: http

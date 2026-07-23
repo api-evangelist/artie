@@ -1,0 +1,183 @@
+asyncapi: 3.0.0
+info:
+  title: Artie Webhooks
+  version: v1.0.51
+  description: Webhook event surface for Artie, derived from the webhook payload schemas published in
+    the Artie OpenAPI. Artie POSTs an Event Payload (PayloadsWebhookEnvelope / discriminated by the `event`
+    field) to a subscriber URL for pipeline, backfill, replication, schema (DDL), dedupe, database-discovery,
+    and encryption-key lifecycle events. Webhook delivery includes an `attempt` counter for retries and
+    a `severity` classification.
+  x-generated: '2026-07-18'
+  x-method: derived
+  x-source: openapi/artie-openapi-original.yml (webhook payload schemas)
+defaultContentType: application/json
+channels:
+  webhooks:
+    address: '{subscriberUrl}'
+    title: Artie webhook subscriber endpoint
+    description: HTTPS endpoint you configure in Artie to receive event deliveries.
+    parameters:
+      subscriberUrl:
+        description: Subscriber-configured HTTPS URL that receives POSTed webhook events.
+    messages:
+      backfill_completed:
+        $ref: '#/components/messages/backfill_completed'
+      backfill_failed:
+        $ref: '#/components/messages/backfill_failed'
+      backfill_started:
+        $ref: '#/components/messages/backfill_started'
+      connection_failed:
+        $ref: '#/components/messages/connection_failed'
+      database_discovered:
+        $ref: '#/components/messages/database_discovered'
+      database_discovery_failed:
+        $ref: '#/components/messages/database_discovery_failed'
+      database_removed:
+        $ref: '#/components/messages/database_removed'
+      ddl_applied:
+        $ref: '#/components/messages/ddl_applied'
+      ddl_seen:
+        $ref: '#/components/messages/ddl_seen'
+      dedupe_completed:
+        $ref: '#/components/messages/dedupe_completed'
+      dedupe_failed:
+        $ref: '#/components/messages/dedupe_failed'
+      dedupe_started:
+        $ref: '#/components/messages/dedupe_started'
+      dek_generated:
+        $ref: '#/components/messages/dek_generated'
+      replication_error:
+        $ref: '#/components/messages/replication_error'
+      replication_failed:
+        $ref: '#/components/messages/replication_failed'
+      replication_started:
+        $ref: '#/components/messages/replication_started'
+      row_skipped:
+        $ref: '#/components/messages/row_skipped'
+operations:
+  receiveWebhook:
+    action: receive
+    channel:
+      $ref: '#/channels/webhooks'
+    summary: Receive an Artie webhook event delivery.
+components:
+  messages:
+    backfill_completed:
+      name: backfill.completed
+      title: backfill.completed
+      summary: 'Artie webhook event: backfill.completed'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookBackfillCompleted
+    backfill_failed:
+      name: backfill.failed
+      title: backfill.failed
+      summary: 'Artie webhook event: backfill.failed'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookBackfillFailed
+    backfill_started:
+      name: backfill.started
+      title: backfill.started
+      summary: 'Artie webhook event: backfill.started'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookBackfillStarted
+    connection_failed:
+      name: connection.failed
+      title: connection.failed
+      summary: 'Artie webhook event: connection.failed'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookConnectionFailed
+    database_discovered:
+      name: database.discovered
+      title: database.discovered
+      summary: 'Artie webhook event: database.discovered'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookDatabaseDiscovered
+    database_discovery_failed:
+      name: database.discovery_failed
+      title: database.discovery_failed
+      summary: 'Artie webhook event: database.discovery_failed'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookDatabaseDiscovery_failed
+    database_removed:
+      name: database.removed
+      title: database.removed
+      summary: 'Artie webhook event: database.removed'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookDatabaseRemoved
+    ddl_applied:
+      name: ddl.applied
+      title: ddl.applied
+      summary: 'Artie webhook event: ddl.applied'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookDdlApplied
+    ddl_seen:
+      name: ddl.seen
+      title: ddl.seen
+      summary: 'Artie webhook event: ddl.seen'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookDdlSeen
+    dedupe_completed:
+      name: dedupe.completed
+      title: dedupe.completed
+      summary: 'Artie webhook event: dedupe.completed'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookDedupeCompleted
+    dedupe_failed:
+      name: dedupe.failed
+      title: dedupe.failed
+      summary: 'Artie webhook event: dedupe.failed'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookDedupeFailed
+    dedupe_started:
+      name: dedupe.started
+      title: dedupe.started
+      summary: 'Artie webhook event: dedupe.started'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookDedupeStarted
+    dek_generated:
+      name: dek.generated
+      title: dek.generated
+      summary: 'Artie webhook event: dek.generated'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookDekGenerated
+    replication_error:
+      name: replication.error
+      title: replication.error
+      summary: 'Artie webhook event: replication.error'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookReplicationError
+    replication_failed:
+      name: replication.failed
+      title: replication.failed
+      summary: 'Artie webhook event: replication.failed'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookReplicationFailed
+    replication_started:
+      name: replication.started
+      title: replication.started
+      summary: 'Artie webhook event: replication.started'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookReplicationStarted
+    row_skipped:
+      name: row.skipped
+      title: row.skipped
+      summary: 'Artie webhook event: row.skipped'
+      contentType: application/json
+      payload:
+        $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookRowSkipped

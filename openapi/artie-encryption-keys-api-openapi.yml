@@ -1,0 +1,222 @@
+openapi: 3.1.0
+info:
+  description: External API endpoints for Artie
+  title: Artie Column Hashing Salts Encryption Keys API
+  version: v1.0.51
+servers:
+- url: https://api.artie.com
+security:
+- ApiKey: []
+tags:
+- name: Encryption Keys
+paths:
+  /encryption-keys:
+    get:
+      description: Lists all encryption keys for the authenticated company.
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseBodyEncryptionKey'
+          description: OK
+        '500':
+          description: Internal Server Error
+      summary: List encryption keys
+      tags:
+      - Encryption Keys
+    post:
+      description: Creates a new encryption key for the authenticated company.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterCreateEncryptionKeyRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouterCreateEncryptionKeyResponse'
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Create an encryption key
+      tags:
+      - Encryption Keys
+  /encryption-keys/{uuid}:
+    delete:
+      description: Deletes an encryption key by UUID.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Delete an encryption key
+      tags:
+      - Encryption Keys
+    get:
+      description: Retrieves an encryption key by UUID, including the decrypted key. Requires company admin.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsEncryptionKeyDetail'
+          description: OK
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Get an encryption key
+      tags:
+      - Encryption Keys
+    post:
+      description: Updates the name and description of an encryption key.
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterUpdateEncryptionKeyRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsEncryptionKey'
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Update an encryption key
+      tags:
+      - Encryption Keys
+components:
+  schemas:
+    RouterCreateEncryptionKeyRequest:
+      properties:
+        description:
+          type: string
+        kmsKeyUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    RouterCreateEncryptionKeyResponse:
+      properties:
+        encryptionKey:
+          $ref: '#/components/schemas/PayloadsEncryptionKey'
+        key:
+          type: string
+      required:
+      - encryptionKey
+      - key
+      type: object
+    RouterUpdateEncryptionKeyRequest:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    ListResponseBodyEncryptionKey:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsEncryptionKey'
+          type: array
+      required:
+      - items
+      type: object
+    PayloadsEncryptionKeyDetail:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        description:
+          type: string
+        key:
+          type: string
+        kmsKeyUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+        type:
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - name
+      - type
+      - key
+      type: object
+    PayloadsEncryptionKey:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        description:
+          type: string
+        kmsKeyUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+        type:
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - name
+      - type
+      type: object
+  securitySchemes:
+    ApiKey:
+      description: API key passed as a Bearer token in the Authorization header.
+      scheme: bearer
+      type: http

@@ -1,0 +1,49 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/artie-openapi-original.yml
+format: plain
+envelope:
+  shape: '{ "error": "<human readable message>" }'
+  schema: RouterValidateErrorResponse
+  note: Errors return a plain JSON object with a single string `error` field. Not RFC 9457 problem+json.
+problems:
+- status: 400
+  title: Bad Request
+  remediation: Validate the request body/parameters against the schema.
+  occurrences: 43
+  example_operations:
+  - DELETE /column-hashing-salts/{uuid}
+  - DELETE /connectors/{uuid}
+  - DELETE /encryption-keys/{uuid}
+  - DELETE /privatelink-connections/{uuid}
+- status: 403
+  title: Forbidden
+  remediation: Ensure the API key is valid and authorized for this company/resource.
+  occurrences: 2
+  example_operations:
+  - POST /pipelines/{uuid}/start
+  - POST /pipelines/{uuid}/status
+- status: 404
+  title: Not Found
+  remediation: Verify the resource UUID exists and belongs to your company.
+  occurrences: 10
+  example_operations:
+  - GET /column-hashing-salts/{uuid}
+  - GET /connectors/{uuid}
+  - GET /encryption-keys/{uuid}
+  - GET /pipelines/{uuid}
+- status: 409
+  title: Conflict
+  remediation: Resolve the conflicting state (e.g. duplicate or in-progress operation) and retry.
+  occurrences: 1
+  example_operations:
+  - POST /pipelines/{uuid}/status
+- status: 500
+  title: Internal Server Error
+  remediation: Transient server error; retry with backoff and contact Artie support if it persists.
+  occurrences: 59
+  example_operations:
+  - DELETE /column-hashing-salts/{uuid}
+  - DELETE /connectors/{uuid}
+  - DELETE /encryption-keys/{uuid}
+  - DELETE /ingestion-api-keys/{uuid}

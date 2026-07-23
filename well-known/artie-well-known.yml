@@ -1,0 +1,46 @@
+generated: '2026-07-18'
+method: searched
+hosts_probed:
+- https://www.artie.com
+- https://artie.com
+- https://app.artie.com
+documents:
+- host: https://www.artie.com
+  path: /.well-known/security.txt
+  status: 404
+- host: https://artie.com
+  path: /.well-known/security.txt
+  status: 404
+- host: https://app.artie.com
+  path: /.well-known/security.txt
+  status: 404
+- host: https://www.artie.com
+  path: /.well-known/openid-configuration
+  status: 404
+- host: https://app.artie.com
+  path: /.well-known/openid-configuration
+  status: 200
+  file: null
+  note: Returned the app HTML SPA shell, not a JSON OIDC document — not a real discovery doc.
+- host: https://www.artie.com
+  path: /.well-known/oauth-authorization-server
+  status: 404
+- host: https://www.artie.com
+  path: /.well-known/api-catalog
+  status: 404
+- host: https://www.artie.com
+  path: /.well-known/ai-plugin.json
+  status: 404
+llms_txt:
+- host: https://www.artie.com
+  path: /llms.txt
+  status: 200
+  file: ../llms/artie-llms.txt
+- host: https://www.artie.com
+  path: /docs/llms.txt
+  status: 200
+note: >-
+  No real machine-readable /.well-known/ discovery document was found. The
+  app.artie.com openid-configuration 200 is an SPA fallback, not an OIDC
+  document, so it is recorded but not saved and no WellKnown catalog doc is
+  asserted. A live llms.txt IS published (saved verbatim under llms/).

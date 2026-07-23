@@ -1,0 +1,34 @@
+generated: '2026-07-18'
+method: searched
+source: https://www.artie.com/docs/changelog
+scheme: date-based
+current: April 2026
+entries:
+- version: April 2026
+  date: '2026-04'
+  breaking: false
+  highlights:
+  - JSON Diff in Pipeline History
+  - Webhook failure alerts and dashboard visibility
+  - Webhooks accessible to all team members
+  - Skip backfill per table
+  - MySQL schema fan-in across multiple databases
+  - Resumable DynamoDB snapshots
+  - Oracle spatial geometry columns replicated as WKT
+  - Oracle index-driven backfills for tables without primary keys
+  - Auto-skip primary key constraints with primaryKeysOverride
+  - KMS-managed keys for column encryption
+  - MongoDB snapshot retries on network errors
+- version: March 2026
+  date: '2026-03'
+  breaking: false
+  highlights:
+  - MySQL parallel backfill (integer primary keys)
+  - Faster Postgres reader (2x+ throughput)
+  - MySQL Force Timezone (UTC)
+  - MySQL destination support
+  - Non-UTF8 encoding support
+  - OpenTofu support
+  - Apache Iceberg REST Catalog support
+  - Table-Level Monitoring
+  - Selective Backfills by Upstream Source
