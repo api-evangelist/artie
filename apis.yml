@@ -205,6 +205,8 @@ common:
   url: skills/_index.yml
 - type: AgenticAccess
   url: agentic-access/artie-agentic-access.yml
+- type: AICatalog
+  url: ai-catalog/artie-ai-catalog.yml
 x-enrichment:
   date: '2026-07-19'
   status: backfilled
