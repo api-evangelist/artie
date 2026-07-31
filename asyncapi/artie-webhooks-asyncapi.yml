@@ -181,3 +181,13 @@ components:
       contentType: application/json
       payload:
         $ref: ../openapi/artie-openapi-original.yml#/components/schemas/PayloadsWebhookRowSkipped
+
+# --- API Evangelist provenance -------------------------------------------
+x-superseded-by:
+  reason: >-
+    Provider publishes this event surface themselves in as-published OpenAPI; this document was authored by API Evangelist before that source was harvested.
+  published_spec: all/artie/openapi/_original/artie-openapi-original.yml
+  published_event_object: webhooks
+  published_events: 17
+  status: superseded
+  reviewed: '2026-07-31'
