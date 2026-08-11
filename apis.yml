@@ -145,6 +145,8 @@ apis:
     url: openapi/artie-ssh-tunnels-api-openapi.yml
 maintainersHistory: []
 common:
+- type: Overlay
+  url: overlays/artie-openapi-overlay.yaml
 - type: DomainSecurity
   url: security/artie-domain-security.yml
 - type: Authentication
