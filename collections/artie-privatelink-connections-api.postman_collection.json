@@ -1,0 +1,837 @@
+{
+  "item": [
+    {
+      "id": "36e29aaa-da31-442a-894f-ed5153a37f59",
+      "name": "PrivateLink Connections",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "625cba60-d75a-4132-88ad-04662473ac2b",
+          "name": "Create a PrivateLink connection",
+          "request": {
+            "name": "Create a PrivateLink connection",
+            "description": {
+              "content": "Creates a new PrivateLink connection for the authenticated company.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "privatelink-connections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vpcServiceName\": \"<string>\",\n  \"availabilityZoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dataPlaneName\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "111bd5aa-0ec7-4a8a-b52e-9199775877a4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privatelink-connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vpcServiceName\": \"<string>\",\n  \"availabilityZoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dataPlaneName\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"38b5b3f7-242b-1827-4884-957f0ef6f98d\",\n  \"companyUUID\": \"8f6f8e7f-1511-f79a-0a04-4d5b2a11cd18\",\n  \"environmentUUID\": \"6767911b-a1e3-fe0b-ec8b-b6ea43b79039\",\n  \"createdAt\": \"1990-06-09T01:52:29.472Z\",\n  \"updatedAt\": \"1999-02-12T14:45:09.750Z\",\n  \"name\": \"string\",\n  \"vpcServiceName\": \"string\",\n  \"status\": \"string\",\n  \"region\": \"string\",\n  \"dnsEntry\": \"string\",\n  \"availabilityZoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"approvedAt\": null,\n  \"createdBy\": \"string\",\n  \"dataPlaneName\": null,\n  \"provisioningError\": \"string\",\n  \"vpcEndpointId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83618e71-8635-4da2-a678-bcb8184418c7",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privatelink-connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vpcServiceName\": \"<string>\",\n  \"availabilityZoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dataPlaneName\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c538d571-f623-4907-972b-e97802130efa",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privatelink-connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vpcServiceName\": \"<string>\",\n  \"availabilityZoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dataPlaneName\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "257c4132-5560-42b1-bca3-866349c6b314",
+          "name": "Delete a PrivateLink connection",
+          "request": {
+            "name": "Delete a PrivateLink connection",
+            "description": {
+              "content": "Permanently deletes a PrivateLink connection by UUID. This action cannot be undone and will remove the connection from your account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "privatelink-connections",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9929ee11-7199-4798-b576-c2a6f976fbca",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privatelink-connections",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "15f8db3c-dcde-47ab-8d8a-645e2fe6ae3d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privatelink-connections",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e79817b4-44f0-4636-833c-87fc1a6cfd67",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privatelink-connections",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec09c0bf-cc5c-46f8-9d8b-cb2a9e9f6252",
+          "name": "Get a PrivateLink connection",
+          "request": {
+            "name": "Get a PrivateLink connection",
+            "description": {
+              "content": "Retrieves the details of a PrivateLink connection by UUID, including its status, VPC service name, region, DNS entry, and availability zones.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "privatelink-connections",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "db49b30c-93e4-4c6e-972c-336a57f219b9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privatelink-connections",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"38b5b3f7-242b-1827-4884-957f0ef6f98d\",\n  \"companyUUID\": \"8f6f8e7f-1511-f79a-0a04-4d5b2a11cd18\",\n  \"environmentUUID\": \"6767911b-a1e3-fe0b-ec8b-b6ea43b79039\",\n  \"createdAt\": \"1990-06-09T01:52:29.472Z\",\n  \"updatedAt\": \"1999-02-12T14:45:09.750Z\",\n  \"name\": \"string\",\n  \"vpcServiceName\": \"string\",\n  \"status\": \"string\",\n  \"region\": \"string\",\n  \"dnsEntry\": \"string\",\n  \"availabilityZoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"approvedAt\": null,\n  \"createdBy\": \"string\",\n  \"dataPlaneName\": null,\n  \"provisioningError\": \"string\",\n  \"vpcEndpointId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97ba5fb3-3d49-41ec-adec-d9cc1b307f4e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privatelink-connections",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1a44fd30-62bb-4169-9ced-220469fe04f0",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privatelink-connections",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "707b6670-a971-425c-852b-762849387a6a",
+          "name": "Update a PrivateLink connection",
+          "request": {
+            "name": "Update a PrivateLink connection",
+            "description": {
+              "content": "Updates an existing PrivateLink connection by UUID. The name can always be updated. The config fields (region / VPC service name / data plane / availability zones) are only mutable while the connection is under review or errored — once it is being provisioned or live they are immutable.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "privatelink-connections",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"vpcServiceName\": \"<string>\",\n  \"availabilityZoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dataPlaneName\": \"<null,string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "521509da-4de0-448b-9b3a-c4c0158ac476",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privatelink-connections",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"vpcServiceName\": \"<string>\",\n  \"availabilityZoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dataPlaneName\": \"<null,string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"38b5b3f7-242b-1827-4884-957f0ef6f98d\",\n  \"companyUUID\": \"8f6f8e7f-1511-f79a-0a04-4d5b2a11cd18\",\n  \"environmentUUID\": \"6767911b-a1e3-fe0b-ec8b-b6ea43b79039\",\n  \"createdAt\": \"1990-06-09T01:52:29.472Z\",\n  \"updatedAt\": \"1999-02-12T14:45:09.750Z\",\n  \"name\": \"string\",\n  \"vpcServiceName\": \"string\",\n  \"status\": \"string\",\n  \"region\": \"string\",\n  \"dnsEntry\": \"string\",\n  \"availabilityZoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"approvedAt\": null,\n  \"createdBy\": \"string\",\n  \"dataPlaneName\": null,\n  \"provisioningError\": \"string\",\n  \"vpcEndpointId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d94c275b-d207-4ab6-8573-e87e26075e20",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privatelink-connections",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"vpcServiceName\": \"<string>\",\n  \"availabilityZoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dataPlaneName\": \"<null,string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0e99ae27-c46b-44a6-8ad6-7d8989d474ec",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "privatelink-connections",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"vpcServiceName\": \"<string>\",\n  \"availabilityZoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dataPlaneName\": \"<null,string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.artie.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "68a574a3-cd8b-47c0-9ddb-7f44a78034bc",
+    "name": "Artie Column Hashing Salts PrivateLink Connections API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "External API endpoints for Artie",
+      "type": "text/plain"
+    }
+  }
+}

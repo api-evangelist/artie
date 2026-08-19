@@ -1,0 +1,264 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Artie Column Hashing Salts Pipelines API",
+    "version": "v1.0.51"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pipelines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List pipelines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.artie.com/pipelines"
+          },
+          "docs": "Returns pipelines for the authenticated company, optionally filtered by environment."
+        },
+        {
+          "info": {
+            "name": "Create a pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/pipelines",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new pipeline from a pipeline payload."
+        },
+        {
+          "info": {
+            "name": "Get pipeline by UUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.artie.com/pipelines/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "includeRelatedObjects",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns pipeline detail. With query includeRelatedObjects=true returns pipeline, sourceReader, sourceConnector, and optional destinationConnector; otherwise returns FullPipeline only."
+        },
+        {
+          "info": {
+            "name": "Update pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/pipelines/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing pipeline by UUID."
+        },
+        {
+          "info": {
+            "name": "Delete pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.artie.com/pipelines/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a pipeline by UUID."
+        },
+        {
+          "info": {
+            "name": "Cancel backfill",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/pipelines/:uuid/backfill/cancel",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels backfilling for the given table UUIDs and/or history table UUIDs."
+        },
+        {
+          "info": {
+            "name": "Detect schema changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/pipelines/:uuid/detect-schema-changes",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Enqueues a background job that checks the pipeline's source database for new, removed, or altered tables. If the pipeline has auto-replicate or auto-history mode enabled, any newly discovered tables will be added to the pipeline automatically. An email summary is sent if changes are detected."
+        },
+        {
+          "info": {
+            "name": "Start pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/pipelines/:uuid/start",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts or resumes a pipeline. Optional body: keepPaused, disableBackFill."
+        },
+        {
+          "info": {
+            "name": "Update pipeline status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/pipelines/:uuid/status",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changes the status of a pipeline (e.g. running, paused). Validates the pipeline before resuming and deploys the configuration change."
+        },
+        {
+          "info": {
+            "name": "Update pipeline with source reader",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/pipelines/:uuid/update-with-source-reader",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates pipeline and optionally its source reader in one request. Accepts gzip-encoded body."
+        },
+        {
+          "info": {
+            "name": "Create pipeline from source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/pipelines/create-from-source",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new pipeline from a source type or existing source connector UUID."
+        },
+        {
+          "info": {
+            "name": "Validate unsaved destination",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/pipelines/validate-unsaved-destination",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validates destination configuration without persisting. Returns 204 on success or 200 with error message on validation failure."
+        },
+        {
+          "info": {
+            "name": "Validate unsaved source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/pipelines/validate-unsaved-source",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validates source reader and connector configuration without persisting. Returns 204 on success or 200 with error message on validation failure."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

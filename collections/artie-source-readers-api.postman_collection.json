@@ -1,0 +1,1570 @@
+{
+  "item": [
+    {
+      "id": "e3711789-e09e-4bdc-b205-266e43d7f52c",
+      "name": "Source Readers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e327d06b-7c29-4fd9-b35a-ce7e93a00f2b",
+          "name": "List source readers",
+          "request": {
+            "name": "List source readers",
+            "description": {
+              "content": "Lists all source readers for the authenticated company.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-readers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "61fc46e5-3fa7-42f9-b6ae-a0c34a64221c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"uuid\": \"f1f45413-baef-c96d-acd0-a3ac0528adb8\",\n    \"name\": \"string\",\n    \"companyUUID\": \"3b0ee83e-1dcf-7597-451c-7d605300553c\",\n    \"dataPlaneName\": \"string\",\n    \"environmentUUID\": \"e0b17d68-533d-6d06-a5b6-c52d5bd47101\",\n    \"connectorUUID\": \"4e5dd72a-3165-a496-cf7c-5f2f9a646ff2\",\n    \"status\": \"running\",\n    \"isValid\": false,\n    \"database\": \"string\",\n    \"containerName\": \"string\",\n    \"settings\": {\n      \"archiveLogPassword\": null,\n      \"archiveLogPath\": null,\n      \"azureBlobStorageConfig\": {\n        \"accountURL\": \"string\",\n        \"containerName\": \"string\",\n        \"sasToken\": \"string\"\n      },\n      \"backfillBatchSize\": null,\n      \"compositeTypesAsText\": null,\n      \"databasesToSync\": null,\n      \"disableAutoFetchTables\": null,\n      \"disableFullDocumentBeforeChange\": null,\n      \"disableNoCursorTimeout\": null,\n      \"enableClientSideFullDocumentLookup\": null,\n      \"enableHeartbeats\": null,\n      \"enableSchemaHistoryCompaction\": null,\n      \"maxConnIdleTimeSeconds\": null,\n      \"messageCompression\": \"\",\n      \"mssqlChangeTrackingConcurrency\": null,\n      \"mssqlChangeTrackingMaxIdleConns\": null,\n      \"mssqlChangeTrackingPollIntervalMs\": null,\n      \"mssqlReplicationMethod\": null,\n      \"oneTopicPerSchema\": null,\n      \"publicationAutoCreateMode\": null,\n      \"publicationNameOverride\": null,\n      \"publishViaPartitionRoot\": null,\n      \"replicationSlotOverride\": null,\n      \"unifyAcrossDatabases\": null,\n      \"unifyAcrossSchemas\": null,\n      \"unifyAcrossSchemasMaxParallelism\": null,\n      \"unifyAcrossSchemasRegex\": null,\n      \"useAdvanceOnPrimaryKeepAlive\": null,\n      \"useNumericTypesForMoney\": null,\n      \"useReaderForOracleStreaming\": null\n    },\n    \"apiBaseURL\": \"string\",\n    \"createdAt\": \"1975-12-08T13:38:05.721Z\",\n    \"isShared\": null,\n    \"tablesConfig\": {\n      \"key_0\": {\n        \"excludeColumns\": [\n          \"string\",\n          \"string\"\n        ],\n        \"includeColumns\": [\n          \"string\",\n          \"string\"\n        ],\n        \"name\": \"string\",\n        \"schema\": \"string\",\n        \"unifyAcrossDatabases\": true,\n        \"unifyAcrossSchemas\": true\n      },\n      \"key_1\": {\n        \"excludeColumns\": [\n          \"string\",\n          \"string\"\n        ],\n        \"includeColumns\": [\n          \"string\",\n          \"string\"\n        ],\n        \"name\": \"string\",\n        \"schema\": \"string\",\n        \"unifyAcrossDatabases\": false,\n        \"unifyAcrossSchemas\": true\n      },\n      \"key_2\": {\n        \"excludeColumns\": [\n          \"string\",\n          \"string\"\n        ],\n        \"includeColumns\": [\n          \"string\",\n          \"string\"\n        ],\n        \"name\": \"string\",\n        \"schema\": \"string\",\n        \"unifyAcrossDatabases\": true,\n        \"unifyAcrossSchemas\": false\n      }\n    },\n    \"updatedAt\": \"1967-02-19T16:28:04.134Z\"\n  },\n  {\n    \"uuid\": \"4f50b007-0993-07d4-3929-baae508f38e7\",\n    \"name\": \"string\",\n    \"companyUUID\": \"13460439-08bf-0472-4c72-0f616ee230b9\",\n    \"dataPlaneName\": \"string\",\n    \"environmentUUID\": \"b76500f3-9f9d-83fc-fb6b-27e6186dc484\",\n    \"connectorUUID\": \"a721d503-75f9-01d9-2c99-d99888bf6ab3\",\n    \"status\": \"paused\",\n    \"isValid\": false,\n    \"database\": \"string\",\n    \"containerName\": \"string\",\n    \"settings\": {\n      \"archiveLogPassword\": null,\n      \"archiveLogPath\": null,\n      \"azureBlobStorageConfig\": {\n        \"accountURL\": \"string\",\n        \"containerName\": \"string\",\n        \"sasToken\": \"string\"\n      },\n      \"backfillBatchSize\": null,\n      \"compositeTypesAsText\": null,\n      \"databasesToSync\": null,\n      \"disableAutoFetchTables\": null,\n      \"disableFullDocumentBeforeChange\": null,\n      \"disableNoCursorTimeout\": null,\n      \"enableClientSideFullDocumentLookup\": null,\n      \"enableHeartbeats\": null,\n      \"enableSchemaHistoryCompaction\": null,\n      \"maxConnIdleTimeSeconds\": null,\n      \"messageCompression\": \"gzip\",\n      \"mssqlChangeTrackingConcurrency\": null,\n      \"mssqlChangeTrackingMaxIdleConns\": null,\n      \"mssqlChangeTrackingPollIntervalMs\": null,\n      \"mssqlReplicationMethod\": null,\n      \"oneTopicPerSchema\": null,\n      \"publicationAutoCreateMode\": null,\n      \"publicationNameOverride\": null,\n      \"publishViaPartitionRoot\": null,\n      \"replicationSlotOverride\": null,\n      \"unifyAcrossDatabases\": null,\n      \"unifyAcrossSchemas\": null,\n      \"unifyAcrossSchemasMaxParallelism\": null,\n      \"unifyAcrossSchemasRegex\": null,\n      \"useAdvanceOnPrimaryKeepAlive\": null,\n      \"useNumericTypesForMoney\": null,\n      \"useReaderForOracleStreaming\": null\n    },\n    \"apiBaseURL\": \"string\",\n    \"createdAt\": \"1990-12-07T16:23:48.053Z\",\n    \"isShared\": null,\n    \"tablesConfig\": {\n      \"key_0\": {\n        \"excludeColumns\": [\n          \"string\",\n          \"string\"\n        ],\n        \"includeColumns\": [\n          \"string\",\n          \"string\"\n        ],\n        \"name\": \"string\",\n        \"schema\": \"string\",\n        \"unifyAcrossDatabases\": false,\n        \"unifyAcrossSchemas\": false\n      }\n    },\n    \"updatedAt\": \"2006-08-28T20:34:21.197Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb70644b-db12-4748-b4f2-c99dd40146d7",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17b508aa-bf37-4b7f-9d7c-1dd416b27dd8",
+          "name": "Create a source reader",
+          "request": {
+            "name": "Create a source reader",
+            "description": {
+              "content": "Creates a new source reader for the authenticated company.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-readers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connectorUUID\": \"<uuid>\",\n  \"containerName\": \"<string>\",\n  \"dataPlaneName\": \"<string>\",\n  \"database\": \"<string>\",\n  \"isShared\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"settings\": {\n    \"archiveLogPassword\": \"<null,string>\",\n    \"archiveLogPath\": \"<null,string>\",\n    \"azureBlobStorageConfig\": {\n      \"accountURL\": \"<string>\",\n      \"containerName\": \"<string>\",\n      \"sasToken\": \"<string>\"\n    },\n    \"backfillBatchSize\": \"<null,integer>\",\n    \"compositeTypesAsText\": \"<null,boolean>\",\n    \"databasesToSync\": null,\n    \"disableAutoFetchTables\": \"<null,boolean>\",\n    \"disableFullDocumentBeforeChange\": \"<null,boolean>\",\n    \"disableNoCursorTimeout\": \"<null,boolean>\",\n    \"enableClientSideFullDocumentLookup\": \"<null,boolean>\",\n    \"enableHeartbeats\": \"<null,boolean>\",\n    \"enableSchemaHistoryCompaction\": \"<null,boolean>\",\n    \"maxConnIdleTimeSeconds\": \"<null,integer>\",\n    \"messageCompression\": \"<null,string>\",\n    \"mssqlChangeTrackingConcurrency\": \"<null,integer>\",\n    \"mssqlChangeTrackingMaxIdleConns\": \"<null,integer>\",\n    \"mssqlChangeTrackingPollIntervalMs\": \"<null,integer>\",\n    \"mssqlReplicationMethod\": \"<null,string>\",\n    \"oneTopicPerSchema\": \"<null,boolean>\",\n    \"publicationAutoCreateMode\": \"<null,string>\",\n    \"publicationNameOverride\": \"<null,string>\",\n    \"publishViaPartitionRoot\": \"<null,boolean>\",\n    \"replicationSlotOverride\": \"<null,string>\",\n    \"unifyAcrossDatabases\": \"<null,boolean>\",\n    \"unifyAcrossSchemas\": \"<null,boolean>\",\n    \"unifyAcrossSchemasMaxParallelism\": \"<null,integer>\",\n    \"unifyAcrossSchemasRegex\": \"<null,string>\",\n    \"useAdvanceOnPrimaryKeepAlive\": \"<null,boolean>\",\n    \"useNumericTypesForMoney\": \"<null,boolean>\",\n    \"useReaderForOracleStreaming\": \"<null,boolean>\"\n  },\n  \"tablesConfig\": {\n    \"key_0\": {\n      \"excludeColumns\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includeColumns\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"name\": \"<string>\",\n      \"schema\": \"<string>\",\n      \"unifyAcrossDatabases\": \"<boolean>\",\n      \"unifyAcrossSchemas\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "82069e53-f0e0-4ec8-a168-0d7afccaf2ec",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connectorUUID\": \"<uuid>\",\n  \"containerName\": \"<string>\",\n  \"dataPlaneName\": \"<string>\",\n  \"database\": \"<string>\",\n  \"isShared\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"settings\": {\n    \"archiveLogPassword\": null,\n    \"archiveLogPath\": null,\n    \"azureBlobStorageConfig\": {\n      \"accountURL\": \"string\",\n      \"containerName\": \"string\",\n      \"sasToken\": \"string\"\n    },\n    \"backfillBatchSize\": null,\n    \"compositeTypesAsText\": null,\n    \"databasesToSync\": null,\n    \"disableAutoFetchTables\": null,\n    \"disableFullDocumentBeforeChange\": null,\n    \"disableNoCursorTimeout\": null,\n    \"enableClientSideFullDocumentLookup\": null,\n    \"enableHeartbeats\": null,\n    \"enableSchemaHistoryCompaction\": null,\n    \"maxConnIdleTimeSeconds\": null,\n    \"messageCompression\": \"\",\n    \"mssqlChangeTrackingConcurrency\": null,\n    \"mssqlChangeTrackingMaxIdleConns\": null,\n    \"mssqlChangeTrackingPollIntervalMs\": null,\n    \"mssqlReplicationMethod\": null,\n    \"oneTopicPerSchema\": null,\n    \"publicationAutoCreateMode\": null,\n    \"publicationNameOverride\": null,\n    \"publishViaPartitionRoot\": null,\n    \"replicationSlotOverride\": null,\n    \"unifyAcrossDatabases\": null,\n    \"unifyAcrossSchemas\": null,\n    \"unifyAcrossSchemasMaxParallelism\": null,\n    \"unifyAcrossSchemasRegex\": null,\n    \"useAdvanceOnPrimaryKeepAlive\": null,\n    \"useNumericTypesForMoney\": null,\n    \"useReaderForOracleStreaming\": null\n  },\n  \"tablesConfig\": {\n    \"key_0\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": true,\n      \"unifyAcrossSchemas\": true\n    },\n    \"key_1\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": true,\n      \"unifyAcrossSchemas\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"630b74c5-8ff4-0ebc-8c5e-1ab5dc4a13d2\",\n  \"name\": \"string\",\n  \"companyUUID\": \"1849db13-db6a-f666-92ae-4ada8b30dc1d\",\n  \"dataPlaneName\": \"string\",\n  \"environmentUUID\": \"9efb9fa2-2ef9-5c3c-22c7-936df600314e\",\n  \"connectorUUID\": \"2cd3eb7d-f5bb-641d-7950-0c4623d0679d\",\n  \"status\": \"running\",\n  \"isValid\": false,\n  \"database\": \"string\",\n  \"containerName\": \"string\",\n  \"settings\": {\n    \"archiveLogPassword\": null,\n    \"archiveLogPath\": null,\n    \"azureBlobStorageConfig\": {\n      \"accountURL\": \"string\",\n      \"containerName\": \"string\",\n      \"sasToken\": \"string\"\n    },\n    \"backfillBatchSize\": null,\n    \"compositeTypesAsText\": null,\n    \"databasesToSync\": null,\n    \"disableAutoFetchTables\": null,\n    \"disableFullDocumentBeforeChange\": null,\n    \"disableNoCursorTimeout\": null,\n    \"enableClientSideFullDocumentLookup\": null,\n    \"enableHeartbeats\": null,\n    \"enableSchemaHistoryCompaction\": null,\n    \"maxConnIdleTimeSeconds\": null,\n    \"messageCompression\": \"gzip\",\n    \"mssqlChangeTrackingConcurrency\": null,\n    \"mssqlChangeTrackingMaxIdleConns\": null,\n    \"mssqlChangeTrackingPollIntervalMs\": null,\n    \"mssqlReplicationMethod\": null,\n    \"oneTopicPerSchema\": null,\n    \"publicationAutoCreateMode\": null,\n    \"publicationNameOverride\": null,\n    \"publishViaPartitionRoot\": null,\n    \"replicationSlotOverride\": null,\n    \"unifyAcrossDatabases\": null,\n    \"unifyAcrossSchemas\": null,\n    \"unifyAcrossSchemasMaxParallelism\": null,\n    \"unifyAcrossSchemasRegex\": null,\n    \"useAdvanceOnPrimaryKeepAlive\": null,\n    \"useNumericTypesForMoney\": null,\n    \"useReaderForOracleStreaming\": null\n  },\n  \"apiBaseURL\": \"string\",\n  \"createdAt\": \"2007-01-10T01:55:25.891Z\",\n  \"isShared\": null,\n  \"tablesConfig\": {\n    \"key_0\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": false,\n      \"unifyAcrossSchemas\": false\n    }\n  },\n  \"updatedAt\": \"1979-01-19T05:08:47.414Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7717a0b9-2b76-42e0-b2d5-784354498641",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connectorUUID\": \"<uuid>\",\n  \"containerName\": \"<string>\",\n  \"dataPlaneName\": \"<string>\",\n  \"database\": \"<string>\",\n  \"isShared\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"settings\": {\n    \"archiveLogPassword\": null,\n    \"archiveLogPath\": null,\n    \"azureBlobStorageConfig\": {\n      \"accountURL\": \"string\",\n      \"containerName\": \"string\",\n      \"sasToken\": \"string\"\n    },\n    \"backfillBatchSize\": null,\n    \"compositeTypesAsText\": null,\n    \"databasesToSync\": null,\n    \"disableAutoFetchTables\": null,\n    \"disableFullDocumentBeforeChange\": null,\n    \"disableNoCursorTimeout\": null,\n    \"enableClientSideFullDocumentLookup\": null,\n    \"enableHeartbeats\": null,\n    \"enableSchemaHistoryCompaction\": null,\n    \"maxConnIdleTimeSeconds\": null,\n    \"messageCompression\": \"\",\n    \"mssqlChangeTrackingConcurrency\": null,\n    \"mssqlChangeTrackingMaxIdleConns\": null,\n    \"mssqlChangeTrackingPollIntervalMs\": null,\n    \"mssqlReplicationMethod\": null,\n    \"oneTopicPerSchema\": null,\n    \"publicationAutoCreateMode\": null,\n    \"publicationNameOverride\": null,\n    \"publishViaPartitionRoot\": null,\n    \"replicationSlotOverride\": null,\n    \"unifyAcrossDatabases\": null,\n    \"unifyAcrossSchemas\": null,\n    \"unifyAcrossSchemasMaxParallelism\": null,\n    \"unifyAcrossSchemasRegex\": null,\n    \"useAdvanceOnPrimaryKeepAlive\": null,\n    \"useNumericTypesForMoney\": null,\n    \"useReaderForOracleStreaming\": null\n  },\n  \"tablesConfig\": {\n    \"key_0\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": true,\n      \"unifyAcrossSchemas\": true\n    },\n    \"key_1\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": true,\n      \"unifyAcrossSchemas\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8450475e-279b-487f-b97d-ac3aa6be8678",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connectorUUID\": \"<uuid>\",\n  \"containerName\": \"<string>\",\n  \"dataPlaneName\": \"<string>\",\n  \"database\": \"<string>\",\n  \"isShared\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"settings\": {\n    \"archiveLogPassword\": null,\n    \"archiveLogPath\": null,\n    \"azureBlobStorageConfig\": {\n      \"accountURL\": \"string\",\n      \"containerName\": \"string\",\n      \"sasToken\": \"string\"\n    },\n    \"backfillBatchSize\": null,\n    \"compositeTypesAsText\": null,\n    \"databasesToSync\": null,\n    \"disableAutoFetchTables\": null,\n    \"disableFullDocumentBeforeChange\": null,\n    \"disableNoCursorTimeout\": null,\n    \"enableClientSideFullDocumentLookup\": null,\n    \"enableHeartbeats\": null,\n    \"enableSchemaHistoryCompaction\": null,\n    \"maxConnIdleTimeSeconds\": null,\n    \"messageCompression\": \"\",\n    \"mssqlChangeTrackingConcurrency\": null,\n    \"mssqlChangeTrackingMaxIdleConns\": null,\n    \"mssqlChangeTrackingPollIntervalMs\": null,\n    \"mssqlReplicationMethod\": null,\n    \"oneTopicPerSchema\": null,\n    \"publicationAutoCreateMode\": null,\n    \"publicationNameOverride\": null,\n    \"publishViaPartitionRoot\": null,\n    \"replicationSlotOverride\": null,\n    \"unifyAcrossDatabases\": null,\n    \"unifyAcrossSchemas\": null,\n    \"unifyAcrossSchemasMaxParallelism\": null,\n    \"unifyAcrossSchemasRegex\": null,\n    \"useAdvanceOnPrimaryKeepAlive\": null,\n    \"useNumericTypesForMoney\": null,\n    \"useReaderForOracleStreaming\": null\n  },\n  \"tablesConfig\": {\n    \"key_0\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": true,\n      \"unifyAcrossSchemas\": true\n    },\n    \"key_1\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": true,\n      \"unifyAcrossSchemas\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b85e224-b959-4a03-8a9f-9c9bdc6b328c",
+          "name": "Delete a source reader",
+          "request": {
+            "name": "Delete a source reader",
+            "description": {
+              "content": "Permanently deletes a source reader by UUID. The source reader must not be associated with any active pipelines before deletion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-readers",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "be8b738a-f45b-4bcc-9db2-aa68f27c508f",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "68e2ebf4-3643-471f-bfb3-df55123eb5d1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ca5dba75-f1be-47f9-8b43-194ea1715472",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b19f3b8b-eacc-4e34-a389-a2fa1aca8cf7",
+          "name": "Get a source reader",
+          "request": {
+            "name": "Get a source reader",
+            "description": {
+              "content": "Retrieves the details of a source reader by UUID, including its configuration, status, connector association, and table settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-readers",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90c3481d-84c6-422b-9dd1-b6398f2dbe79",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"630b74c5-8ff4-0ebc-8c5e-1ab5dc4a13d2\",\n  \"name\": \"string\",\n  \"companyUUID\": \"1849db13-db6a-f666-92ae-4ada8b30dc1d\",\n  \"dataPlaneName\": \"string\",\n  \"environmentUUID\": \"9efb9fa2-2ef9-5c3c-22c7-936df600314e\",\n  \"connectorUUID\": \"2cd3eb7d-f5bb-641d-7950-0c4623d0679d\",\n  \"status\": \"running\",\n  \"isValid\": false,\n  \"database\": \"string\",\n  \"containerName\": \"string\",\n  \"settings\": {\n    \"archiveLogPassword\": null,\n    \"archiveLogPath\": null,\n    \"azureBlobStorageConfig\": {\n      \"accountURL\": \"string\",\n      \"containerName\": \"string\",\n      \"sasToken\": \"string\"\n    },\n    \"backfillBatchSize\": null,\n    \"compositeTypesAsText\": null,\n    \"databasesToSync\": null,\n    \"disableAutoFetchTables\": null,\n    \"disableFullDocumentBeforeChange\": null,\n    \"disableNoCursorTimeout\": null,\n    \"enableClientSideFullDocumentLookup\": null,\n    \"enableHeartbeats\": null,\n    \"enableSchemaHistoryCompaction\": null,\n    \"maxConnIdleTimeSeconds\": null,\n    \"messageCompression\": \"gzip\",\n    \"mssqlChangeTrackingConcurrency\": null,\n    \"mssqlChangeTrackingMaxIdleConns\": null,\n    \"mssqlChangeTrackingPollIntervalMs\": null,\n    \"mssqlReplicationMethod\": null,\n    \"oneTopicPerSchema\": null,\n    \"publicationAutoCreateMode\": null,\n    \"publicationNameOverride\": null,\n    \"publishViaPartitionRoot\": null,\n    \"replicationSlotOverride\": null,\n    \"unifyAcrossDatabases\": null,\n    \"unifyAcrossSchemas\": null,\n    \"unifyAcrossSchemasMaxParallelism\": null,\n    \"unifyAcrossSchemasRegex\": null,\n    \"useAdvanceOnPrimaryKeepAlive\": null,\n    \"useNumericTypesForMoney\": null,\n    \"useReaderForOracleStreaming\": null\n  },\n  \"apiBaseURL\": \"string\",\n  \"createdAt\": \"2007-01-10T01:55:25.891Z\",\n  \"isShared\": null,\n  \"tablesConfig\": {\n    \"key_0\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": false,\n      \"unifyAcrossSchemas\": false\n    }\n  },\n  \"updatedAt\": \"1979-01-19T05:08:47.414Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "728b1f96-8c44-4d7e-b814-c8a48cadc4ac",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8d41d790-8eab-42e4-b008-016ee25b3688",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c45d131d-e74f-4fbf-b939-f2b41ba930a4",
+          "name": "Update a source reader",
+          "request": {
+            "name": "Update a source reader",
+            "description": {
+              "content": "Updates an existing source reader by UUID. You can modify the name, settings, table configuration, and shared status of the source reader.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-readers",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uuid\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"companyUUID\": \"<uuid>\",\n  \"dataPlaneName\": \"<string>\",\n  \"environmentUUID\": \"<uuid>\",\n  \"connectorUUID\": \"<uuid>\",\n  \"status\": \"<string>\",\n  \"isValid\": \"<boolean>\",\n  \"database\": \"<string>\",\n  \"containerName\": \"<string>\",\n  \"settings\": {\n    \"archiveLogPassword\": \"<null,string>\",\n    \"archiveLogPath\": \"<null,string>\",\n    \"azureBlobStorageConfig\": {\n      \"accountURL\": \"<string>\",\n      \"containerName\": \"<string>\",\n      \"sasToken\": \"<string>\"\n    },\n    \"backfillBatchSize\": \"<null,integer>\",\n    \"compositeTypesAsText\": \"<null,boolean>\",\n    \"databasesToSync\": null,\n    \"disableAutoFetchTables\": \"<null,boolean>\",\n    \"disableFullDocumentBeforeChange\": \"<null,boolean>\",\n    \"disableNoCursorTimeout\": \"<null,boolean>\",\n    \"enableClientSideFullDocumentLookup\": \"<null,boolean>\",\n    \"enableHeartbeats\": \"<null,boolean>\",\n    \"enableSchemaHistoryCompaction\": \"<null,boolean>\",\n    \"maxConnIdleTimeSeconds\": \"<null,integer>\",\n    \"messageCompression\": \"<null,string>\",\n    \"mssqlChangeTrackingConcurrency\": \"<null,integer>\",\n    \"mssqlChangeTrackingMaxIdleConns\": \"<null,integer>\",\n    \"mssqlChangeTrackingPollIntervalMs\": \"<null,integer>\",\n    \"mssqlReplicationMethod\": \"<null,string>\",\n    \"oneTopicPerSchema\": \"<null,boolean>\",\n    \"publicationAutoCreateMode\": \"<null,string>\",\n    \"publicationNameOverride\": \"<null,string>\",\n    \"publishViaPartitionRoot\": \"<null,boolean>\",\n    \"replicationSlotOverride\": \"<null,string>\",\n    \"unifyAcrossDatabases\": \"<null,boolean>\",\n    \"unifyAcrossSchemas\": \"<null,boolean>\",\n    \"unifyAcrossSchemasMaxParallelism\": \"<null,integer>\",\n    \"unifyAcrossSchemasRegex\": \"<null,string>\",\n    \"useAdvanceOnPrimaryKeepAlive\": \"<null,boolean>\",\n    \"useNumericTypesForMoney\": \"<null,boolean>\",\n    \"useReaderForOracleStreaming\": \"<null,boolean>\"\n  },\n  \"apiBaseURL\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"isShared\": \"<null,boolean>\",\n  \"tablesConfig\": {\n    \"key_0\": {\n      \"excludeColumns\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includeColumns\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"name\": \"<string>\",\n      \"schema\": \"<string>\",\n      \"unifyAcrossDatabases\": \"<boolean>\",\n      \"unifyAcrossSchemas\": \"<boolean>\"\n    },\n    \"key_1\": {\n      \"excludeColumns\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includeColumns\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"name\": \"<string>\",\n      \"schema\": \"<string>\",\n      \"unifyAcrossDatabases\": \"<boolean>\",\n      \"unifyAcrossSchemas\": \"<boolean>\"\n    },\n    \"key_2\": {\n      \"excludeColumns\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includeColumns\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"name\": \"<string>\",\n      \"schema\": \"<string>\",\n      \"unifyAcrossDatabases\": \"<boolean>\",\n      \"unifyAcrossSchemas\": \"<boolean>\"\n    }\n  },\n  \"updatedAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2b7d19ac-3ff2-4f4e-b4c6-64893b8d2376",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"companyUUID\": \"<uuid>\",\n  \"dataPlaneName\": \"<string>\",\n  \"environmentUUID\": \"<uuid>\",\n  \"connectorUUID\": \"<uuid>\",\n  \"status\": \"running\",\n  \"isValid\": \"<boolean>\",\n  \"database\": \"<string>\",\n  \"containerName\": \"<string>\",\n  \"settings\": {\n    \"archiveLogPassword\": null,\n    \"archiveLogPath\": null,\n    \"azureBlobStorageConfig\": {\n      \"accountURL\": \"string\",\n      \"containerName\": \"string\",\n      \"sasToken\": \"string\"\n    },\n    \"backfillBatchSize\": null,\n    \"compositeTypesAsText\": null,\n    \"databasesToSync\": null,\n    \"disableAutoFetchTables\": null,\n    \"disableFullDocumentBeforeChange\": null,\n    \"disableNoCursorTimeout\": null,\n    \"enableClientSideFullDocumentLookup\": null,\n    \"enableHeartbeats\": null,\n    \"enableSchemaHistoryCompaction\": null,\n    \"maxConnIdleTimeSeconds\": null,\n    \"messageCompression\": \"\",\n    \"mssqlChangeTrackingConcurrency\": null,\n    \"mssqlChangeTrackingMaxIdleConns\": null,\n    \"mssqlChangeTrackingPollIntervalMs\": null,\n    \"mssqlReplicationMethod\": null,\n    \"oneTopicPerSchema\": null,\n    \"publicationAutoCreateMode\": null,\n    \"publicationNameOverride\": null,\n    \"publishViaPartitionRoot\": null,\n    \"replicationSlotOverride\": null,\n    \"unifyAcrossDatabases\": null,\n    \"unifyAcrossSchemas\": null,\n    \"unifyAcrossSchemasMaxParallelism\": null,\n    \"unifyAcrossSchemasRegex\": null,\n    \"useAdvanceOnPrimaryKeepAlive\": null,\n    \"useNumericTypesForMoney\": null,\n    \"useReaderForOracleStreaming\": null\n  },\n  \"apiBaseURL\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"isShared\": \"<null,boolean>\",\n  \"tablesConfig\": {\n    \"key_0\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": false,\n      \"unifyAcrossSchemas\": true\n    },\n    \"key_1\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": false,\n      \"unifyAcrossSchemas\": false\n    },\n    \"key_2\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": true,\n      \"unifyAcrossSchemas\": true\n    }\n  },\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"630b74c5-8ff4-0ebc-8c5e-1ab5dc4a13d2\",\n  \"name\": \"string\",\n  \"companyUUID\": \"1849db13-db6a-f666-92ae-4ada8b30dc1d\",\n  \"dataPlaneName\": \"string\",\n  \"environmentUUID\": \"9efb9fa2-2ef9-5c3c-22c7-936df600314e\",\n  \"connectorUUID\": \"2cd3eb7d-f5bb-641d-7950-0c4623d0679d\",\n  \"status\": \"running\",\n  \"isValid\": false,\n  \"database\": \"string\",\n  \"containerName\": \"string\",\n  \"settings\": {\n    \"archiveLogPassword\": null,\n    \"archiveLogPath\": null,\n    \"azureBlobStorageConfig\": {\n      \"accountURL\": \"string\",\n      \"containerName\": \"string\",\n      \"sasToken\": \"string\"\n    },\n    \"backfillBatchSize\": null,\n    \"compositeTypesAsText\": null,\n    \"databasesToSync\": null,\n    \"disableAutoFetchTables\": null,\n    \"disableFullDocumentBeforeChange\": null,\n    \"disableNoCursorTimeout\": null,\n    \"enableClientSideFullDocumentLookup\": null,\n    \"enableHeartbeats\": null,\n    \"enableSchemaHistoryCompaction\": null,\n    \"maxConnIdleTimeSeconds\": null,\n    \"messageCompression\": \"gzip\",\n    \"mssqlChangeTrackingConcurrency\": null,\n    \"mssqlChangeTrackingMaxIdleConns\": null,\n    \"mssqlChangeTrackingPollIntervalMs\": null,\n    \"mssqlReplicationMethod\": null,\n    \"oneTopicPerSchema\": null,\n    \"publicationAutoCreateMode\": null,\n    \"publicationNameOverride\": null,\n    \"publishViaPartitionRoot\": null,\n    \"replicationSlotOverride\": null,\n    \"unifyAcrossDatabases\": null,\n    \"unifyAcrossSchemas\": null,\n    \"unifyAcrossSchemasMaxParallelism\": null,\n    \"unifyAcrossSchemasRegex\": null,\n    \"useAdvanceOnPrimaryKeepAlive\": null,\n    \"useNumericTypesForMoney\": null,\n    \"useReaderForOracleStreaming\": null\n  },\n  \"apiBaseURL\": \"string\",\n  \"createdAt\": \"2007-01-10T01:55:25.891Z\",\n  \"isShared\": null,\n  \"tablesConfig\": {\n    \"key_0\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": false,\n      \"unifyAcrossSchemas\": false\n    }\n  },\n  \"updatedAt\": \"1979-01-19T05:08:47.414Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95a486d1-30ae-408a-a64d-9b137581c5a5",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"companyUUID\": \"<uuid>\",\n  \"dataPlaneName\": \"<string>\",\n  \"environmentUUID\": \"<uuid>\",\n  \"connectorUUID\": \"<uuid>\",\n  \"status\": \"running\",\n  \"isValid\": \"<boolean>\",\n  \"database\": \"<string>\",\n  \"containerName\": \"<string>\",\n  \"settings\": {\n    \"archiveLogPassword\": null,\n    \"archiveLogPath\": null,\n    \"azureBlobStorageConfig\": {\n      \"accountURL\": \"string\",\n      \"containerName\": \"string\",\n      \"sasToken\": \"string\"\n    },\n    \"backfillBatchSize\": null,\n    \"compositeTypesAsText\": null,\n    \"databasesToSync\": null,\n    \"disableAutoFetchTables\": null,\n    \"disableFullDocumentBeforeChange\": null,\n    \"disableNoCursorTimeout\": null,\n    \"enableClientSideFullDocumentLookup\": null,\n    \"enableHeartbeats\": null,\n    \"enableSchemaHistoryCompaction\": null,\n    \"maxConnIdleTimeSeconds\": null,\n    \"messageCompression\": \"\",\n    \"mssqlChangeTrackingConcurrency\": null,\n    \"mssqlChangeTrackingMaxIdleConns\": null,\n    \"mssqlChangeTrackingPollIntervalMs\": null,\n    \"mssqlReplicationMethod\": null,\n    \"oneTopicPerSchema\": null,\n    \"publicationAutoCreateMode\": null,\n    \"publicationNameOverride\": null,\n    \"publishViaPartitionRoot\": null,\n    \"replicationSlotOverride\": null,\n    \"unifyAcrossDatabases\": null,\n    \"unifyAcrossSchemas\": null,\n    \"unifyAcrossSchemasMaxParallelism\": null,\n    \"unifyAcrossSchemasRegex\": null,\n    \"useAdvanceOnPrimaryKeepAlive\": null,\n    \"useNumericTypesForMoney\": null,\n    \"useReaderForOracleStreaming\": null\n  },\n  \"apiBaseURL\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"isShared\": \"<null,boolean>\",\n  \"tablesConfig\": {\n    \"key_0\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": false,\n      \"unifyAcrossSchemas\": true\n    },\n    \"key_1\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": false,\n      \"unifyAcrossSchemas\": false\n    },\n    \"key_2\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": true,\n      \"unifyAcrossSchemas\": true\n    }\n  },\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e7efdace-cc76-4f5c-95b9-e7d80387fcfb",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"companyUUID\": \"<uuid>\",\n  \"dataPlaneName\": \"<string>\",\n  \"environmentUUID\": \"<uuid>\",\n  \"connectorUUID\": \"<uuid>\",\n  \"status\": \"running\",\n  \"isValid\": \"<boolean>\",\n  \"database\": \"<string>\",\n  \"containerName\": \"<string>\",\n  \"settings\": {\n    \"archiveLogPassword\": null,\n    \"archiveLogPath\": null,\n    \"azureBlobStorageConfig\": {\n      \"accountURL\": \"string\",\n      \"containerName\": \"string\",\n      \"sasToken\": \"string\"\n    },\n    \"backfillBatchSize\": null,\n    \"compositeTypesAsText\": null,\n    \"databasesToSync\": null,\n    \"disableAutoFetchTables\": null,\n    \"disableFullDocumentBeforeChange\": null,\n    \"disableNoCursorTimeout\": null,\n    \"enableClientSideFullDocumentLookup\": null,\n    \"enableHeartbeats\": null,\n    \"enableSchemaHistoryCompaction\": null,\n    \"maxConnIdleTimeSeconds\": null,\n    \"messageCompression\": \"\",\n    \"mssqlChangeTrackingConcurrency\": null,\n    \"mssqlChangeTrackingMaxIdleConns\": null,\n    \"mssqlChangeTrackingPollIntervalMs\": null,\n    \"mssqlReplicationMethod\": null,\n    \"oneTopicPerSchema\": null,\n    \"publicationAutoCreateMode\": null,\n    \"publicationNameOverride\": null,\n    \"publishViaPartitionRoot\": null,\n    \"replicationSlotOverride\": null,\n    \"unifyAcrossDatabases\": null,\n    \"unifyAcrossSchemas\": null,\n    \"unifyAcrossSchemasMaxParallelism\": null,\n    \"unifyAcrossSchemasRegex\": null,\n    \"useAdvanceOnPrimaryKeepAlive\": null,\n    \"useNumericTypesForMoney\": null,\n    \"useReaderForOracleStreaming\": null\n  },\n  \"apiBaseURL\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"isShared\": \"<null,boolean>\",\n  \"tablesConfig\": {\n    \"key_0\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": false,\n      \"unifyAcrossSchemas\": true\n    },\n    \"key_1\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": false,\n      \"unifyAcrossSchemas\": false\n    },\n    \"key_2\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": true,\n      \"unifyAcrossSchemas\": true\n    }\n  },\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea995aa4-c5b6-4f69-b0ad-e42341774a5a",
+          "name": "Deploy a source reader",
+          "request": {
+            "name": "Deploy a source reader",
+            "description": {
+              "content": "Deploys a shared source reader to the data plane. The source reader must be shared and pass validation before it can be deployed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-readers",
+                ":uuid",
+                "deploy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "590b626f-825d-4e11-8256-de9c6de675a9",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    ":uuid",
+                    "deploy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "78bb52ff-e20b-4242-ad44-e402bfcbf857",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    ":uuid",
+                    "deploy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f245486d-2bc0-483b-ad13-f4a5074136b9",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    ":uuid",
+                    "deploy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e106897c-95fd-45e2-9b4a-33879659f395",
+          "name": "Update source reader status",
+          "request": {
+            "name": "Update source reader status",
+            "description": {
+              "content": "Changes the status of a shared source reader (e.g. running, paused). Only shared source readers are supported; for non-shared source readers, use the pipeline status endpoint instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-readers",
+                ":uuid",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e53e8fa2-ade2-41e8-9ed9-e07d33b8fa08",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    ":uuid",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"paused\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"630b74c5-8ff4-0ebc-8c5e-1ab5dc4a13d2\",\n  \"name\": \"string\",\n  \"companyUUID\": \"1849db13-db6a-f666-92ae-4ada8b30dc1d\",\n  \"dataPlaneName\": \"string\",\n  \"environmentUUID\": \"9efb9fa2-2ef9-5c3c-22c7-936df600314e\",\n  \"connectorUUID\": \"2cd3eb7d-f5bb-641d-7950-0c4623d0679d\",\n  \"status\": \"running\",\n  \"isValid\": false,\n  \"database\": \"string\",\n  \"containerName\": \"string\",\n  \"settings\": {\n    \"archiveLogPassword\": null,\n    \"archiveLogPath\": null,\n    \"azureBlobStorageConfig\": {\n      \"accountURL\": \"string\",\n      \"containerName\": \"string\",\n      \"sasToken\": \"string\"\n    },\n    \"backfillBatchSize\": null,\n    \"compositeTypesAsText\": null,\n    \"databasesToSync\": null,\n    \"disableAutoFetchTables\": null,\n    \"disableFullDocumentBeforeChange\": null,\n    \"disableNoCursorTimeout\": null,\n    \"enableClientSideFullDocumentLookup\": null,\n    \"enableHeartbeats\": null,\n    \"enableSchemaHistoryCompaction\": null,\n    \"maxConnIdleTimeSeconds\": null,\n    \"messageCompression\": \"gzip\",\n    \"mssqlChangeTrackingConcurrency\": null,\n    \"mssqlChangeTrackingMaxIdleConns\": null,\n    \"mssqlChangeTrackingPollIntervalMs\": null,\n    \"mssqlReplicationMethod\": null,\n    \"oneTopicPerSchema\": null,\n    \"publicationAutoCreateMode\": null,\n    \"publicationNameOverride\": null,\n    \"publishViaPartitionRoot\": null,\n    \"replicationSlotOverride\": null,\n    \"unifyAcrossDatabases\": null,\n    \"unifyAcrossSchemas\": null,\n    \"unifyAcrossSchemasMaxParallelism\": null,\n    \"unifyAcrossSchemasRegex\": null,\n    \"useAdvanceOnPrimaryKeepAlive\": null,\n    \"useNumericTypesForMoney\": null,\n    \"useReaderForOracleStreaming\": null\n  },\n  \"apiBaseURL\": \"string\",\n  \"createdAt\": \"2007-01-10T01:55:25.891Z\",\n  \"isShared\": null,\n  \"tablesConfig\": {\n    \"key_0\": {\n      \"excludeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includeColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unifyAcrossDatabases\": false,\n      \"unifyAcrossSchemas\": false\n    }\n  },\n  \"updatedAt\": \"1979-01-19T05:08:47.414Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcff2757-142d-4f21-af7b-eaa5f4bdaf9f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    ":uuid",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"paused\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "510295c4-43a1-4f90-ad37-a9d688f18657",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    ":uuid",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"paused\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ccbe052-09b7-4355-a865-1621b98b6f5d",
+          "name": "Validate an unsaved source reader",
+          "request": {
+            "name": "Validate an unsaved source reader",
+            "description": {
+              "content": "Validates a source reader configuration without persisting it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-readers",
+                "validate-unsaved"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sourceReader\": {\n    \"uuid\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"companyUUID\": \"<uuid>\",\n    \"dataPlaneName\": \"<string>\",\n    \"environmentUUID\": \"<uuid>\",\n    \"connectorUUID\": \"<uuid>\",\n    \"status\": \"<string>\",\n    \"isValid\": \"<boolean>\",\n    \"database\": \"<string>\",\n    \"containerName\": \"<string>\",\n    \"settings\": {\n      \"archiveLogPassword\": \"<null,string>\",\n      \"archiveLogPath\": \"<null,string>\",\n      \"azureBlobStorageConfig\": {\n        \"accountURL\": \"<string>\",\n        \"containerName\": \"<string>\",\n        \"sasToken\": \"<string>\"\n      },\n      \"backfillBatchSize\": \"<null,integer>\",\n      \"compositeTypesAsText\": \"<null,boolean>\",\n      \"databasesToSync\": null,\n      \"disableAutoFetchTables\": \"<null,boolean>\",\n      \"disableFullDocumentBeforeChange\": \"<null,boolean>\",\n      \"disableNoCursorTimeout\": \"<null,boolean>\",\n      \"enableClientSideFullDocumentLookup\": \"<null,boolean>\",\n      \"enableHeartbeats\": \"<null,boolean>\",\n      \"enableSchemaHistoryCompaction\": \"<null,boolean>\",\n      \"maxConnIdleTimeSeconds\": \"<null,integer>\",\n      \"messageCompression\": \"<null,string>\",\n      \"mssqlChangeTrackingConcurrency\": \"<null,integer>\",\n      \"mssqlChangeTrackingMaxIdleConns\": \"<null,integer>\",\n      \"mssqlChangeTrackingPollIntervalMs\": \"<null,integer>\",\n      \"mssqlReplicationMethod\": \"<null,string>\",\n      \"oneTopicPerSchema\": \"<null,boolean>\",\n      \"publicationAutoCreateMode\": \"<null,string>\",\n      \"publicationNameOverride\": \"<null,string>\",\n      \"publishViaPartitionRoot\": \"<null,boolean>\",\n      \"replicationSlotOverride\": \"<null,string>\",\n      \"unifyAcrossDatabases\": \"<null,boolean>\",\n      \"unifyAcrossSchemas\": \"<null,boolean>\",\n      \"unifyAcrossSchemasMaxParallelism\": \"<null,integer>\",\n      \"unifyAcrossSchemasRegex\": \"<null,string>\",\n      \"useAdvanceOnPrimaryKeepAlive\": \"<null,boolean>\",\n      \"useNumericTypesForMoney\": \"<null,boolean>\",\n      \"useReaderForOracleStreaming\": \"<null,boolean>\"\n    },\n    \"apiBaseURL\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"isShared\": \"<null,boolean>\",\n    \"tablesConfig\": {\n      \"key_0\": {\n        \"excludeColumns\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"includeColumns\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"name\": \"<string>\",\n        \"schema\": \"<string>\",\n        \"unifyAcrossDatabases\": \"<boolean>\",\n        \"unifyAcrossSchemas\": \"<boolean>\"\n      },\n      \"key_1\": {\n        \"excludeColumns\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"includeColumns\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"name\": \"<string>\",\n        \"schema\": \"<string>\",\n        \"unifyAcrossDatabases\": \"<boolean>\",\n        \"unifyAcrossSchemas\": \"<boolean>\"\n      }\n    },\n    \"updatedAt\": \"<dateTime>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f16049b4-5427-4256-9073-6b06e4b0fe84",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    "validate-unsaved"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceReader\": {\n    \"uuid\": \"dabd712b-7281-dc78-4784-890f9ad9df59\",\n    \"name\": \"string\",\n    \"companyUUID\": \"f398986f-cb54-48de-cbc8-48010cfb6e88\",\n    \"dataPlaneName\": \"string\",\n    \"environmentUUID\": \"c7e1878f-6e33-d7c5-646c-3ac930a7b79f\",\n    \"connectorUUID\": \"676e55b0-9798-0a18-8cef-6de11eca8b4b\",\n    \"status\": \"draft\",\n    \"isValid\": false,\n    \"database\": \"string\",\n    \"containerName\": \"string\",\n    \"settings\": {\n      \"archiveLogPassword\": null,\n      \"archiveLogPath\": null,\n      \"azureBlobStorageConfig\": {\n        \"accountURL\": \"string\",\n        \"containerName\": \"string\",\n        \"sasToken\": \"string\"\n      },\n      \"backfillBatchSize\": null,\n      \"compositeTypesAsText\": null,\n      \"databasesToSync\": null,\n      \"disableAutoFetchTables\": null,\n      \"disableFullDocumentBeforeChange\": null,\n      \"disableNoCursorTimeout\": null,\n      \"enableClientSideFullDocumentLookup\": null,\n      \"enableHeartbeats\": null,\n      \"enableSchemaHistoryCompaction\": null,\n      \"maxConnIdleTimeSeconds\": null,\n      \"messageCompression\": \"\",\n      \"mssqlChangeTrackingConcurrency\": null,\n      \"mssqlChangeTrackingMaxIdleConns\": null,\n      \"mssqlChangeTrackingPollIntervalMs\": null,\n      \"mssqlReplicationMethod\": null,\n      \"oneTopicPerSchema\": null,\n      \"publicationAutoCreateMode\": null,\n      \"publicationNameOverride\": null,\n      \"publishViaPartitionRoot\": null,\n      \"replicationSlotOverride\": null,\n      \"unifyAcrossDatabases\": null,\n      \"unifyAcrossSchemas\": null,\n      \"unifyAcrossSchemasMaxParallelism\": null,\n      \"unifyAcrossSchemasRegex\": null,\n      \"useAdvanceOnPrimaryKeepAlive\": null,\n      \"useNumericTypesForMoney\": null,\n      \"useReaderForOracleStreaming\": null\n    },\n    \"apiBaseURL\": \"string\",\n    \"createdAt\": \"1967-03-24T21:47:08.194Z\",\n    \"isShared\": null,\n    \"tablesConfig\": {\n      \"key_0\": {\n        \"excludeColumns\": [\n          \"string\",\n          \"string\"\n        ],\n        \"includeColumns\": [\n          \"string\",\n          \"string\"\n        ],\n        \"name\": \"string\",\n        \"schema\": \"string\",\n        \"unifyAcrossDatabases\": false,\n        \"unifyAcrossSchemas\": true\n      }\n    },\n    \"updatedAt\": \"1963-09-17T10:27:36.757Z\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e6fa15a-eb47-45ab-a4c0-688750cd8b1e",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    "validate-unsaved"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceReader\": {\n    \"uuid\": \"dabd712b-7281-dc78-4784-890f9ad9df59\",\n    \"name\": \"string\",\n    \"companyUUID\": \"f398986f-cb54-48de-cbc8-48010cfb6e88\",\n    \"dataPlaneName\": \"string\",\n    \"environmentUUID\": \"c7e1878f-6e33-d7c5-646c-3ac930a7b79f\",\n    \"connectorUUID\": \"676e55b0-9798-0a18-8cef-6de11eca8b4b\",\n    \"status\": \"draft\",\n    \"isValid\": false,\n    \"database\": \"string\",\n    \"containerName\": \"string\",\n    \"settings\": {\n      \"archiveLogPassword\": null,\n      \"archiveLogPath\": null,\n      \"azureBlobStorageConfig\": {\n        \"accountURL\": \"string\",\n        \"containerName\": \"string\",\n        \"sasToken\": \"string\"\n      },\n      \"backfillBatchSize\": null,\n      \"compositeTypesAsText\": null,\n      \"databasesToSync\": null,\n      \"disableAutoFetchTables\": null,\n      \"disableFullDocumentBeforeChange\": null,\n      \"disableNoCursorTimeout\": null,\n      \"enableClientSideFullDocumentLookup\": null,\n      \"enableHeartbeats\": null,\n      \"enableSchemaHistoryCompaction\": null,\n      \"maxConnIdleTimeSeconds\": null,\n      \"messageCompression\": \"\",\n      \"mssqlChangeTrackingConcurrency\": null,\n      \"mssqlChangeTrackingMaxIdleConns\": null,\n      \"mssqlChangeTrackingPollIntervalMs\": null,\n      \"mssqlReplicationMethod\": null,\n      \"oneTopicPerSchema\": null,\n      \"publicationAutoCreateMode\": null,\n      \"publicationNameOverride\": null,\n      \"publishViaPartitionRoot\": null,\n      \"replicationSlotOverride\": null,\n      \"unifyAcrossDatabases\": null,\n      \"unifyAcrossSchemas\": null,\n      \"unifyAcrossSchemasMaxParallelism\": null,\n      \"unifyAcrossSchemasRegex\": null,\n      \"useAdvanceOnPrimaryKeepAlive\": null,\n      \"useNumericTypesForMoney\": null,\n      \"useReaderForOracleStreaming\": null\n    },\n    \"apiBaseURL\": \"string\",\n    \"createdAt\": \"1967-03-24T21:47:08.194Z\",\n    \"isShared\": null,\n    \"tablesConfig\": {\n      \"key_0\": {\n        \"excludeColumns\": [\n          \"string\",\n          \"string\"\n        ],\n        \"includeColumns\": [\n          \"string\",\n          \"string\"\n        ],\n        \"name\": \"string\",\n        \"schema\": \"string\",\n        \"unifyAcrossDatabases\": false,\n        \"unifyAcrossSchemas\": true\n      }\n    },\n    \"updatedAt\": \"1963-09-17T10:27:36.757Z\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0e68d11b-18b3-425a-87bb-0cf8ec83b0de",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-readers",
+                    "validate-unsaved"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceReader\": {\n    \"uuid\": \"dabd712b-7281-dc78-4784-890f9ad9df59\",\n    \"name\": \"string\",\n    \"companyUUID\": \"f398986f-cb54-48de-cbc8-48010cfb6e88\",\n    \"dataPlaneName\": \"string\",\n    \"environmentUUID\": \"c7e1878f-6e33-d7c5-646c-3ac930a7b79f\",\n    \"connectorUUID\": \"676e55b0-9798-0a18-8cef-6de11eca8b4b\",\n    \"status\": \"draft\",\n    \"isValid\": false,\n    \"database\": \"string\",\n    \"containerName\": \"string\",\n    \"settings\": {\n      \"archiveLogPassword\": null,\n      \"archiveLogPath\": null,\n      \"azureBlobStorageConfig\": {\n        \"accountURL\": \"string\",\n        \"containerName\": \"string\",\n        \"sasToken\": \"string\"\n      },\n      \"backfillBatchSize\": null,\n      \"compositeTypesAsText\": null,\n      \"databasesToSync\": null,\n      \"disableAutoFetchTables\": null,\n      \"disableFullDocumentBeforeChange\": null,\n      \"disableNoCursorTimeout\": null,\n      \"enableClientSideFullDocumentLookup\": null,\n      \"enableHeartbeats\": null,\n      \"enableSchemaHistoryCompaction\": null,\n      \"maxConnIdleTimeSeconds\": null,\n      \"messageCompression\": \"\",\n      \"mssqlChangeTrackingConcurrency\": null,\n      \"mssqlChangeTrackingMaxIdleConns\": null,\n      \"mssqlChangeTrackingPollIntervalMs\": null,\n      \"mssqlReplicationMethod\": null,\n      \"oneTopicPerSchema\": null,\n      \"publicationAutoCreateMode\": null,\n      \"publicationNameOverride\": null,\n      \"publishViaPartitionRoot\": null,\n      \"replicationSlotOverride\": null,\n      \"unifyAcrossDatabases\": null,\n      \"unifyAcrossSchemas\": null,\n      \"unifyAcrossSchemasMaxParallelism\": null,\n      \"unifyAcrossSchemasRegex\": null,\n      \"useAdvanceOnPrimaryKeepAlive\": null,\n      \"useNumericTypesForMoney\": null,\n      \"useReaderForOracleStreaming\": null\n    },\n    \"apiBaseURL\": \"string\",\n    \"createdAt\": \"1967-03-24T21:47:08.194Z\",\n    \"isShared\": null,\n    \"tablesConfig\": {\n      \"key_0\": {\n        \"excludeColumns\": [\n          \"string\",\n          \"string\"\n        ],\n        \"includeColumns\": [\n          \"string\",\n          \"string\"\n        ],\n        \"name\": \"string\",\n        \"schema\": \"string\",\n        \"unifyAcrossDatabases\": false,\n        \"unifyAcrossSchemas\": true\n      }\n    },\n    \"updatedAt\": \"1963-09-17T10:27:36.757Z\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.artie.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b5f882b7-e20b-4089-bb78-5f95b6bcfa95",
+    "name": "Artie Column Hashing Salts Source Readers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "External API endpoints for Artie",
+      "type": "text/plain"
+    }
+  }
+}

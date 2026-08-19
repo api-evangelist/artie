@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Artie Column Hashing Salts Data Catalog API",
+    "version": "v1.0.51"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search the data catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/data-catalog/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches across the company's data catalog using full-text search."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

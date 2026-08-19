@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Artie Column Hashing Salts API",
+    "version": "v1.0.51"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Column Hashing Salts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List column hashing salts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.artie.com/column-hashing-salts"
+          },
+          "docs": "Lists all column hashing salts for the authenticated company."
+        },
+        {
+          "info": {
+            "name": "Create a column hashing salt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/column-hashing-salts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new column hashing salt for the authenticated company."
+        },
+        {
+          "info": {
+            "name": "Get a column hashing salt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.artie.com/column-hashing-salts/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a column hashing salt by UUID, including the decrypted salt. Requires company admin."
+        },
+        {
+          "info": {
+            "name": "Update a column hashing salt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/column-hashing-salts/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the name and description of a column hashing salt."
+        },
+        {
+          "info": {
+            "name": "Delete a column hashing salt",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.artie.com/column-hashing-salts/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a column hashing salt by UUID."
+        },
+        {
+          "info": {
+            "name": "Preview a column hashing salt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/column-hashing-salts/:uuid/preview",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Hashes a sample string value with this salt using the same function used by Artie's pipelines (HMAC-SHA256 keyed on the salt, or SHA-256 if the salt is empty). Returns the hex-encoded hash."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

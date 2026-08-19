@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Artie Column Hashing Salts Encryption Keys API",
+    "version": "v1.0.51"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Encryption Keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List encryption keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.artie.com/encryption-keys"
+          },
+          "docs": "Lists all encryption keys for the authenticated company."
+        },
+        {
+          "info": {
+            "name": "Create an encryption key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/encryption-keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new encryption key for the authenticated company."
+        },
+        {
+          "info": {
+            "name": "Get an encryption key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.artie.com/encryption-keys/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves an encryption key by UUID, including the decrypted key. Requires company admin."
+        },
+        {
+          "info": {
+            "name": "Update an encryption key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/encryption-keys/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the name and description of an encryption key."
+        },
+        {
+          "info": {
+            "name": "Delete an encryption key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.artie.com/encryption-keys/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes an encryption key by UUID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

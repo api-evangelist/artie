@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Artie Column Hashing Salts PrivateLink Connections API",
+    "version": "v1.0.51"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PrivateLink Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a PrivateLink connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/privatelink-connections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new PrivateLink connection for the authenticated company."
+        },
+        {
+          "info": {
+            "name": "Get a PrivateLink connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.artie.com/privatelink-connections/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a PrivateLink connection by UUID, including its status, VPC service name, region, DNS entry, and availability zones."
+        },
+        {
+          "info": {
+            "name": "Update a PrivateLink connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/privatelink-connections/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing PrivateLink connection by UUID. The name can always be updated. The config fields (region / VPC service name / data plane / availability zones) are only mutable while the connection is under review or errored — once it is being provisioned or live they are immutable."
+        },
+        {
+          "info": {
+            "name": "Delete a PrivateLink connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.artie.com/privatelink-connections/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a PrivateLink connection by UUID. This action cannot be undone and will remove the connection from your account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

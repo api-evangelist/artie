@@ -1,0 +1,190 @@
+{
+  "item": [
+    {
+      "id": "ce59e271-60e3-4cb3-a9a3-db61433dc9f2",
+      "name": "Data Catalog",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4fcd8bc2-f8a3-4438-adcd-84dfc3248ee5",
+          "name": "Search the data catalog",
+          "request": {
+            "name": "Search the data catalog",
+            "description": {
+              "content": "Searches across the company's data catalog using full-text search.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data-catalog",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d6f89a8f-3500-4bdc-9801-e2a495db8a39",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-catalog",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"connectorUUID\": \"4de19a8a-dff2-8154-6558-286ad03119d3\",\n      \"object\": {\n        \"database\": {\n          \"name\": \"string\"\n        },\n        \"schema\": {\n          \"databaseName\": \"string\",\n          \"name\": \"string\"\n        },\n        \"table\": {\n          \"databaseName\": \"string\",\n          \"name\": \"string\",\n          \"schemaName\": \"string\"\n        }\n      },\n      \"score\": 3506.2599799528216\n    },\n    {\n      \"connectorUUID\": \"435047b9-e861-9452-aceb-39ea21d85aa3\",\n      \"object\": {\n        \"database\": {\n          \"name\": \"string\"\n        },\n        \"schema\": {\n          \"databaseName\": \"string\",\n          \"name\": \"string\"\n        },\n        \"table\": {\n          \"databaseName\": \"string\",\n          \"name\": \"string\",\n          \"schemaName\": \"string\"\n        }\n      },\n      \"score\": 6662.477149948488\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1d5ab58-01c0-437e-b5ee-30a1fa6df3ae",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-catalog",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.artie.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fa8059d0-6178-4ec2-97e0-1c985d414e32",
+    "name": "Artie Column Hashing Salts Data Catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "External API endpoints for Artie",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Artie Column Hashing Salts Source Readers API",
+    "version": "v1.0.51"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Source Readers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List source readers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.artie.com/source-readers"
+          },
+          "docs": "Lists all source readers for the authenticated company."
+        },
+        {
+          "info": {
+            "name": "Create a source reader",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/source-readers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new source reader for the authenticated company."
+        },
+        {
+          "info": {
+            "name": "Get a source reader",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.artie.com/source-readers/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a source reader by UUID, including its configuration, status, connector association, and table settings."
+        },
+        {
+          "info": {
+            "name": "Update a source reader",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/source-readers/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing source reader by UUID. You can modify the name, settings, table configuration, and shared status of the source reader."
+        },
+        {
+          "info": {
+            "name": "Delete a source reader",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.artie.com/source-readers/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a source reader by UUID. The source reader must not be associated with any active pipelines before deletion."
+        },
+        {
+          "info": {
+            "name": "Deploy a source reader",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/source-readers/:uuid/deploy",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deploys a shared source reader to the data plane. The source reader must be shared and pass validation before it can be deployed."
+        },
+        {
+          "info": {
+            "name": "Update source reader status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/source-readers/:uuid/status",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changes the status of a shared source reader (e.g. running, paused). Only shared source readers are supported; for non-shared source readers, use the pipeline status endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Validate an unsaved source reader",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/source-readers/validate-unsaved",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validates a source reader configuration without persisting it."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

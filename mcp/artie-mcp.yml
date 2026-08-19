@@ -430,3 +430,9 @@ tools:
   path: /ssh-tunnels/{uuid}
   tags:
   - SSH Tunnels
+deployment:
+  mode: none
+  verified: derived
+  tools: 60
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Artie Column Hashing Salts SSH Tunnels API",
+    "version": "v1.0.51"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SSH Tunnels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an SSH tunnel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/ssh-tunnels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new SSH tunnel for the authenticated company."
+        },
+        {
+          "info": {
+            "name": "Get an SSH tunnel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.artie.com/ssh-tunnels/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an SSH tunnel by UUID, including its host, port, username, public key, and whether it is currently in use."
+        },
+        {
+          "info": {
+            "name": "Update an SSH tunnel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/ssh-tunnels/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing SSH tunnel by UUID. You can modify the name, host, port, and username. Changes will mark associated pipelines as having undeployed changes."
+        },
+        {
+          "info": {
+            "name": "Delete an SSH tunnel",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.artie.com/ssh-tunnels/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently deletes an SSH tunnel by UUID. The tunnel must not be in use by any connectors or pipelines before it can be deleted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

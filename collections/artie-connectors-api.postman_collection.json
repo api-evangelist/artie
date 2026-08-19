@@ -1,0 +1,3268 @@
+{
+  "item": [
+    {
+      "id": "d6fb9d18-9126-491a-82f2-9d1e5b98efc2",
+      "name": "Connectors",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4f3a963c-f8b0-41c9-955d-fb1295a9ae92",
+          "name": "Create a connector",
+          "request": {
+            "name": "Create a connector",
+            "description": {
+              "content": "Creates a new source or destination connector for your Artie deployment. Configure database connections, authentication, and replication settings programmatically.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataPlaneName\": \"<string>\",\n  \"defaultDatabase\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"label\": \"<string>\",\n  \"privateLinkUUID\": \"<null,string-uuid>\",\n  \"sharedConfig\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n  \"sshTunnelUUID\": \"<null,string-uuid>\",\n  \"type\": \"<string>\",\n  \"uuid\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c97d616e-d087-4ea7-aad7-ed8252e8f991",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataPlaneName\": \"<string>\",\n  \"defaultDatabase\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"label\": \"<string>\",\n  \"privateLinkUUID\": \"<null,string-uuid>\",\n  \"sharedConfig\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n  \"sshTunnelUUID\": \"<null,string-uuid>\",\n  \"type\": \"<string>\",\n  \"uuid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"label\": \"string\",\n  \"uuid\": \"e36ffa42-4f2e-bc3a-8daa-54b211fd7901\",\n  \"createdAt\": \"1995-08-02T08:11:23.384Z\",\n  \"updatedAt\": \"1968-08-30T13:01:09.058Z\",\n  \"type\": \"redis\",\n  \"companyUUID\": \"ae8b2ebc-1ddb-bfaf-c057-35b1b77f9783\",\n  \"environmentUUID\": \"13bc52d8-24a8-5209-2006-1a479d25b9fb\",\n  \"isValid\": true,\n  \"connectionLabel\": \"string\",\n  \"dataPlaneName\": null,\n  \"defaultDatabase\": \"string\",\n  \"privateLinkUUID\": null,\n  \"sharedConfig\": \"\",\n  \"snapshotPrivateLinkUUID\": null,\n  \"sshTunnelUUID\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47475767-e762-4967-a9d2-76b93767fa9a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataPlaneName\": \"<string>\",\n  \"defaultDatabase\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"label\": \"<string>\",\n  \"privateLinkUUID\": \"<null,string-uuid>\",\n  \"sharedConfig\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n  \"sshTunnelUUID\": \"<null,string-uuid>\",\n  \"type\": \"<string>\",\n  \"uuid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "722d0947-3409-4658-8ee6-b722febede29",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataPlaneName\": \"<string>\",\n  \"defaultDatabase\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"label\": \"<string>\",\n  \"privateLinkUUID\": \"<null,string-uuid>\",\n  \"sharedConfig\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n  \"sshTunnelUUID\": \"<null,string-uuid>\",\n  \"type\": \"<string>\",\n  \"uuid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82895936-4c24-4a43-97c0-f087fa06968b",
+          "name": "Delete a connector",
+          "request": {
+            "name": "Delete a connector",
+            "description": {
+              "content": "Permanently removes a connector and its associated configuration. This stops any active replication pipelines that depend on the connector.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d2badc4e-9597-4916-ad43-eafe92f8b77e",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8abb33dc-87d5-45a8-96ea-765f9d21f1d4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "064fa247-caf1-4b93-b1ab-0f242e9ad512",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f5bd5d4-9fd0-4c9d-80d9-7738f63f35bb",
+          "name": "Get a connector",
+          "request": {
+            "name": "Get a connector",
+            "description": {
+              "content": "Retrieves the full configuration and status of a connector by its unique identifier, including connection settings and current replication state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "13323d03-c54c-4261-83e4-eac045d0baba",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"label\": \"string\",\n  \"uuid\": \"e36ffa42-4f2e-bc3a-8daa-54b211fd7901\",\n  \"createdAt\": \"1995-08-02T08:11:23.384Z\",\n  \"updatedAt\": \"1968-08-30T13:01:09.058Z\",\n  \"type\": \"redis\",\n  \"companyUUID\": \"ae8b2ebc-1ddb-bfaf-c057-35b1b77f9783\",\n  \"environmentUUID\": \"13bc52d8-24a8-5209-2006-1a479d25b9fb\",\n  \"isValid\": true,\n  \"connectionLabel\": \"string\",\n  \"dataPlaneName\": null,\n  \"defaultDatabase\": \"string\",\n  \"privateLinkUUID\": null,\n  \"sharedConfig\": \"\",\n  \"snapshotPrivateLinkUUID\": null,\n  \"sshTunnelUUID\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dccdb1d0-e52c-4eda-9b09-a83731d7ac6a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e3e93601-c7cd-43cd-8820-5f29aaa41eec",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "410df91d-7697-4f15-b596-5574b4af370d",
+          "name": "Update a connector",
+          "request": {
+            "name": "Update a connector",
+            "description": {
+              "content": "Updates the configuration of an existing source or destination connector. Modify connection settings, credentials, or replication parameters for a running pipeline.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataPlaneName\": \"<string>\",\n  \"defaultDatabase\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"label\": \"<string>\",\n  \"privateLinkUUID\": \"<null,string-uuid>\",\n  \"sharedConfig\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n  \"sshTunnelUUID\": \"<null,string-uuid>\",\n  \"type\": \"<string>\",\n  \"uuid\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "863814a4-bcdb-4699-a735-70ac44e8dea7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataPlaneName\": \"<string>\",\n  \"defaultDatabase\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"label\": \"<string>\",\n  \"privateLinkUUID\": \"<null,string-uuid>\",\n  \"sharedConfig\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n  \"sshTunnelUUID\": \"<null,string-uuid>\",\n  \"type\": \"<string>\",\n  \"uuid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"label\": \"string\",\n  \"uuid\": \"e36ffa42-4f2e-bc3a-8daa-54b211fd7901\",\n  \"createdAt\": \"1995-08-02T08:11:23.384Z\",\n  \"updatedAt\": \"1968-08-30T13:01:09.058Z\",\n  \"type\": \"redis\",\n  \"companyUUID\": \"ae8b2ebc-1ddb-bfaf-c057-35b1b77f9783\",\n  \"environmentUUID\": \"13bc52d8-24a8-5209-2006-1a479d25b9fb\",\n  \"isValid\": true,\n  \"connectionLabel\": \"string\",\n  \"dataPlaneName\": null,\n  \"defaultDatabase\": \"string\",\n  \"privateLinkUUID\": null,\n  \"sharedConfig\": \"\",\n  \"snapshotPrivateLinkUUID\": null,\n  \"sshTunnelUUID\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee2a11a9-1c3f-435a-9d4e-0eb6238ab2bf",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataPlaneName\": \"<string>\",\n  \"defaultDatabase\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"label\": \"<string>\",\n  \"privateLinkUUID\": \"<null,string-uuid>\",\n  \"sharedConfig\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n  \"sshTunnelUUID\": \"<null,string-uuid>\",\n  \"type\": \"<string>\",\n  \"uuid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c4ec3e80-4ef8-4762-b10f-36c2ef0fafeb",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataPlaneName\": \"<string>\",\n  \"defaultDatabase\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"label\": \"<string>\",\n  \"privateLinkUUID\": \"<null,string-uuid>\",\n  \"sharedConfig\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n  \"sshTunnelUUID\": \"<null,string-uuid>\",\n  \"type\": \"<string>\",\n  \"uuid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3fdb5fb-0306-444b-8cf3-aadeda559912",
+          "name": "Fetch table detail for a saved connector",
+          "request": {
+            "name": "Fetch table detail for a saved connector",
+            "description": {
+              "content": "Returns detailed metadata for a specific table on the saved connector. Requires 'schemaName' and 'tableName' query parameters; 'isView' is optional.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                ":uuid",
+                "detail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "02775e63-02c8-40e7-bf74-e8d89b4004ef",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"columns\": [\n    {\n      \"metadata\": {\n        \"comment\": \"string\",\n        \"dataType\": \"string\",\n        \"defaultValue\": null,\n        \"isPrimaryKey\": null,\n        \"notNull\": true\n      },\n      \"name\": \"string\"\n    },\n    {\n      \"metadata\": {\n        \"comment\": \"string\",\n        \"dataType\": \"string\",\n        \"defaultValue\": null,\n        \"isPrimaryKey\": null,\n        \"notNull\": false\n      },\n      \"name\": \"string\"\n    }\n  ],\n  \"createdAt\": null,\n  \"isView\": false,\n  \"metadata\": [\n    {\n      \"isDate\": true,\n      \"key\": \"string\",\n      \"value\": \"\"\n    },\n    {\n      \"isDate\": true,\n      \"key\": \"string\",\n      \"value\": \"\"\n    }\n  ],\n  \"modifiedAt\": null,\n  \"name\": \"string\",\n  \"schema\": \"string\",\n  \"unreadable\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abf3c08e-c640-4626-9bd0-6dd2d70fd8c1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bb66e78c-dc4c-4ba4-ba3e-bc2729f3c1a2",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e6f6e9af-0296-46d2-93ce-044f9918c050",
+          "name": "Generate Oracle shadow table script",
+          "request": {
+            "name": "Generate Oracle shadow table script",
+            "description": {
+              "content": "Generates the SQL script to create shadow tables required for Oracle change data capture (CDC). Run this script on your Oracle source before starting replication.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                ":uuid",
+                "generate-shadow-script"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"database\": \"<string>\",\n  \"tables\": [\n    {\n      \"schema\": \"<string>\",\n      \"name\": \"<string>\",\n      \"columns\": [\n        {\n          \"name\": \"<string>\",\n          \"metadata\": {\n            \"dataType\": \"<string>\",\n            \"notNull\": \"<boolean>\",\n            \"defaultValue\": \"<null,string>\",\n            \"isPrimaryKey\": \"<null,boolean>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"metadata\": {\n            \"dataType\": \"<string>\",\n            \"notNull\": \"<boolean>\",\n            \"defaultValue\": \"<null,string>\",\n            \"isPrimaryKey\": \"<null,boolean>\"\n          }\n        }\n      ]\n    },\n    {\n      \"schema\": \"<string>\",\n      \"name\": \"<string>\",\n      \"columns\": [\n        {\n          \"name\": \"<string>\",\n          \"metadata\": {\n            \"dataType\": \"<string>\",\n            \"notNull\": \"<boolean>\",\n            \"defaultValue\": \"<null,string>\",\n            \"isPrimaryKey\": \"<null,boolean>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"metadata\": {\n            \"dataType\": \"<string>\",\n            \"notNull\": \"<boolean>\",\n            \"defaultValue\": \"<null,string>\",\n            \"isPrimaryKey\": \"<null,boolean>\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "79089b2d-1e3d-4c83-859d-2661fa47af1e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid",
+                    "generate-shadow-script"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"database\": \"<string>\",\n  \"tables\": [\n    {\n      \"schema\": \"string\",\n      \"name\": \"string\",\n      \"columns\": [\n        {\n          \"name\": \"string\",\n          \"metadata\": {\n            \"dataType\": \"string\",\n            \"notNull\": false,\n            \"defaultValue\": null,\n            \"isPrimaryKey\": null\n          }\n        },\n        {\n          \"name\": \"string\",\n          \"metadata\": {\n            \"dataType\": \"string\",\n            \"notNull\": false,\n            \"defaultValue\": null,\n            \"isPrimaryKey\": null\n          }\n        }\n      ]\n    },\n    {\n      \"schema\": \"string\",\n      \"name\": \"string\",\n      \"columns\": [\n        {\n          \"name\": \"string\",\n          \"metadata\": {\n            \"dataType\": \"string\",\n            \"notNull\": false,\n            \"defaultValue\": null,\n            \"isPrimaryKey\": null\n          }\n        },\n        {\n          \"name\": \"string\",\n          \"metadata\": {\n            \"dataType\": \"string\",\n            \"notNull\": true,\n            \"defaultValue\": null,\n            \"isPrimaryKey\": null\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"script\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1a30c23-f9cb-41da-b307-01aec90a308b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid",
+                    "generate-shadow-script"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"database\": \"<string>\",\n  \"tables\": [\n    {\n      \"schema\": \"string\",\n      \"name\": \"string\",\n      \"columns\": [\n        {\n          \"name\": \"string\",\n          \"metadata\": {\n            \"dataType\": \"string\",\n            \"notNull\": false,\n            \"defaultValue\": null,\n            \"isPrimaryKey\": null\n          }\n        },\n        {\n          \"name\": \"string\",\n          \"metadata\": {\n            \"dataType\": \"string\",\n            \"notNull\": false,\n            \"defaultValue\": null,\n            \"isPrimaryKey\": null\n          }\n        }\n      ]\n    },\n    {\n      \"schema\": \"string\",\n      \"name\": \"string\",\n      \"columns\": [\n        {\n          \"name\": \"string\",\n          \"metadata\": {\n            \"dataType\": \"string\",\n            \"notNull\": false,\n            \"defaultValue\": null,\n            \"isPrimaryKey\": null\n          }\n        },\n        {\n          \"name\": \"string\",\n          \"metadata\": {\n            \"dataType\": \"string\",\n            \"notNull\": true,\n            \"defaultValue\": null,\n            \"isPrimaryKey\": null\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "879854e0-2516-4f1a-883d-29644278264d",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid",
+                    "generate-shadow-script"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"database\": \"<string>\",\n  \"tables\": [\n    {\n      \"schema\": \"string\",\n      \"name\": \"string\",\n      \"columns\": [\n        {\n          \"name\": \"string\",\n          \"metadata\": {\n            \"dataType\": \"string\",\n            \"notNull\": false,\n            \"defaultValue\": null,\n            \"isPrimaryKey\": null\n          }\n        },\n        {\n          \"name\": \"string\",\n          \"metadata\": {\n            \"dataType\": \"string\",\n            \"notNull\": false,\n            \"defaultValue\": null,\n            \"isPrimaryKey\": null\n          }\n        }\n      ]\n    },\n    {\n      \"schema\": \"string\",\n      \"name\": \"string\",\n      \"columns\": [\n        {\n          \"name\": \"string\",\n          \"metadata\": {\n            \"dataType\": \"string\",\n            \"notNull\": false,\n            \"defaultValue\": null,\n            \"isPrimaryKey\": null\n          }\n        },\n        {\n          \"name\": \"string\",\n          \"metadata\": {\n            \"dataType\": \"string\",\n            \"notNull\": true,\n            \"defaultValue\": null,\n            \"isPrimaryKey\": null\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e1bf422-a352-4aa2-9a28-00081ae6ba86",
+          "name": "Drop a PostgreSQL replication slot",
+          "request": {
+            "name": "Drop a PostgreSQL replication slot",
+            "description": {
+              "content": "Drops a PostgreSQL replication slot that is inactive or orphaned. Use this to clean up stale replication slots that may be preventing WAL cleanup on the source.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                ":uuid",
+                "postgres-drop-replication-slot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slotName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4c15b0ba-3c57-4422-b9bf-d55634aed358",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid",
+                    "postgres-drop-replication-slot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"slotName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "40254946-f393-4365-b42e-bb9139c04f30",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid",
+                    "postgres-drop-replication-slot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"slotName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5be22a1a-a988-42dd-a77d-278c7ad5c7d5",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid",
+                    "postgres-drop-replication-slot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"slotName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0357a355-3e81-43b9-92da-de6acea00db4",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid",
+                    "postgres-drop-replication-slot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"slotName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "431ae140-4aeb-4da4-b833-9504c55dacf4",
+          "name": "Start a DynamoDB export",
+          "request": {
+            "name": "Start a DynamoDB export",
+            "description": {
+              "content": "Initiates a point-in-time export from Amazon DynamoDB for the specified connector. Use this to backfill your destination with existing DynamoDB table data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                ":uuid",
+                "start-dynamodb-export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"s3Bucket\": \"<string>\",\n  \"s3Prefix\": \"<null,string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ad2b0f0-ac94-43fc-9c0d-fa6b7eac481c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid",
+                    "start-dynamodb-export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"s3Bucket\": \"<string>\",\n  \"s3Prefix\": \"<null,string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"exportARN\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0381e134-6f73-4899-a6d4-b90a08fe9fb6",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    ":uuid",
+                    "start-dynamodb-export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"s3Bucket\": \"<string>\",\n  \"s3Prefix\": \"<null,string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe50faad-879d-4361-a0d7-00546c1665ec",
+          "name": "Fetch databases for an unsaved connector",
+          "request": {
+            "name": "Fetch databases for an unsaved connector",
+            "description": {
+              "content": "Lists available databases on the target using an unsaved connector configuration. Useful during connector setup to discover existing databases. Response metadata may include Iceberg S3 table bucket maintenance defaults.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                "databases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataPlaneName\": \"<string>\",\n  \"defaultDatabase\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"label\": \"<string>\",\n  \"privateLinkUUID\": \"<null,string-uuid>\",\n  \"sharedConfig\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n  \"sshTunnelUUID\": \"<null,string-uuid>\",\n  \"type\": \"<string>\",\n  \"uuid\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "077f7ddb-1b98-4b51-a3d2-bab09c1cc645",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "databases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataPlaneName\": \"<string>\",\n  \"defaultDatabase\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"label\": \"<string>\",\n  \"privateLinkUUID\": \"<null,string-uuid>\",\n  \"sharedConfig\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n  \"sshTunnelUUID\": \"<null,string-uuid>\",\n  \"type\": \"<string>\",\n  \"uuid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"name\": \"string\"\n    },\n    {\n      \"name\": \"string\"\n    }\n  ],\n  \"metadata\": [\n    {\n      \"isDate\": false,\n      \"key\": \"string\",\n      \"value\": \"\"\n    },\n    {\n      \"isDate\": false,\n      \"key\": \"string\",\n      \"value\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f10916f-6486-42b2-893a-ae4762df467a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "databases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataPlaneName\": \"<string>\",\n  \"defaultDatabase\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"label\": \"<string>\",\n  \"privateLinkUUID\": \"<null,string-uuid>\",\n  \"sharedConfig\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n  \"sshTunnelUUID\": \"<null,string-uuid>\",\n  \"type\": \"<string>\",\n  \"uuid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0624d414-c863-4bac-9315-3c0b61293563",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "databases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataPlaneName\": \"<string>\",\n  \"defaultDatabase\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"label\": \"<string>\",\n  \"privateLinkUUID\": \"<null,string-uuid>\",\n  \"sharedConfig\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n  \"sshTunnelUUID\": \"<null,string-uuid>\",\n  \"type\": \"<string>\",\n  \"uuid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "338cd64c-4b19-4040-8601-2fca15d8cd08",
+          "name": "Create a database on an unsaved connector",
+          "request": {
+            "name": "Create a database on an unsaved connector",
+            "description": {
+              "content": "Creates a new database on the target destination using a connector configuration that has not yet been saved. Useful during initial setup to prepare the destination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                "new-database"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"<string>\",\n    \"defaultDatabase\": \"<null,string>\",\n    \"environmentUUID\": \"<null,string-uuid>\",\n    \"label\": \"<string>\",\n    \"privateLinkUUID\": \"<null,string-uuid>\",\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n    \"sshTunnelUUID\": \"<null,string-uuid>\",\n    \"type\": \"<string>\",\n    \"uuid\": \"<string>\"\n  },\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bdace312-8781-46ee-8b34-4635c43118a4",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "new-database"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5ba423df-86f2-41b8-bed8-aa2cff552703",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "new-database"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "27fb3d00-7277-49f1-a48e-b7b3d3a39794",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "new-database"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca036fb6-22d7-4fe2-9fa1-1ece08187af4",
+          "name": "Create a schema on an unsaved connector",
+          "request": {
+            "name": "Create a schema on an unsaved connector",
+            "description": {
+              "content": "Creates a new schema on the target destination using a connector configuration that has not yet been saved. Useful during initial setup to organize destination tables.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                "new-schema"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"<string>\",\n    \"defaultDatabase\": \"<null,string>\",\n    \"environmentUUID\": \"<null,string-uuid>\",\n    \"label\": \"<string>\",\n    \"privateLinkUUID\": \"<null,string-uuid>\",\n    \"sharedConfig\": {\n      \"key_0\": {}\n    },\n    \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n    \"sshTunnelUUID\": \"<null,string-uuid>\",\n    \"type\": \"<string>\",\n    \"uuid\": \"<string>\"\n  },\n  \"databaseName\": \"<string>\",\n  \"name\": \"<string>\",\n  \"volume\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "58c3d12a-3813-460e-b182-d25038dd28dd",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "new-schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {},\n      \"key_4\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"databaseName\": \"<string>\",\n  \"name\": \"<string>\",\n  \"volume\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "43df9585-32e5-4ce3-8781-fa12cbdbc60d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "new-schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {},\n      \"key_4\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"databaseName\": \"<string>\",\n  \"name\": \"<string>\",\n  \"volume\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "071c9112-7026-482f-8052-15a44ecda854",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "new-schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {},\n      \"key_4\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"databaseName\": \"<string>\",\n  \"name\": \"<string>\",\n  \"volume\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4140b09f-710e-4c04-bbb7-e2742b1308b4",
+          "name": "Create a Snowflake warehouse on an unsaved connector",
+          "request": {
+            "name": "Create a Snowflake warehouse on an unsaved connector",
+            "description": {
+              "content": "Creates a new Snowflake virtual warehouse using an unsaved connector configuration. Useful during initial setup to provision compute resources for data replication.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                "new-snowflake-warehouse"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"<string>\",\n    \"defaultDatabase\": \"<null,string>\",\n    \"environmentUUID\": \"<null,string-uuid>\",\n    \"label\": \"<string>\",\n    \"privateLinkUUID\": \"<null,string-uuid>\",\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n    \"sshTunnelUUID\": \"<null,string-uuid>\",\n    \"type\": \"<string>\",\n    \"uuid\": \"<string>\"\n  },\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eb1f988d-f647-4035-861f-c1c09d826d43",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "new-snowflake-warehouse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f05a46d0-465e-4972-a81f-5475d1a5c978",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "new-snowflake-warehouse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a6755da7-b765-417e-90a3-7c2625aae65f",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "new-snowflake-warehouse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f03cd01-1b56-4814-9995-f355352953b8",
+          "name": "Ping a connector",
+          "request": {
+            "name": "Ping a connector",
+            "description": {
+              "content": "Tests network connectivity and authentication for a connector configuration before saving it. Use this to validate connection settings during connector setup.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                "ping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataPlaneName\": \"<string>\",\n  \"defaultDatabase\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"label\": \"<string>\",\n  \"privateLinkUUID\": \"<null,string-uuid>\",\n  \"sharedConfig\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n  \"sshTunnelUUID\": \"<null,string-uuid>\",\n  \"type\": \"<string>\",\n  \"uuid\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "676a7ee5-30c9-4ee9-9e52-5f502203cac6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataPlaneName\": \"<string>\",\n  \"defaultDatabase\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"label\": \"<string>\",\n  \"privateLinkUUID\": \"<null,string-uuid>\",\n  \"sharedConfig\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n  \"sshTunnelUUID\": \"<null,string-uuid>\",\n  \"type\": \"<string>\",\n  \"uuid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e65160b-6d8b-443c-88de-2582c93241e2",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataPlaneName\": \"<string>\",\n  \"defaultDatabase\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"label\": \"<string>\",\n  \"privateLinkUUID\": \"<null,string-uuid>\",\n  \"sharedConfig\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n  \"sshTunnelUUID\": \"<null,string-uuid>\",\n  \"type\": \"<string>\",\n  \"uuid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f0e5320a-3897-45bc-bb44-7bef08f56136",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataPlaneName\": \"<string>\",\n  \"defaultDatabase\": \"<null,string>\",\n  \"environmentUUID\": \"<null,string-uuid>\",\n  \"label\": \"<string>\",\n  \"privateLinkUUID\": \"<null,string-uuid>\",\n  \"sharedConfig\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n  \"sshTunnelUUID\": \"<null,string-uuid>\",\n  \"type\": \"<string>\",\n  \"uuid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4379da7-3370-48e2-bd5e-86bf98f5ec14",
+          "name": "List PostgreSQL publications for an unsaved connector",
+          "request": {
+            "name": "List PostgreSQL publications for an unsaved connector",
+            "description": {
+              "content": "Lists logical replication publications on a PostgreSQL source using an unsaved connector configuration. Useful during connector setup to let users select an existing publication.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                "postgres-publications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"<string>\",\n    \"defaultDatabase\": \"<null,string>\",\n    \"environmentUUID\": \"<null,string-uuid>\",\n    \"label\": \"<string>\",\n    \"privateLinkUUID\": \"<null,string-uuid>\",\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n    \"sshTunnelUUID\": \"<null,string-uuid>\",\n    \"type\": \"<string>\",\n    \"uuid\": \"<string>\"\n  },\n  \"databaseName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3a929a0d-c554-4836-92d5-c2433be7b6e5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "postgres-publications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"databaseName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"allTables\": true,\n      \"publishViaPartitionRoot\": false\n    },\n    {\n      \"name\": \"string\",\n      \"allTables\": false,\n      \"publishViaPartitionRoot\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a0448eb-d811-409b-a976-3fa4ab047879",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "postgres-publications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"databaseName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "64c42711-eabc-4afd-a444-6c1896b12af7",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "postgres-publications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"databaseName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "068cc3a9-edd5-42ee-9725-7d17ec947332",
+          "name": "Fetch schemas for an unsaved connector",
+          "request": {
+            "name": "Fetch schemas for an unsaved connector",
+            "description": {
+              "content": "Lists available schemas in a specific database using an unsaved connector configuration. Useful during connector setup to discover existing schemas.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                "schemas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"<string>\",\n    \"defaultDatabase\": \"<null,string>\",\n    \"environmentUUID\": \"<null,string-uuid>\",\n    \"label\": \"<string>\",\n    \"privateLinkUUID\": \"<null,string-uuid>\",\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n    \"sshTunnelUUID\": \"<null,string-uuid>\",\n    \"type\": \"<string>\",\n    \"uuid\": \"<string>\"\n  },\n  \"databaseName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9bbd424c-669f-457f-b0a3-2c7d1938c23f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "schemas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"databaseName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c0788d30-a88f-4dbc-b8ae-c60533a43919",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "schemas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"databaseName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d1598a8c-536e-4ec2-b6e1-3a7f5b2f7757",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "schemas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"databaseName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7203f585-d61b-46d2-af67-9f2ca6b98e94",
+          "name": "Fetch tables for an unsaved connector",
+          "request": {
+            "name": "Fetch tables for an unsaved connector",
+            "description": {
+              "content": "Lists available tables in a specific database and schema using an unsaved connector configuration. Results are cached when a connector UUID is provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                "tables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"<string>\",\n    \"defaultDatabase\": \"<null,string>\",\n    \"environmentUUID\": \"<null,string-uuid>\",\n    \"label\": \"<string>\",\n    \"privateLinkUUID\": \"<null,string-uuid>\",\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"snapshotPrivateLinkUUID\": \"<null,string-uuid>\",\n    \"sshTunnelUUID\": \"<null,string-uuid>\",\n    \"type\": \"<string>\",\n    \"uuid\": \"<string>\"\n  },\n  \"databaseName\": \"<string>\",\n  \"forceRefresh\": \"<boolean>\",\n  \"schemaName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c42d89ec-9298-4c63-83c8-6aaf401f2c61",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"databaseName\": \"<string>\",\n  \"forceRefresh\": \"<boolean>\",\n  \"schemaName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"approxDateAdded\": null,\n      \"columns\": [\n        {\n          \"metadata\": {\n            \"comment\": \"string\",\n            \"dataType\": \"string\",\n            \"defaultValue\": null,\n            \"isPrimaryKey\": null,\n            \"notNull\": true\n          },\n          \"name\": \"string\"\n        },\n        {\n          \"metadata\": {\n            \"comment\": \"string\",\n            \"dataType\": \"string\",\n            \"defaultValue\": null,\n            \"isPrimaryKey\": null,\n            \"notNull\": true\n          },\n          \"name\": \"string\"\n        }\n      ],\n      \"createdAt\": null,\n      \"isView\": false,\n      \"metadata\": [\n        {\n          \"isDate\": false,\n          \"key\": \"string\",\n          \"value\": \"\"\n        },\n        {\n          \"isDate\": false,\n          \"key\": \"string\",\n          \"value\": \"\"\n        }\n      ],\n      \"modifiedAt\": null,\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unreadable\": true\n    },\n    {\n      \"approxDateAdded\": null,\n      \"columns\": [\n        {\n          \"metadata\": {\n            \"comment\": \"string\",\n            \"dataType\": \"string\",\n            \"defaultValue\": null,\n            \"isPrimaryKey\": null,\n            \"notNull\": false\n          },\n          \"name\": \"string\"\n        },\n        {\n          \"metadata\": {\n            \"comment\": \"string\",\n            \"dataType\": \"string\",\n            \"defaultValue\": null,\n            \"isPrimaryKey\": null,\n            \"notNull\": true\n          },\n          \"name\": \"string\"\n        }\n      ],\n      \"createdAt\": null,\n      \"isView\": true,\n      \"metadata\": [\n        {\n          \"isDate\": true,\n          \"key\": \"string\",\n          \"value\": \"\"\n        },\n        {\n          \"isDate\": false,\n          \"key\": \"string\",\n          \"value\": \"\"\n        }\n      ],\n      \"modifiedAt\": null,\n      \"name\": \"string\",\n      \"schema\": \"string\",\n      \"unreadable\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0cfabe4a-eeed-46f6-bf59-a9fe2a709e3f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"databaseName\": \"<string>\",\n  \"forceRefresh\": \"<boolean>\",\n  \"schemaName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1176bbb9-936b-4ad0-bc16-cf2ffe3ade70",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connector\": {\n    \"dataPlaneName\": \"string\",\n    \"defaultDatabase\": null,\n    \"environmentUUID\": null,\n    \"label\": \"string\",\n    \"privateLinkUUID\": null,\n    \"sharedConfig\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"snapshotPrivateLinkUUID\": null,\n    \"sshTunnelUUID\": null,\n    \"type\": \"string\",\n    \"uuid\": \"string\"\n  },\n  \"databaseName\": \"<string>\",\n  \"forceRefresh\": \"<boolean>\",\n  \"schemaName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.artie.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "be46b7bb-29d7-43f0-a5c2-f831c5d5e782",
+    "name": "Artie Column Hashing Salts Connectors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "External API endpoints for Artie",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,301 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Artie Column Hashing Salts Connectors API",
+    "version": "v1.0.51"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connectors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/connectors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new source or destination connector for your Artie deployment. Configure database connections, authentication, and replication settings programmatically."
+        },
+        {
+          "info": {
+            "name": "Get a connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.artie.com/connectors/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the full configuration and status of a connector by its unique identifier, including connection settings and current replication state."
+        },
+        {
+          "info": {
+            "name": "Update a connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/connectors/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing source or destination connector. Modify connection settings, credentials, or replication parameters for a running pipeline."
+        },
+        {
+          "info": {
+            "name": "Delete a connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.artie.com/connectors/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently removes a connector and its associated configuration. This stops any active replication pipelines that depend on the connector."
+        },
+        {
+          "info": {
+            "name": "Fetch table detail for a saved connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.artie.com/connectors/:uuid/detail",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns detailed metadata for a specific table on the saved connector. Requires 'schemaName' and 'tableName' query parameters; 'isView' is optional."
+        },
+        {
+          "info": {
+            "name": "Generate Oracle shadow table script",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/connectors/:uuid/generate-shadow-script",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates the SQL script to create shadow tables required for Oracle change data capture (CDC). Run this script on your Oracle source before starting replication."
+        },
+        {
+          "info": {
+            "name": "Drop a PostgreSQL replication slot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/connectors/:uuid/postgres-drop-replication-slot",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Drops a PostgreSQL replication slot that is inactive or orphaned. Use this to clean up stale replication slots that may be preventing WAL cleanup on the source."
+        },
+        {
+          "info": {
+            "name": "Start a DynamoDB export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/connectors/:uuid/start-dynamodb-export",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates a point-in-time export from Amazon DynamoDB for the specified connector. Use this to backfill your destination with existing DynamoDB table data."
+        },
+        {
+          "info": {
+            "name": "Fetch databases for an unsaved connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/connectors/databases",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists available databases on the target using an unsaved connector configuration. Useful during connector setup to discover existing databases. Response metadata may include Iceberg S3 table bucket maintenance defaults."
+        },
+        {
+          "info": {
+            "name": "Create a database on an unsaved connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/connectors/new-database",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new database on the target destination using a connector configuration that has not yet been saved. Useful during initial setup to prepare the destination."
+        },
+        {
+          "info": {
+            "name": "Create a schema on an unsaved connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/connectors/new-schema",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new schema on the target destination using a connector configuration that has not yet been saved. Useful during initial setup to organize destination tables."
+        },
+        {
+          "info": {
+            "name": "Create a Snowflake warehouse on an unsaved connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/connectors/new-snowflake-warehouse",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Snowflake virtual warehouse using an unsaved connector configuration. Useful during initial setup to provision compute resources for data replication."
+        },
+        {
+          "info": {
+            "name": "Ping a connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/connectors/ping",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Tests network connectivity and authentication for a connector configuration before saving it. Use this to validate connection settings during connector setup."
+        },
+        {
+          "info": {
+            "name": "List PostgreSQL publications for an unsaved connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/connectors/postgres-publications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists logical replication publications on a PostgreSQL source using an unsaved connector configuration. Useful during connector setup to let users select an existing publication."
+        },
+        {
+          "info": {
+            "name": "Fetch schemas for an unsaved connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/connectors/schemas",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists available schemas in a specific database using an unsaved connector configuration. Useful during connector setup to discover existing schemas."
+        },
+        {
+          "info": {
+            "name": "Fetch tables for an unsaved connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.artie.com/connectors/tables",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists available tables in a specific database and schema using an unsaved connector configuration. Results are cached when a connector UUID is provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
