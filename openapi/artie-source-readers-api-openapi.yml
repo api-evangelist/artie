@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: External API endpoints for Artie
-  title: Artie Column Hashing Salts Source Readers API
+  title: Artie Source Readers API
   version: v1.0.51
 servers:
 - url: https://api.artie.com
@@ -194,6 +194,95 @@ components:
       required:
       - status
       type: object
+    PayloadsSourceReaderTablesConfig:
+      additionalProperties:
+        $ref: '#/components/schemas/PayloadsSourceReaderTable'
+      type:
+      - 'null'
+      - object
+    RouterSourceReaderCreateRequest:
+      properties:
+        connectorUUID:
+          format: uuid
+          type: string
+        containerName:
+          type: string
+        dataPlaneName:
+          type: string
+        database:
+          type: string
+        isShared:
+          type: boolean
+        name:
+          type: string
+        settings:
+          $ref: '#/components/schemas/PayloadsSourceReaderSettingsPayload'
+        tablesConfig:
+          $ref: '#/components/schemas/PayloadsSourceReaderTablesConfig'
+      required:
+      - connectorUUID
+      type: object
+    PayloadsSourceReader:
+      properties:
+        apiBaseURL:
+          type: string
+        companyUUID:
+          format: uuid
+          type: string
+        connectorUUID:
+          format: uuid
+          type: string
+        containerName:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        dataPlaneName:
+          type: string
+        database:
+          type: string
+        environmentUUID:
+          format: uuid
+          type: string
+        isShared:
+          type:
+          - 'null'
+          - boolean
+        isValid:
+          type: boolean
+        name:
+          type: string
+        settings:
+          $ref: '#/components/schemas/PayloadsSourceReaderSettingsPayload'
+        status:
+          $ref: '#/components/schemas/EnumsSourceReaderStatus'
+        tablesConfig:
+          $ref: '#/components/schemas/PayloadsSourceReaderTablesConfig'
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - name
+      - companyUUID
+      - dataPlaneName
+      - environmentUUID
+      - connectorUUID
+      - status
+      - isValid
+      - database
+      - containerName
+      - settings
+      type: object
+    EnumsSourceReaderStatus:
+      enum:
+      - draft
+      - paused
+      - running
+      type: string
     PayloadsSourceReaderSettingsPayload:
       properties:
         archiveLogPassword:
@@ -324,53 +413,12 @@ components:
           - 'null'
           - boolean
       type: object
-    PayloadsSourceReaderTablesConfig:
-      additionalProperties:
-        $ref: '#/components/schemas/PayloadsSourceReaderTable'
-      type:
-      - 'null'
-      - object
-    EnumsSourceReaderStatus:
-      enum:
-      - draft
-      - paused
-      - running
-      type: string
     RouterSourceReaderValidateUnsavedResponse:
       properties:
         error:
           type: string
       required:
       - error
-      type: object
-    RouterSourceReaderValidateUnsavedRequest:
-      properties:
-        sourceReader:
-          $ref: '#/components/schemas/PayloadsSourceReader'
-      required:
-      - sourceReader
-      type: object
-    RouterSourceReaderCreateRequest:
-      properties:
-        connectorUUID:
-          format: uuid
-          type: string
-        containerName:
-          type: string
-        dataPlaneName:
-          type: string
-        database:
-          type: string
-        isShared:
-          type: boolean
-        name:
-          type: string
-        settings:
-          $ref: '#/components/schemas/PayloadsSourceReaderSettingsPayload'
-        tablesConfig:
-          $ref: '#/components/schemas/PayloadsSourceReaderTablesConfig'
-      required:
-      - connectorUUID
       type: object
     PayloadsSourceReaderTable:
       properties:
@@ -391,60 +439,12 @@ components:
         unifyAcrossSchemas:
           type: boolean
       type: object
-    PayloadsSourceReader:
+    RouterSourceReaderValidateUnsavedRequest:
       properties:
-        apiBaseURL:
-          type: string
-        companyUUID:
-          format: uuid
-          type: string
-        connectorUUID:
-          format: uuid
-          type: string
-        containerName:
-          type: string
-        createdAt:
-          format: date-time
-          type: string
-        dataPlaneName:
-          type: string
-        database:
-          type: string
-        environmentUUID:
-          format: uuid
-          type: string
-        isShared:
-          type:
-          - 'null'
-          - boolean
-        isValid:
-          type: boolean
-        name:
-          type: string
-        settings:
-          $ref: '#/components/schemas/PayloadsSourceReaderSettingsPayload'
-        status:
-          $ref: '#/components/schemas/EnumsSourceReaderStatus'
-        tablesConfig:
-          $ref: '#/components/schemas/PayloadsSourceReaderTablesConfig'
-        updatedAt:
-          format: date-time
-          type: string
-        uuid:
-          format: uuid
-          type: string
+        sourceReader:
+          $ref: '#/components/schemas/PayloadsSourceReader'
       required:
-      - uuid
-      - name
-      - companyUUID
-      - dataPlaneName
-      - environmentUUID
-      - connectorUUID
-      - status
-      - isValid
-      - database
-      - containerName
-      - settings
+      - sourceReader
       type: object
     PayloadsAzureBlobStorageConfig:
       properties:

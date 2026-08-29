@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: External API endpoints for Artie
-  title: Artie Column Hashing Salts PrivateLink Connections API
+  title: Artie PrivateLink Connections API
   version: v1.0.51
 servers:
 - url: https://api.artie.com
@@ -102,6 +102,29 @@ paths:
       - PrivateLink Connections
 components:
   schemas:
+    RouterPrivateLinkConnectionCreateRequest:
+      properties:
+        availabilityZoneIds:
+          items:
+            type: string
+          type: array
+        dataPlaneName:
+          type:
+          - 'null'
+          - string
+        environmentUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+        vpcServiceName:
+          type: string
+      required:
+      - vpcServiceName
+      - availabilityZoneIds
+      type: object
     RouterPrivateLinkConnectionUpdateRequest:
       properties:
         availabilityZoneIds:
@@ -178,29 +201,6 @@ components:
       - status
       - region
       - dnsEntry
-      - availabilityZoneIds
-      type: object
-    RouterPrivateLinkConnectionCreateRequest:
-      properties:
-        availabilityZoneIds:
-          items:
-            type: string
-          type: array
-        dataPlaneName:
-          type:
-          - 'null'
-          - string
-        environmentUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        name:
-          type: string
-        vpcServiceName:
-          type: string
-      required:
-      - vpcServiceName
       - availabilityZoneIds
       type: object
   securitySchemes:

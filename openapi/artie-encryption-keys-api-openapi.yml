@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: External API endpoints for Artie
-  title: Artie Column Hashing Salts Encryption Keys API
+  title: Artie Encryption Keys API
   version: v1.0.51
 servers:
 - url: https://api.artie.com
@@ -130,16 +130,6 @@ components:
       required:
       - name
       type: object
-    RouterCreateEncryptionKeyResponse:
-      properties:
-        encryptionKey:
-          $ref: '#/components/schemas/PayloadsEncryptionKey'
-        key:
-          type: string
-      required:
-      - encryptionKey
-      - key
-      type: object
     RouterUpdateEncryptionKeyRequest:
       properties:
         description:
@@ -149,14 +139,15 @@ components:
       required:
       - name
       type: object
-    ListResponseBodyEncryptionKey:
+    RouterCreateEncryptionKeyResponse:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/PayloadsEncryptionKey'
-          type: array
+        encryptionKey:
+          $ref: '#/components/schemas/PayloadsEncryptionKey'
+        key:
+          type: string
       required:
-      - items
+      - encryptionKey
+      - key
       type: object
     PayloadsEncryptionKeyDetail:
       properties:
@@ -187,6 +178,15 @@ components:
       - name
       - type
       - key
+      type: object
+    ListResponseBodyEncryptionKey:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsEncryptionKey'
+          type: array
+      required:
+      - items
       type: object
     PayloadsEncryptionKey:
       properties:

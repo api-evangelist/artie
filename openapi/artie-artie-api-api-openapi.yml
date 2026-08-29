@@ -1,0 +1,1089 @@
+openapi: 3.2.0
+info:
+  description: External API endpoints for Artie
+  title: Artie API
+  version: v1.0.51
+servers:
+- url: https://api.artie.com
+security:
+- ApiKey: []
+tags:
+- name: Artie API
+paths: {}
+webhooks:
+  backfill.completed:
+    post:
+      description: Backfill completed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookBackfillCompleted'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+  backfill.failed:
+    post:
+      description: Backfill failed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookBackfillFailed'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+  backfill.started:
+    post:
+      description: Backfill started
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookBackfillStarted'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+  connection.failed:
+    post:
+      description: Connection failed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookConnectionFailed'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+  database.discovered:
+    post:
+      description: Database discovered
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookDatabaseDiscovered'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+  database.discovery_failed:
+    post:
+      description: Database discovery failed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookDatabaseDiscovery_failed'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+  database.removed:
+    post:
+      description: Database removed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookDatabaseRemoved'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+  ddl.applied:
+    post:
+      description: DDL applied
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookDdlApplied'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+  ddl.seen:
+    post:
+      description: DDL seen
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookDdlSeen'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+  dedupe.completed:
+    post:
+      description: Deduplication completed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookDedupeCompleted'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+  dedupe.failed:
+    post:
+      description: Deduplication failed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookDedupeFailed'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+  dedupe.started:
+    post:
+      description: Deduplication started
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookDedupeStarted'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+  dek.generated:
+    post:
+      description: Data Encryption Key (DEK) generated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookDekGenerated'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+  replication.error:
+    post:
+      description: Replication error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookReplicationError'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+  replication.failed:
+    post:
+      description: Replication failed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookReplicationFailed'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+  replication.started:
+    post:
+      description: Replication started
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookReplicationStarted'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+  row.skipped:
+    post:
+      description: Row skipped
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadsWebhookRowSkipped'
+        required: true
+      responses:
+        '200':
+          description: Acknowledge delivery
+      tags:
+      - Artie API
+components:
+  schemas:
+    PayloadsWebhookDedupeFailed:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - dedupe.failed
+            type: string
+          properties:
+            properties:
+              error:
+                description: Full error string (scrubbed).
+                type: string
+              schema:
+                description: Schema containing the table whose deduplication failed (scrubbed).
+                type: string
+              table:
+                description: Table whose deduplication failed (scrubbed).
+                type: string
+            required:
+            - table
+            - error
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      description: Deduplication failed
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: dedupe.failed
+        message: Deduplication failed
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties:
+          error: 'merge query failed: timeout'
+          schema: public
+          table: orders
+        severity: error
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: dedupe.failed
+    PayloadsWebhookDekGenerated:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - dek.generated
+            type: string
+          properties:
+            properties:
+              aws_kms_key_arn:
+                description: ARN of the AWS KMS key used to encrypt the DEK.
+                type: string
+              encryption_key_name:
+                description: Human-readable name of the DEK.
+                type: string
+              encryption_key_uuid:
+                description: UUID of the generated Data Encryption Key.
+                type: string
+            required:
+            - encryption_key_uuid
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      description: Data Encryption Key (DEK) generated
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: dek.generated
+        message: Data Encryption Key (DEK) generated
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties:
+          aws_kms_key_arn: arn:aws:kms:us-east-1:123456789012:key/abcd1234-a56b-7890-cdef-1234567890ab
+          encryption_key_name: orders-dek-2026-06
+          encryption_key_uuid: 33333333-3333-3333-3333-333333333333
+        severity: info
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: dek.generated
+    PayloadsWebhookDeliveryMetadata:
+      properties:
+        attempt:
+          description: 1-based delivery attempt number for this event.
+          type: integer
+      required:
+      - attempt
+      type: object
+    PayloadsWebhookDdlSeen:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - ddl.seen
+            type: string
+          properties:
+            properties:
+              ddl_event:
+                description: Parsed DDL event details from the source.
+                items:
+                  type: object
+                type: array
+              queries:
+                description: SQL statements observed in the DDL event.
+                items:
+                  type: string
+                type: array
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      description: DDL seen
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: ddl.seen
+        message: DDL seen
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties:
+          ddl_event:
+          - column: promo_code
+            operation: add_column
+            type: VARCHAR(32)
+          queries:
+          - ALTER TABLE orders ADD COLUMN promo_code VARCHAR(32)
+        severity: info
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: ddl.seen
+    PayloadsWebhookDdlApplied:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - ddl.applied
+            type: string
+          properties:
+            properties:
+              queries:
+                description: SQL statements executed for this DDL operation.
+                items:
+                  type: string
+                type: array
+              schema:
+                description: Schema containing the affected table (scrubbed).
+                type: string
+              table:
+                description: Table affected by the DDL (scrubbed).
+                type: string
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      description: DDL applied
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: ddl.applied
+        message: DDL applied
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties:
+          queries:
+          - ALTER TABLE orders ADD COLUMN promo_code VARCHAR(32)
+          schema: public
+          table: orders
+        severity: info
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: ddl.applied
+    PayloadsWebhookReplicationError:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - replication.error
+            type: string
+          properties:
+            properties:
+              error:
+                description: Full error string (scrubbed).
+                type: string
+              topic:
+                description: Kafka topic the failure is scoped to, when the error is topic-specific (scrubbed).
+                type: string
+            required:
+            - error
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      description: Replication error
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: replication.error
+        message: Replication error
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties:
+          error: 'failed to flush: context deadline exceeded'
+          topic: dbserver1.public.orders
+        severity: error
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: replication.error
+    PayloadsWebhookEventProperties:
+      additionalProperties: true
+      description: Event-specific fields included in the `properties` object of a webhook delivery. The set of keys depends on the event type. Every field is optional; omitted keys should be treated as absent. Artie may add new fields at any time—clients must tolerate unknown keys and should not assume a fixed schema beyond this contract.
+      type: object
+    PayloadsWebhookBackfillFailed:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - backfill.failed
+            type: string
+          properties:
+            properties:
+              error:
+                description: Full error string (scrubbed).
+                type: string
+              rows_written:
+                description: Rows written before the failure.
+                type: integer
+              schema:
+                description: Schema containing the table whose backfill failed (scrubbed).
+                type: string
+              table:
+                description: Table whose backfill failed (scrubbed).
+                type: string
+            required:
+            - table
+            - error
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      description: Backfill failed
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: backfill.failed
+        message: Backfill failed
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties:
+          error: read tcp connection reset by peer
+          rows_written: 420000
+          schema: public
+          table: orders
+        severity: error
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: backfill.failed
+    PayloadsWebhookReplicationFailed:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - replication.failed
+            type: string
+          properties:
+            properties:
+              error:
+                description: Full error string (scrubbed).
+                type: string
+            required:
+            - error
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      deprecated: true
+      description: Replication failed
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: replication.failed
+        message: Replication failed
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties:
+          error: 'failed to flush: context deadline exceeded'
+        severity: error
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: replication.failed
+    PayloadsWebhookDatabaseDiscovery_failed:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - database.discovery_failed
+            type: string
+          properties:
+            properties:
+              error:
+                description: Full error string (scrubbed).
+                type: string
+            required:
+            - error
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      description: Database discovery failed
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: database.discovery_failed
+        message: Database discovery failed
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties:
+          error: 'failed to list databases: connection reset by peer'
+        severity: error
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: database.discovery_failed
+    PayloadsWebhookPipelineInfo:
+      properties:
+        name:
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - name
+      type: object
+    PayloadsWebhookReplicationStarted:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - replication.started
+            type: string
+          properties:
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      description: Replication started
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: replication.started
+        message: Replication started
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties: {}
+        severity: info
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: replication.started
+    PayloadsWebhookDedupeStarted:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - dedupe.started
+            type: string
+          properties:
+            properties:
+              schema:
+                description: Schema containing the table being deduplicated (scrubbed).
+                type: string
+              table:
+                description: Table being deduplicated (scrubbed).
+                type: string
+            required:
+            - table
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      description: Deduplication started
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: dedupe.started
+        message: Deduplication started
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties:
+          schema: public
+          table: orders
+        severity: info
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: dedupe.started
+    PayloadsWebhookBackfillCompleted:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - backfill.completed
+            type: string
+          properties:
+            properties:
+              duration_seconds:
+                description: Elapsed time in seconds.
+                type: number
+              rows_written:
+                description: Total rows written during the backfill.
+                type: integer
+              schema:
+                description: Schema containing the table that finished backfilling (scrubbed).
+                type: string
+              table:
+                description: Table that finished backfilling (scrubbed).
+                type: string
+            required:
+            - table
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      description: Backfill completed
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: backfill.completed
+        message: Backfill completed
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties:
+          duration_seconds: 842.31
+          rows_written: 850000
+          schema: public
+          table: orders
+        severity: info
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: backfill.completed
+    PayloadsWebhookDedupeCompleted:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - dedupe.completed
+            type: string
+          properties:
+            properties:
+              duration_seconds:
+                description: Elapsed time in seconds.
+                type: number
+              schema:
+                description: Schema containing the table that finished deduplication (scrubbed).
+                type: string
+              table:
+                description: Table that finished deduplication (scrubbed).
+                type: string
+            required:
+            - table
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      description: Deduplication completed
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: dedupe.completed
+        message: Deduplication completed
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties:
+          duration_seconds: 12.5
+          schema: public
+          table: orders
+        severity: info
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: dedupe.completed
+    PayloadsWebhookConnectionFailed:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - connection.failed
+            type: string
+          properties:
+            properties:
+              error:
+                description: Full error string (scrubbed).
+                type: string
+            required:
+            - error
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      deprecated: true
+      description: Connection failed
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: connection.failed
+        message: Connection failed
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties:
+          error: 'dial tcp: connection refused'
+        severity: error
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: connection.failed
+    PayloadsWebhookDatabaseRemoved:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - database.removed
+            type: string
+          properties:
+            properties:
+              database:
+                description: Name of the database that was removed (scrubbed).
+                type: string
+            required:
+            - database
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      description: Database removed
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: database.removed
+        message: Database removed
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties:
+          database: AdventureWorks
+        severity: warning
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: database.removed
+    PayloadsWebhookBackfillStarted:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - backfill.started
+            type: string
+          properties:
+            properties:
+              schema:
+                description: Schema containing the table being backfilled (scrubbed).
+                type: string
+              table:
+                description: Table being backfilled (scrubbed).
+                type: string
+            required:
+            - table
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      description: Backfill started
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: backfill.started
+        message: Backfill started
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties:
+          schema: public
+          table: orders
+        severity: info
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: backfill.started
+    PayloadsWebhookEnvelope:
+      properties:
+        delivery_metadata:
+          $ref: '#/components/schemas/PayloadsWebhookDeliveryMetadata'
+        destination:
+          description: Destination connector type (e.g. bigquery).
+          type: string
+        environment_name:
+          description: Human-readable name of the environment. Omitted when the event has no environment.
+          type: string
+        environment_uuid:
+          description: UUID of the environment the event belongs to. Omitted when the event has no environment.
+          format: uuid
+          type:
+          - 'null'
+          - string
+        event:
+          description: Event type identifier (e.g. replication.failed).
+          type: string
+        message:
+          description: Human-readable summary of the event.
+          type: string
+        pipelines:
+          items:
+            $ref: '#/components/schemas/PayloadsWebhookPipelineInfo'
+          type: array
+        properties:
+          $ref: '#/components/schemas/PayloadsWebhookEventProperties'
+        severity:
+          $ref: '#/components/schemas/PayloadsWebhookSeverity'
+          description: Severity of the event.
+        source:
+          description: Source connector type (e.g. postgresql).
+          type: string
+        source_reader_uuid:
+          format: uuid
+          type: string
+        timestamp:
+          description: Time the event occurred (RFC 3339).
+          format: date-time
+          type: string
+      required:
+      - event
+      - message
+      - severity
+      - timestamp
+      - properties
+      - delivery_metadata
+      - source_reader_uuid
+      - pipelines
+      - source
+      - destination
+      type: object
+    PayloadsWebhookSeverity:
+      enum:
+      - info
+      - warning
+      - error
+      type: string
+    PayloadsWebhookDatabaseDiscovered:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - database.discovered
+            type: string
+          properties:
+            properties:
+              database:
+                description: Name of the database that was discovered (scrubbed).
+                type: string
+            required:
+            - database
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      description: Database discovered
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: database.discovered
+        message: Database discovered
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties:
+          database: AdventureWorks
+        severity: info
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: database.discovered
+    PayloadsWebhookRowSkipped:
+      allOf:
+      - $ref: '#/components/schemas/PayloadsWebhookEnvelope'
+      - properties:
+          event:
+            enum:
+            - row.skipped
+            type: string
+          properties:
+            properties:
+              primary_keys:
+                description: Primary-key map identifying the row that was dropped.
+                type: object
+              schema:
+                description: Schema containing the skipped row's table (scrubbed).
+                type: string
+              table:
+                description: Table the skipped row belongs to (scrubbed).
+                type: string
+            required:
+            - table
+            - primary_keys
+            type: object
+        required:
+        - event
+        - properties
+        type: object
+      description: Row skipped
+      examples:
+      - delivery_metadata:
+          attempt: 1
+        destination: snowflake
+        environment_name: Production
+        environment_uuid: 33333333-3333-3333-3333-333333333333
+        event: row.skipped
+        message: Row skipped
+        pipelines:
+        - name: Production Postgres → Snowflake
+          uuid: 22222222-2222-2222-2222-222222222222
+        properties:
+          primary_keys:
+            id: 90210
+          schema: public
+          table: orders
+        severity: warning
+        source: postgresql
+        source_reader_uuid: 11111111-1111-1111-1111-111111111111
+        timestamp: '2026-06-20T12:00:00Z'
+      title: row.skipped
+  securitySchemes:
+    ApiKey:
+      description: API key passed as a Bearer token in the Authorization header.
+      scheme: bearer
+      type: http

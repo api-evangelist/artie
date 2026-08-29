@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: External API endpoints for Artie
-  title: Artie Column Hashing Salts Ingestion API Keys API
+  title: Artie Ingestion API Keys API
   version: v1.0.51
 servers:
 - url: https://api.artie.com
@@ -78,16 +78,6 @@ paths:
       - Ingestion API Keys
 components:
   schemas:
-    RouterCreateIngestionAPIKeyRequest:
-      properties:
-        name:
-          type: string
-        sourceReaderUUID:
-          format: uuid
-          type: string
-      required:
-      - sourceReaderUUID
-      type: object
     PayloadsIngestionAPIKey:
       properties:
         companyUUID:
@@ -122,6 +112,16 @@ components:
       - last4
       - sourceReaderUUID
       - companyUUID
+      type: object
+    RouterCreateIngestionAPIKeyRequest:
+      properties:
+        name:
+          type: string
+        sourceReaderUUID:
+          format: uuid
+          type: string
+      required:
+      - sourceReaderUUID
       type: object
     RouterCreateIngestionAPIKeyResponse:
       properties:

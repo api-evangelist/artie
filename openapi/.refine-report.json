@@ -1,17 +1,10 @@
 {
   "provider": "artie",
   "sources": [
-    "artie-column-hashing-salts-api-openapi.yml",
-    "artie-connectors-api-openapi.yml",
-    "artie-data-catalog-api-openapi.yml",
-    "artie-encryption-keys-api-openapi.yml",
-    "artie-ingestion-api-keys-api-openapi.yml",
-    "artie-pipelines-api-openapi.yml",
-    "artie-privatelink-connections-api-openapi.yml",
-    "artie-source-readers-api-openapi.yml",
-    "artie-ssh-tunnels-api-openapi.yml"
+    "_original/artie-openapi-original.yml"
   ],
   "outputs": [
+    "artie-artie-api-api-openapi.yml",
     "artie-column-hashing-salts-api-openapi.yml",
     "artie-connectors-api-openapi.yml",
     "artie-data-catalog-api-openapi.yml",
@@ -19,12 +12,52 @@
     "artie-ingestion-api-keys-api-openapi.yml",
     "artie-pipelines-api-openapi.yml",
     "artie-privatelink-connections-api-openapi.yml",
-    "artie-source-readers-api-openapi.yml",
-    "artie-ssh-tunnels-api-openapi.yml"
+    "artie-ssh-tunnels-api-openapi.yml",
+    "artie-source-readers-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "artie-openapi-original.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "artie-openapi-original.yml: tagged webhooks POST backfill.completed -> Artie API",
+    "artie-openapi-original.yml: tagged webhooks POST backfill.failed -> Artie API",
+    "artie-openapi-original.yml: tagged webhooks POST backfill.started -> Artie API",
+    "artie-openapi-original.yml: tagged webhooks POST connection.failed -> Artie API",
+    "artie-openapi-original.yml: tagged webhooks POST database.discovered -> Artie API",
+    "artie-openapi-original.yml: tagged webhooks POST database.discovery_failed -> Artie API",
+    "artie-openapi-original.yml: tagged webhooks POST database.removed -> Artie API",
+    "artie-openapi-original.yml: tagged webhooks POST ddl.applied -> Artie API",
+    "artie-openapi-original.yml: tagged webhooks POST ddl.seen -> Artie API",
+    "artie-openapi-original.yml: tagged webhooks POST dedupe.completed -> Artie API",
+    "artie-openapi-original.yml: tagged webhooks POST dedupe.failed -> Artie API",
+    "artie-openapi-original.yml: tagged webhooks POST dedupe.started -> Artie API",
+    "artie-openapi-original.yml: tagged webhooks POST dek.generated -> Artie API",
+    "artie-openapi-original.yml: tagged webhooks POST replication.error -> Artie API",
+    "artie-openapi-original.yml: tagged webhooks POST replication.failed -> Artie API",
+    "artie-openapi-original.yml: tagged webhooks POST replication.started -> Artie API",
+    "artie-openapi-original.yml: tagged webhooks POST row.skipped -> Artie API",
+    "artie-openapi-original.yml: declared missing tag: Artie API",
+    "artie-openapi-original.yml: declared missing tag: Column Hashing Salts",
+    "artie-openapi-original.yml: declared missing tag: Connectors",
+    "artie-openapi-original.yml: declared missing tag: Data Catalog",
+    "artie-openapi-original.yml: declared missing tag: Encryption Keys",
+    "artie-openapi-original.yml: declared missing tag: Ingestion API Keys",
+    "artie-openapi-original.yml: declared missing tag: Pipelines",
+    "artie-openapi-original.yml: declared missing tag: PrivateLink Connections",
+    "artie-openapi-original.yml: declared missing tag: SSH Tunnels",
+    "artie-openapi-original.yml: declared missing tag: Source Readers"
+  ],
+  "skipped": [
+    "artie-column-hashing-salts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artie-connectors-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artie-data-catalog-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artie-encryption-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artie-ingestion-api-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artie-pipelines-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artie-privatelink-connections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artie-source-readers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artie-ssh-tunnels-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

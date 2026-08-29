@@ -155,6 +155,16 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/artie-ssh-tunnels-api-openapi.yml
+- aid: artie:artie-artie-api-api
+  name: Artie Artie API
+  description: The Artie API API from Artie — 0 operation(s) for artie api.
+  humanURL: https://www.artie.com/docs/api-reference
+  baseURL: https://api.artie.com
+  tags:
+  - Artie API
+  properties:
+  - type: OpenAPI
+    url: openapi/artie-artie-api-api-openapi.yml
 maintainersHistory: []
 common:
 - type: Overlay

@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: External API endpoints for Artie
-  title: Artie Column Hashing Salts Data Catalog API
+  title: Artie Data Catalog API
   version: v1.0.51
 servers:
 - url: https://api.artie.com
@@ -32,11 +32,6 @@ paths:
       - Data Catalog
 components:
   schemas:
-    PayloadsDataCatalogDatabase:
-      properties:
-        name:
-          type: string
-      type: object
     PayloadsDataCatalogSchema:
       properties:
         databaseName:
@@ -55,14 +50,15 @@ components:
           format: double
           type: number
       type: object
-    PayloadsDataCatalogMatchedObject:
+    PayloadsDataCatalogSearchRequest:
       properties:
-        database:
-          $ref: '#/components/schemas/PayloadsDataCatalogDatabase'
-        schema:
-          $ref: '#/components/schemas/PayloadsDataCatalogSchema'
-        table:
-          $ref: '#/components/schemas/PayloadsDataCatalogTable'
+        query:
+          type: string
+      type: object
+    PayloadsDataCatalogDatabase:
+      properties:
+        name:
+          type: string
       type: object
     ListResponseBodyDataCatalogMatch:
       properties:
@@ -82,10 +78,14 @@ components:
         schemaName:
           type: string
       type: object
-    PayloadsDataCatalogSearchRequest:
+    PayloadsDataCatalogMatchedObject:
       properties:
-        query:
-          type: string
+        database:
+          $ref: '#/components/schemas/PayloadsDataCatalogDatabase'
+        schema:
+          $ref: '#/components/schemas/PayloadsDataCatalogSchema'
+        table:
+          $ref: '#/components/schemas/PayloadsDataCatalogTable'
       type: object
   securitySchemes:
     ApiKey:

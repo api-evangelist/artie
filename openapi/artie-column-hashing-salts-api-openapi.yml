@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: External API endpoints for Artie
   title: Artie Column Hashing Salts API
@@ -146,58 +146,6 @@ paths:
       - Column Hashing Salts
 components:
   schemas:
-    RouterUpdateColumnHashingSaltRequest:
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-      required:
-      - name
-      type: object
-    RouterPreviewColumnHashingSaltResponse:
-      properties:
-        hash:
-          type: string
-      required:
-      - hash
-      type: object
-    RouterPreviewColumnHashingSaltRequest:
-      properties:
-        value:
-          type: string
-      required:
-      - value
-      type: object
-    RouterCreateColumnHashingSaltResponse:
-      properties:
-        columnHashingSalt:
-          $ref: '#/components/schemas/PayloadsColumnHashingSalt'
-        salt:
-          type: string
-      required:
-      - columnHashingSalt
-      - salt
-      type: object
-    PayloadsColumnHashingSalt:
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-        description:
-          type: string
-        name:
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-        uuid:
-          format: uuid
-          type: string
-      required:
-      - uuid
-      - name
-      type: object
     RouterCreateColumnHashingSaltRequest:
       properties:
         description:
@@ -208,6 +156,13 @@ components:
           type: string
       required:
       - name
+      type: object
+    RouterPreviewColumnHashingSaltRequest:
+      properties:
+        value:
+          type: string
+      required:
+      - value
       type: object
     PayloadsColumnHashingSaltDetail:
       properties:
@@ -231,6 +186,16 @@ components:
       - name
       - salt
       type: object
+    RouterCreateColumnHashingSaltResponse:
+      properties:
+        columnHashingSalt:
+          $ref: '#/components/schemas/PayloadsColumnHashingSalt'
+        salt:
+          type: string
+      required:
+      - columnHashingSalt
+      - salt
+      type: object
     ListResponseBodyColumnHashingSalt:
       properties:
         items:
@@ -239,6 +204,41 @@ components:
           type: array
       required:
       - items
+      type: object
+    PayloadsColumnHashingSalt:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - name
+      type: object
+    RouterUpdateColumnHashingSaltRequest:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    RouterPreviewColumnHashingSaltResponse:
+      properties:
+        hash:
+          type: string
+      required:
+      - hash
       type: object
   securitySchemes:
     ApiKey:
