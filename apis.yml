@@ -58,6 +58,16 @@ tags:
 - Streaming
 - Databases
 - Data Warehouse
+- Data Engineering
+tags_raw:
+- Company
+- Data Replication
+- Change Data Capture
+- Data Integration
+- ETL
+- Streaming
+- Databases
+- Data Warehouse
 - CDC
 - Data Engineering
 maintainers:
