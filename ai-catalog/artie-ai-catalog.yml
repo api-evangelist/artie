@@ -25,7 +25,7 @@ conformance:
   - entry-no-displayName
   - no-host-object
   soft_gaps:
-  - cors-not-wildcard
+  - cors-not-readable-cross-origin
   - entry-no-representativeQueries
   official_tool:
     tool: ARD conformance-test v0.9.1 (ards-project/ard-spec)
