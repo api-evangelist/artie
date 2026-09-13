@@ -1,1 +1,10 @@
-{"specVersion":"1.0","entries":[{"identifier":"urn:air:artie.com:mcp:artie","type":"application/mcp-server-card+json","url":"https://mcp.artie.com/mcp/server-card"}]}
+{
+  "specVersion": "1.0",
+  "entries": [
+    {
+      "identifier": "urn:air:artie.com:mcp:artie",
+      "type": "application/mcp-server-card+json",
+      "url": "https://mcp.artie.com/mcp/server-card"
+    }
+  ]
+}
