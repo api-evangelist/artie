@@ -1,17 +1,13 @@
 aid: artie
 name: Artie
-description: >-
-  Artie is a real-time data replication platform that streams database changes
-  to cloud data warehouses and lakehouses with sub-minute latency and
-  exactly-once delivery. It captures change data (CDC) from sources such as
-  PostgreSQL, MySQL, MongoDB, Oracle, and DynamoDB and continuously merges them
-  into destinations including Snowflake, BigQuery, Databricks, Redshift, and
-  Apache Iceberg, eliminating the need to build and operate Kafka or Debezium
-  infrastructure. Artie handles advanced backfills, schema evolution,
-  column-level encryption and hashing, data catalog search, PrivateLink/SSH
-  connectivity, and observability, and exposes a REST API plus a webhook event
-  stream so teams can programmatically manage pipelines, connectors, and source
-  readers. Artie is venture-backed by Canaan Partners and General Catalyst.
+description: Artie is a real-time data replication platform that streams database changes to cloud data
+  warehouses and lakehouses with sub-minute latency and exactly-once delivery. It captures change data
+  (CDC) from sources such as PostgreSQL, MySQL, MongoDB, Oracle, and DynamoDB and continuously merges
+  them into destinations including Snowflake, BigQuery, Databricks, Redshift, and Apache Iceberg, eliminating
+  the need to build and operate Kafka or Debezium infrastructure. Artie handles advanced backfills, schema
+  evolution, column-level encryption and hashing, data catalog search, PrivateLink/SSH connectivity, and
+  observability, and exposes a REST API plus a webhook event stream so teams can programmatically manage
+  pipelines, connectors, and source readers. Artie is venture-backed by Canaan Partners and General Catalyst.
 url: https://raw.githubusercontent.com/api-evangelist/artie/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -47,7 +43,7 @@ accessModel:
   method: derived
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-18'
+modified: '2026-09-16'
 image: https://avatars.githubusercontent.com/artie-labs
 tags:
 - Company
@@ -167,7 +163,7 @@ apis:
   - type: OpenAPI
     url: openapi/artie-ssh-tunnels-api-openapi.yml
 - aid: artie:artie-artie-api-api
-  name: Artie Artie API
+  name: Artie API
   description: The Artie API API from Artie — 0 operation(s) for artie api.
   humanURL: https://www.artie.com/docs/api-reference
   baseURL: https://api.artie.com
@@ -220,7 +216,10 @@ common:
   url: cli/artie-cli.yml
 - type: X-MCPServerCandidate
   url: mcp/artie-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: Conventions
   url: conventions/artie-conventions.yml
 - type: ErrorCatalog
