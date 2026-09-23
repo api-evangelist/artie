@@ -25,6 +25,8 @@ paths:
       summary: List column hashing salts
       tags:
       - Column Hashing Salts
+      operationId: getColumnHashingSalts
+      x-operation-id-source: derived
     post:
       description: Creates a new column hashing salt for the authenticated company.
       requestBody:
@@ -46,6 +48,8 @@ paths:
       summary: Create a column hashing salt
       tags:
       - Column Hashing Salts
+      operationId: postColumnHashingSalts
+      x-operation-id-source: derived
   /column-hashing-salts/{uuid}:
     delete:
       description: Deletes a column hashing salt by UUID.
@@ -65,6 +69,8 @@ paths:
       summary: Delete a column hashing salt
       tags:
       - Column Hashing Salts
+      operationId: deleteColumnHashingSaltsByUuid
+      x-operation-id-source: derived
     get:
       description: Retrieves a column hashing salt by UUID, including the decrypted salt. Requires company admin.
       parameters:
@@ -87,6 +93,8 @@ paths:
       summary: Get a column hashing salt
       tags:
       - Column Hashing Salts
+      operationId: getColumnHashingSaltsByUuid
+      x-operation-id-source: derived
     post:
       description: Updates the name and description of a column hashing salt.
       parameters:
@@ -114,6 +122,8 @@ paths:
       summary: Update a column hashing salt
       tags:
       - Column Hashing Salts
+      operationId: postColumnHashingSaltsByUuid
+      x-operation-id-source: derived
   /column-hashing-salts/{uuid}/preview:
     post:
       description: Hashes a sample string value with this salt using the same function used by Artie's pipelines (HMAC-SHA256 keyed on the salt, or SHA-256 if the salt is empty). Returns the hex-encoded hash.
@@ -144,6 +154,8 @@ paths:
       summary: Preview a column hashing salt
       tags:
       - Column Hashing Salts
+      operationId: postColumnHashingSaltsByUuidPreview
+      x-operation-id-source: derived
 components:
   schemas:
     RouterCreateColumnHashingSaltRequest:
@@ -157,12 +169,22 @@ components:
       required:
       - name
       type: object
-    RouterPreviewColumnHashingSaltRequest:
+    RouterPreviewColumnHashingSaltResponse:
       properties:
-        value:
+        hash:
           type: string
       required:
-      - value
+      - hash
+      type: object
+    RouterCreateColumnHashingSaltResponse:
+      properties:
+        columnHashingSalt:
+          $ref: '#/components/schemas/PayloadsColumnHashingSalt'
+        salt:
+          type: string
+      required:
+      - columnHashingSalt
+      - salt
       type: object
     PayloadsColumnHashingSaltDetail:
       properties:
@@ -186,24 +208,21 @@ components:
       - name
       - salt
       type: object
-    RouterCreateColumnHashingSaltResponse:
+    RouterUpdateColumnHashingSaltRequest:
       properties:
-        columnHashingSalt:
-          $ref: '#/components/schemas/PayloadsColumnHashingSalt'
-        salt:
+        description:
+          type: string
+        name:
           type: string
       required:
-      - columnHashingSalt
-      - salt
+      - name
       type: object
-    ListResponseBodyColumnHashingSalt:
+    RouterPreviewColumnHashingSaltRequest:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/PayloadsColumnHashingSalt'
-          type: array
+        value:
+          type: string
       required:
-      - items
+      - value
       type: object
     PayloadsColumnHashingSalt:
       properties:
@@ -224,21 +243,14 @@ components:
       - uuid
       - name
       type: object
-    RouterUpdateColumnHashingSaltRequest:
+    ListResponseBodyColumnHashingSalt:
       properties:
-        description:
-          type: string
-        name:
-          type: string
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsColumnHashingSalt'
+          type: array
       required:
-      - name
-      type: object
-    RouterPreviewColumnHashingSaltResponse:
-      properties:
-        hash:
-          type: string
-      required:
-      - hash
+      - items
       type: object
   securitySchemes:
     ApiKey:

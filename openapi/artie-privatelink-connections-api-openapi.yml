@@ -32,6 +32,8 @@ paths:
       summary: Create a PrivateLink connection
       tags:
       - PrivateLink Connections
+      operationId: postPrivatelinkConnections
+      x-operation-id-source: derived
   /privatelink-connections/{uuid}:
     delete:
       description: Permanently deletes a PrivateLink connection by UUID. This action cannot be undone and will remove the connection from your account.
@@ -51,6 +53,8 @@ paths:
       summary: Delete a PrivateLink connection
       tags:
       - PrivateLink Connections
+      operationId: deletePrivatelinkConnectionsByUuid
+      x-operation-id-source: derived
     get:
       description: Retrieves the details of a PrivateLink connection by UUID, including its status, VPC service name, region, DNS entry, and availability zones.
       parameters:
@@ -73,6 +77,8 @@ paths:
       summary: Get a PrivateLink connection
       tags:
       - PrivateLink Connections
+      operationId: getPrivatelinkConnectionsByUuid
+      x-operation-id-source: derived
     post:
       description: Updates an existing PrivateLink connection by UUID. The name can always be updated. The config fields (region / VPC service name / data plane / availability zones) are only mutable while the connection is under review or errored — once it is being provisioned or live they are immutable.
       parameters:
@@ -100,31 +106,10 @@ paths:
       summary: Update a PrivateLink connection
       tags:
       - PrivateLink Connections
+      operationId: postPrivatelinkConnectionsByUuid
+      x-operation-id-source: derived
 components:
   schemas:
-    RouterPrivateLinkConnectionCreateRequest:
-      properties:
-        availabilityZoneIds:
-          items:
-            type: string
-          type: array
-        dataPlaneName:
-          type:
-          - 'null'
-          - string
-        environmentUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        name:
-          type: string
-        vpcServiceName:
-          type: string
-      required:
-      - vpcServiceName
-      - availabilityZoneIds
-      type: object
     RouterPrivateLinkConnectionUpdateRequest:
       properties:
         availabilityZoneIds:
@@ -201,6 +186,29 @@ components:
       - status
       - region
       - dnsEntry
+      - availabilityZoneIds
+      type: object
+    RouterPrivateLinkConnectionCreateRequest:
+      properties:
+        availabilityZoneIds:
+          items:
+            type: string
+          type: array
+        dataPlaneName:
+          type:
+          - 'null'
+          - string
+        environmentUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+        vpcServiceName:
+          type: string
+      required:
+      - vpcServiceName
       - availabilityZoneIds
       type: object
   securitySchemes:

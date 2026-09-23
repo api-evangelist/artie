@@ -32,6 +32,8 @@ paths:
       summary: Create an SSH tunnel
       tags:
       - SSH Tunnels
+      operationId: postSshTunnels
+      x-operation-id-source: derived
   /ssh-tunnels/{uuid}:
     delete:
       description: Permanently deletes an SSH tunnel by UUID. The tunnel must not be in use by any connectors or pipelines before it can be deleted.
@@ -51,6 +53,8 @@ paths:
       summary: Delete an SSH tunnel
       tags:
       - SSH Tunnels
+      operationId: deleteSshTunnelsByUuid
+      x-operation-id-source: derived
     get:
       description: Retrieves the details of an SSH tunnel by UUID, including its host, port, username, public key, and whether it is currently in use.
       parameters:
@@ -73,6 +77,8 @@ paths:
       summary: Get an SSH tunnel
       tags:
       - SSH Tunnels
+      operationId: getSshTunnelsByUuid
+      x-operation-id-source: derived
     post:
       description: Updates an existing SSH tunnel by UUID. You can modify the name, host, port, and username. Changes will mark associated pipelines as having undeployed changes.
       parameters:
@@ -100,6 +106,8 @@ paths:
       summary: Update an SSH tunnel
       tags:
       - SSH Tunnels
+      operationId: postSshTunnelsByUuid
+      x-operation-id-source: derived
 components:
   schemas:
     PayloadsSSHTunnel:

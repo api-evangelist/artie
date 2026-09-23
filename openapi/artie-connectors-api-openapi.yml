@@ -32,6 +32,8 @@ paths:
       summary: Create a connector
       tags:
       - Connectors
+      operationId: postConnectors
+      x-operation-id-source: derived
   /connectors/{uuid}:
     delete:
       description: Permanently removes a connector and its associated configuration. This stops any active replication pipelines that depend on the connector.
@@ -51,6 +53,8 @@ paths:
       summary: Delete a connector
       tags:
       - Connectors
+      operationId: deleteConnectorsByUuid
+      x-operation-id-source: derived
     get:
       description: Retrieves the full configuration and status of a connector by its unique identifier, including connection settings and current replication state.
       parameters:
@@ -73,6 +77,8 @@ paths:
       summary: Get a connector
       tags:
       - Connectors
+      operationId: getConnectorsByUuid
+      x-operation-id-source: derived
     post:
       description: Updates the configuration of an existing source or destination connector. Modify connection settings, credentials, or replication parameters for a running pipeline.
       parameters:
@@ -100,6 +106,8 @@ paths:
       summary: Update a connector
       tags:
       - Connectors
+      operationId: postConnectorsByUuid
+      x-operation-id-source: derived
   /connectors/{uuid}/detail:
     get:
       description: Returns detailed metadata for a specific table on the saved connector. Requires 'schemaName' and 'tableName' query parameters; 'isView' is optional.
@@ -123,6 +131,8 @@ paths:
       summary: Fetch table detail for a saved connector
       tags:
       - Connectors
+      operationId: getConnectorsByUuidDetail
+      x-operation-id-source: derived
   /connectors/{uuid}/generate-shadow-script:
     post:
       description: Generates the SQL script to create shadow tables required for Oracle change data capture (CDC). Run this script on your Oracle source before starting replication.
@@ -151,6 +161,8 @@ paths:
       summary: Generate Oracle shadow table script
       tags:
       - Connectors
+      operationId: postConnectorsByUuidGenerateShadowScript
+      x-operation-id-source: derived
   /connectors/{uuid}/postgres-drop-replication-slot:
     post:
       description: Drops a PostgreSQL replication slot that is inactive or orphaned. Use this to clean up stale replication slots that may be preventing WAL cleanup on the source.
@@ -177,6 +189,8 @@ paths:
       summary: Drop a PostgreSQL replication slot
       tags:
       - Connectors
+      operationId: postConnectorsByUuidPostgresDropReplicationSlot
+      x-operation-id-source: derived
   /connectors/{uuid}/start-dynamodb-export:
     post:
       description: Initiates a point-in-time export from Amazon DynamoDB for the specified connector. Use this to backfill your destination with existing DynamoDB table data.
@@ -203,6 +217,8 @@ paths:
       summary: Start a DynamoDB export
       tags:
       - Connectors
+      operationId: postConnectorsByUuidStartDynamodbExport
+      x-operation-id-source: derived
   /connectors/databases:
     post:
       description: Lists available databases on the target using an unsaved connector configuration. Useful during connector setup to discover existing databases. Response metadata may include Iceberg S3 table bucket maintenance defaults.
@@ -225,6 +241,8 @@ paths:
       summary: Fetch databases for an unsaved connector
       tags:
       - Connectors
+      operationId: postConnectorsDatabases
+      x-operation-id-source: derived
   /connectors/new-database:
     post:
       description: Creates a new database on the target destination using a connector configuration that has not yet been saved. Useful during initial setup to prepare the destination.
@@ -243,6 +261,8 @@ paths:
       summary: Create a database on an unsaved connector
       tags:
       - Connectors
+      operationId: postConnectorsNewDatabase
+      x-operation-id-source: derived
   /connectors/new-schema:
     post:
       description: Creates a new schema on the target destination using a connector configuration that has not yet been saved. Useful during initial setup to organize destination tables.
@@ -261,6 +281,8 @@ paths:
       summary: Create a schema on an unsaved connector
       tags:
       - Connectors
+      operationId: postConnectorsNewSchema
+      x-operation-id-source: derived
   /connectors/new-snowflake-warehouse:
     post:
       description: Creates a new Snowflake virtual warehouse using an unsaved connector configuration. Useful during initial setup to provision compute resources for data replication.
@@ -279,6 +301,8 @@ paths:
       summary: Create a Snowflake warehouse on an unsaved connector
       tags:
       - Connectors
+      operationId: postConnectorsNewSnowflakeWarehouse
+      x-operation-id-source: derived
   /connectors/ping:
     post:
       description: Tests network connectivity and authentication for a connector configuration before saving it. Use this to validate connection settings during connector setup.
@@ -301,6 +325,8 @@ paths:
       summary: Ping a connector
       tags:
       - Connectors
+      operationId: postConnectorsPing
+      x-operation-id-source: derived
   /connectors/postgres-publications:
     post:
       description: Lists logical replication publications on a PostgreSQL source using an unsaved connector configuration. Useful during connector setup to let users select an existing publication.
@@ -323,6 +349,8 @@ paths:
       summary: List PostgreSQL publications for an unsaved connector
       tags:
       - Connectors
+      operationId: postConnectorsPostgresPublications
+      x-operation-id-source: derived
   /connectors/schemas:
     post:
       description: Lists available schemas in a specific database using an unsaved connector configuration. Useful during connector setup to discover existing schemas.
@@ -341,6 +369,8 @@ paths:
       summary: Fetch schemas for an unsaved connector
       tags:
       - Connectors
+      operationId: postConnectorsSchemas
+      x-operation-id-source: derived
   /connectors/tables:
     post:
       description: Lists available tables in a specific database and schema using an unsaved connector configuration. Results are cached when a connector UUID is provided.
@@ -363,192 +393,14 @@ paths:
       summary: Fetch tables for an unsaved connector
       tags:
       - Connectors
+      operationId: postConnectorsTables
+      x-operation-id-source: derived
 components:
   schemas:
-    EnumsConnectorSlug:
-      enum:
-      - api
-      - bigquery
-      - clickhouse
-      - cockroach
-      - databricks
-      - documentdb
-      - delta
-      - dynamodb
-      - gcs
-      - iceberg
-      - keyspaces
-      - mongodb
-      - motherduck
-      - mssql
-      - mysql
-      - oracle
-      - planetscale
-      - postgresql
-      - redis
-      - redshift
-      - s3
-      - snowflake
-      type: string
-    ListResponseBodyPostgresPublication:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/PayloadsPostgresPublication'
-          type: array
-      required:
-      - items
-      type: object
-    PayloadsConnectorColumn:
-      properties:
-        metadata:
-          $ref: '#/components/schemas/PayloadsConnectorColumnMetadata'
-        name:
-          type: string
-      type: object
-    RouterConnectorCreateSchemaRequest:
-      properties:
-        connector:
-          $ref: '#/components/schemas/PayloadsConnectorPayload'
-        databaseName:
-          type: string
-        name:
-          type: string
-        volume:
-          type: string
-      required:
-      - connector
-      - databaseName
-      - name
-      type: object
-    PayloadsSeenTableColumnMetadata:
-      properties:
-        dataType:
-          type: string
-        defaultValue:
-          type:
-          - 'null'
-          - string
-        isPrimaryKey:
-          type:
-          - 'null'
-          - boolean
-        notNull:
-          type: boolean
-      required:
-      - dataType
-      - notNull
-      type: object
-    RouterConnectorStartDynamoDBExportResponse:
-      properties:
-        exportARN:
-          type: string
-      required:
-      - exportARN
-      type: object
-    RouterConnectorCreateDatabaseRequest:
-      properties:
-        connector:
-          $ref: '#/components/schemas/PayloadsConnectorPayload'
-        name:
-          type: string
-      required:
-      - connector
-      - name
-      type: object
-    PayloadsSeenTableColumn:
-      properties:
-        metadata:
-          $ref: '#/components/schemas/PayloadsSeenTableColumnMetadata'
-        name:
-          type: string
-      required:
-      - name
-      - metadata
-      type: object
     PayloadsDatabaseListItem:
       properties:
         name:
           type: string
-      type: object
-    PayloadsConnectorFetchDatabasesResponse:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/PayloadsDatabaseListItem'
-          type:
-          - array
-          - 'null'
-        metadata:
-          items:
-            $ref: '#/components/schemas/PayloadsCatalogTableProperty'
-          type: array
-      type: object
-    RouterConnectorTable:
-      properties:
-        approxDateAdded:
-          format: date-time
-          type:
-          - 'null'
-          - string
-        columns:
-          items:
-            $ref: '#/components/schemas/PayloadsConnectorColumn'
-          type: array
-        createdAt:
-          format: date-time
-          type:
-          - 'null'
-          - string
-        isView:
-          type: boolean
-        metadata:
-          items:
-            $ref: '#/components/schemas/PayloadsCatalogTableProperty'
-          type: array
-        modifiedAt:
-          format: date-time
-          type:
-          - 'null'
-          - string
-        name:
-          type: string
-        schema:
-          type: string
-        unreadable:
-          type: boolean
-      type: object
-    RouterConnectorDropReplicationSlotRequest:
-      properties:
-        slotName:
-          type: string
-      required:
-      - slotName
-      type: object
-    RouterConnectorCreateSnowflakeWarehouseRequest:
-      properties:
-        connector:
-          $ref: '#/components/schemas/PayloadsConnectorPayload'
-        name:
-          type: string
-      required:
-      - connector
-      - name
-      type: object
-    RouterConnectorShadowScriptTable:
-      properties:
-        columns:
-          items:
-            $ref: '#/components/schemas/PayloadsSeenTableColumn'
-          type: array
-        name:
-          type: string
-        schema:
-          type: string
-      required:
-      - schema
-      - name
-      - columns
       type: object
     RouterConnectorGenerateShadowScriptRequest:
       properties:
@@ -561,137 +413,6 @@ components:
       required:
       - database
       - tables
-      type: object
-    PayloadsConnectorTableDetailResponse:
-      properties:
-        columns:
-          items:
-            $ref: '#/components/schemas/PayloadsConnectorColumn'
-          type: array
-        createdAt:
-          format: date-time
-          type:
-          - 'null'
-          - string
-        isView:
-          type: boolean
-        metadata:
-          items:
-            $ref: '#/components/schemas/PayloadsCatalogTableProperty'
-          type: array
-        modifiedAt:
-          format: date-time
-          type:
-          - 'null'
-          - string
-        name:
-          type: string
-        schema:
-          type: string
-        unreadable:
-          type: boolean
-      type: object
-    RouterConnectorFetchPostgresPublicationsRequest:
-      properties:
-        connector:
-          $ref: '#/components/schemas/PayloadsConnectorPayload'
-        databaseName:
-          type: string
-      required:
-      - connector
-      - databaseName
-      type: object
-    RouterConnectorStartDynamoDBExportRequest:
-      properties:
-        s3Bucket:
-          type: string
-        s3Prefix:
-          type:
-          - 'null'
-          - string
-      required:
-      - s3Bucket
-      type: object
-    RouterConnectorFetchSchemasRequest:
-      properties:
-        connector:
-          $ref: '#/components/schemas/PayloadsConnectorPayload'
-        databaseName:
-          type: string
-      required:
-      - connector
-      - databaseName
-      type: object
-    PayloadsPostgresPublication:
-      properties:
-        allTables:
-          type: boolean
-        name:
-          type: string
-        publishViaPartitionRoot:
-          type: boolean
-      required:
-      - name
-      type: object
-    RouterConnectorFetchTablesRequest:
-      properties:
-        connector:
-          $ref: '#/components/schemas/PayloadsConnectorPayload'
-        databaseName:
-          type: string
-        forceRefresh:
-          type: boolean
-        schemaName:
-          type: string
-      required:
-      - connector
-      - databaseName
-      type: object
-    RouterConnectorGenerateShadowScriptResponse:
-      properties:
-        script:
-          type: string
-      required:
-      - script
-      type: object
-    RouterConnectorPingResponse:
-      properties:
-        error:
-          type: string
-      type: object
-    PayloadsCatalogTableProperty:
-      properties:
-        isDate:
-          type: boolean
-        key:
-          type: string
-        value: {}
-      type: object
-    PayloadsConnectorColumnMetadata:
-      properties:
-        comment:
-          type: string
-        dataType:
-          type: string
-        defaultValue:
-          type:
-          - 'null'
-          - string
-        isPrimaryKey:
-          type:
-          - 'null'
-          - boolean
-        notNull:
-          type: boolean
-      type: object
-    ListResponseBodyConnectorTable:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/RouterConnectorTable'
-          type: array
-      required:
-      - items
       type: object
     PayloadsConnectorPayload:
       properties:
@@ -732,6 +453,187 @@ components:
           type: string
         uuid:
           type: string
+      type: object
+    RouterConnectorCreateSnowflakeWarehouseRequest:
+      properties:
+        connector:
+          $ref: '#/components/schemas/PayloadsConnectorPayload'
+        name:
+          type: string
+      required:
+      - connector
+      - name
+      type: object
+    PayloadsConnectorColumnMetadata:
+      properties:
+        comment:
+          type: string
+        dataType:
+          type: string
+        defaultValue:
+          type:
+          - 'null'
+          - string
+        isPrimaryKey:
+          type:
+          - 'null'
+          - boolean
+        notNull:
+          type: boolean
+      type: object
+    PayloadsCatalogTableProperty:
+      properties:
+        isDate:
+          type: boolean
+        key:
+          type: string
+        value: {}
+      type: object
+    ListResponseBodyPostgresPublication:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsPostgresPublication'
+          type: array
+      required:
+      - items
+      type: object
+    PayloadsConnectorTableDetailResponse:
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/PayloadsConnectorColumn'
+          type: array
+        createdAt:
+          format: date-time
+          type:
+          - 'null'
+          - string
+        isView:
+          type: boolean
+        metadata:
+          items:
+            $ref: '#/components/schemas/PayloadsCatalogTableProperty'
+          type: array
+        modifiedAt:
+          format: date-time
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+        schema:
+          type: string
+        unreadable:
+          type: boolean
+      type: object
+    RouterConnectorDropReplicationSlotRequest:
+      properties:
+        slotName:
+          type: string
+      required:
+      - slotName
+      type: object
+    PayloadsConnectorColumn:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/PayloadsConnectorColumnMetadata'
+        name:
+          type: string
+      type: object
+    RouterConnectorTable:
+      properties:
+        approxDateAdded:
+          format: date-time
+          type:
+          - 'null'
+          - string
+        columns:
+          items:
+            $ref: '#/components/schemas/PayloadsConnectorColumn'
+          type: array
+        createdAt:
+          format: date-time
+          type:
+          - 'null'
+          - string
+        isView:
+          type: boolean
+        metadata:
+          items:
+            $ref: '#/components/schemas/PayloadsCatalogTableProperty'
+          type: array
+        modifiedAt:
+          format: date-time
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+        schema:
+          type: string
+        unreadable:
+          type: boolean
+      type: object
+    PayloadsSeenTableColumnMetadata:
+      properties:
+        dataType:
+          type: string
+        defaultValue:
+          type:
+          - 'null'
+          - string
+        isPrimaryKey:
+          type:
+          - 'null'
+          - boolean
+        notNull:
+          type: boolean
+      required:
+      - dataType
+      - notNull
+      type: object
+    RouterConnectorStartDynamoDBExportResponse:
+      properties:
+        exportARN:
+          type: string
+      required:
+      - exportARN
+      type: object
+    RouterConnectorCreateSchemaRequest:
+      properties:
+        connector:
+          $ref: '#/components/schemas/PayloadsConnectorPayload'
+        databaseName:
+          type: string
+        name:
+          type: string
+        volume:
+          type: string
+      required:
+      - connector
+      - databaseName
+      - name
+      type: object
+    RouterConnectorFetchSchemasRequest:
+      properties:
+        connector:
+          $ref: '#/components/schemas/PayloadsConnectorPayload'
+        databaseName:
+          type: string
+      required:
+      - connector
+      - databaseName
+      type: object
+    PayloadsSeenTableColumn:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/PayloadsSeenTableColumnMetadata'
+        name:
+          type: string
+      required:
+      - name
+      - metadata
       type: object
     PayloadsFullConnector:
       properties:
@@ -789,6 +691,136 @@ components:
       - companyUUID
       - environmentUUID
       - isValid
+      type: object
+    RouterConnectorStartDynamoDBExportRequest:
+      properties:
+        s3Bucket:
+          type: string
+        s3Prefix:
+          type:
+          - 'null'
+          - string
+      required:
+      - s3Bucket
+      type: object
+    EnumsConnectorSlug:
+      enum:
+      - api
+      - bigquery
+      - clickhouse
+      - cockroach
+      - databricks
+      - documentdb
+      - delta
+      - dynamodb
+      - gcs
+      - iceberg
+      - keyspaces
+      - mongodb
+      - motherduck
+      - mssql
+      - mysql
+      - oracle
+      - planetscale
+      - postgresql
+      - redis
+      - redshift
+      - s3
+      - snowflake
+      type: string
+    RouterConnectorPingResponse:
+      properties:
+        error:
+          type: string
+      type: object
+    RouterConnectorCreateDatabaseRequest:
+      properties:
+        connector:
+          $ref: '#/components/schemas/PayloadsConnectorPayload'
+        name:
+          type: string
+      required:
+      - connector
+      - name
+      type: object
+    RouterConnectorFetchPostgresPublicationsRequest:
+      properties:
+        connector:
+          $ref: '#/components/schemas/PayloadsConnectorPayload'
+        databaseName:
+          type: string
+      required:
+      - connector
+      - databaseName
+      type: object
+    RouterConnectorShadowScriptTable:
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/PayloadsSeenTableColumn'
+          type: array
+        name:
+          type: string
+        schema:
+          type: string
+      required:
+      - schema
+      - name
+      - columns
+      type: object
+    RouterConnectorFetchTablesRequest:
+      properties:
+        connector:
+          $ref: '#/components/schemas/PayloadsConnectorPayload'
+        databaseName:
+          type: string
+        forceRefresh:
+          type: boolean
+        schemaName:
+          type: string
+      required:
+      - connector
+      - databaseName
+      type: object
+    PayloadsPostgresPublication:
+      properties:
+        allTables:
+          type: boolean
+        name:
+          type: string
+        publishViaPartitionRoot:
+          type: boolean
+      required:
+      - name
+      type: object
+    PayloadsConnectorFetchDatabasesResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsDatabaseListItem'
+          type:
+          - array
+          - 'null'
+        metadata:
+          items:
+            $ref: '#/components/schemas/PayloadsCatalogTableProperty'
+          type: array
+      type: object
+    ListResponseBodyConnectorTable:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/RouterConnectorTable'
+          type: array
+      required:
+      - items
+      type: object
+    RouterConnectorGenerateShadowScriptResponse:
+      properties:
+        script:
+          type: string
+      required:
+      - script
       type: object
   securitySchemes:
     ApiKey:

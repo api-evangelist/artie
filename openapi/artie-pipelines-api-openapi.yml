@@ -25,6 +25,8 @@ paths:
       summary: List pipelines
       tags:
       - Pipelines
+      operationId: getPipelines
+      x-operation-id-source: derived
     post:
       description: Creates a new pipeline from a pipeline payload.
       requestBody:
@@ -46,6 +48,8 @@ paths:
       summary: Create a pipeline
       tags:
       - Pipelines
+      operationId: postPipelines
+      x-operation-id-source: derived
   /pipelines/{uuid}:
     delete:
       description: Deletes a pipeline by UUID.
@@ -63,6 +67,8 @@ paths:
       summary: Delete pipeline
       tags:
       - Pipelines
+      operationId: deletePipelinesByUuid
+      x-operation-id-source: derived
     get:
       description: Returns pipeline detail. With query includeRelatedObjects=true returns pipeline, sourceReader, sourceConnector, and optional destinationConnector; otherwise returns FullPipeline only.
       parameters:
@@ -89,6 +95,8 @@ paths:
       summary: Get pipeline by UUID
       tags:
       - Pipelines
+      operationId: getPipelinesByUuid
+      x-operation-id-source: derived
     post:
       description: Updates an existing pipeline by UUID.
       parameters:
@@ -116,6 +124,8 @@ paths:
       summary: Update pipeline
       tags:
       - Pipelines
+      operationId: postPipelinesByUuid
+      x-operation-id-source: derived
   /pipelines/{uuid}/backfill/cancel:
     post:
       description: Cancels backfilling for the given table UUIDs and/or history table UUIDs.
@@ -140,6 +150,8 @@ paths:
       summary: Cancel backfill
       tags:
       - Pipelines
+      operationId: postPipelinesByUuidBackfillCancel
+      x-operation-id-source: derived
   /pipelines/{uuid}/detect-schema-changes:
     post:
       description: Enqueues a background job that checks the pipeline's source database for new, removed, or altered tables. If the pipeline has auto-replicate or auto-history mode enabled, any newly discovered tables will be added to the pipeline automatically. An email summary is sent if changes are detected.
@@ -159,6 +171,8 @@ paths:
       summary: Detect schema changes
       tags:
       - Pipelines
+      operationId: postPipelinesByUuidDetectSchemaChanges
+      x-operation-id-source: derived
   /pipelines/{uuid}/start:
     post:
       description: 'Starts or resumes a pipeline. Optional body: keepPaused, disableBackFill.'
@@ -185,6 +199,8 @@ paths:
       summary: Start pipeline
       tags:
       - Pipelines
+      operationId: postPipelinesByUuidStart
+      x-operation-id-source: derived
   /pipelines/{uuid}/status:
     post:
       description: Changes the status of a pipeline (e.g. running, paused). Validates the pipeline before resuming and deploys the configuration change.
@@ -217,6 +233,8 @@ paths:
       summary: Update pipeline status
       tags:
       - Pipelines
+      operationId: postPipelinesByUuidStatus
+      x-operation-id-source: derived
   /pipelines/{uuid}/update-with-source-reader:
     post:
       description: Updates pipeline and optionally its source reader in one request. Accepts gzip-encoded body.
@@ -245,6 +263,8 @@ paths:
       summary: Update pipeline with source reader
       tags:
       - Pipelines
+      operationId: postPipelinesByUuidUpdateWithSourceReader
+      x-operation-id-source: derived
   /pipelines/create-from-source:
     post:
       description: Creates a new pipeline from a source type or existing source connector UUID.
@@ -267,6 +287,8 @@ paths:
       summary: Create pipeline from source
       tags:
       - Pipelines
+      operationId: postPipelinesCreateFromSource
+      x-operation-id-source: derived
   /pipelines/validate-unsaved-destination:
     post:
       description: Validates destination configuration without persisting. Returns 204 on success or 200 with error message on validation failure.
@@ -291,6 +313,8 @@ paths:
       summary: Validate unsaved destination
       tags:
       - Pipelines
+      operationId: postPipelinesValidateUnsavedDestination
+      x-operation-id-source: derived
   /pipelines/validate-unsaved-source:
     post:
       description: Validates source reader and connector configuration without persisting. Returns 204 on success or 200 with error message on validation failure.
@@ -315,38 +339,116 @@ paths:
       summary: Validate unsaved source
       tags:
       - Pipelines
+      operationId: postPipelinesValidateUnsavedSource
+      x-operation-id-source: derived
 components:
   schemas:
-    RouterValidateErrorResponse:
+    PayloadsConnectorPayload:
       properties:
-        error:
+        dataPlaneName:
+          type: string
+        defaultDatabase:
+          type:
+          - 'null'
+          - string
+        environmentUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        label:
+          type: string
+        privateLinkUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        sharedConfig:
+          additionalProperties: {}
+          type:
+          - object
+          - 'null'
+        snapshotPrivateLinkUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        sshTunnelUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        type:
+          type: string
+        uuid:
           type: string
       type: object
-    EnumsConnectorSlug:
-      enum:
-      - api
-      - bigquery
-      - clickhouse
-      - cockroach
-      - databricks
-      - documentdb
-      - delta
-      - dynamodb
-      - gcs
-      - iceberg
-      - keyspaces
-      - mongodb
-      - motherduck
-      - mssql
-      - mysql
-      - oracle
-      - planetscale
-      - postgresql
-      - redis
-      - redshift
-      - s3
-      - snowflake
-      type: string
+    RouterPipelineCreateRequest:
+      properties:
+        pipeline:
+          $ref: '#/components/schemas/PayloadsPipelinePayload'
+      required:
+      - pipeline
+      type: object
+    PayloadsSpecificConfig:
+      properties:
+        bucketName:
+          type: string
+        checkpointInterval:
+          type: integer
+        compaction:
+          $ref: '#/components/schemas/PayloadsCompactionConfig'
+        containerName:
+          type: string
+        database:
+          type: string
+        dynamicallyCreateNamespaces:
+          type: boolean
+        externalStageName:
+          type: string
+        externalStageS3Bucket:
+          type: string
+        externalStageS3Prefix:
+          type: string
+        folderName:
+          type: string
+        schema:
+          type: string
+        schemaNamePrefix:
+          type: string
+        tableNameSeparator:
+          type: string
+        useSameSchemaAsSource:
+          type: boolean
+      type: object
+    RouterPipelineCreateFromSourceRequest:
+      properties:
+        dataPlaneName:
+          type: string
+        destinationType:
+          type: string
+        environmentUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        sourceConnectorUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        sourceType:
+          type: string
+      type: object
+    ListResponseBodyLightPipeline:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsLightPipeline'
+          type: array
+      required:
+      - items
+      type: object
     PayloadsPipelinePayload:
       properties:
         advancedSettings:
@@ -387,29 +489,649 @@ components:
           - array
           - 'null'
       type: object
-    PayloadsTablePayload:
+    PayloadsStaticColumn:
       properties:
-        advancedSettings:
-          $ref: '#/components/schemas/PayloadsAdvancedTableSettingsPayload'
-        disableReplication:
+        column:
+          type: string
+        value:
+          type: string
+      type: object
+    RouterPipelineValidateUnsavedSourceRequest:
+      properties:
+        dataPlaneName:
+          type: string
+        dynamoDBBackfillConfig:
+          $ref: '#/components/schemas/PayloadsDynamoDBSnapshotConfig'
+        sourceConnector:
+          $ref: '#/components/schemas/PayloadsConnectorPayload'
+        sourceReader:
+          $ref: '#/components/schemas/PayloadsSourceReader'
+        sourceReaderUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        tables:
+          items:
+            $ref: '#/components/schemas/PayloadsTable'
+          type: array
+        validateTables:
           type: boolean
-        enableHistoryMode:
+      required:
+      - validateTables
+      - tables
+      type: object
+    RouterPipelineUpdateWithSourceReaderResponse:
+      properties:
+        pipeline:
+          $ref: '#/components/schemas/PayloadsFullPipeline'
+        sourceReader:
+          $ref: '#/components/schemas/PayloadsSourceReader'
+      required:
+      - pipeline
+      - sourceReader
+      type: object
+    RouterValidateErrorResponse:
+      properties:
+        error:
+          type: string
+      type: object
+    RouterPipelineUpdateRequest:
+      properties:
+        pipeline:
+          $ref: '#/components/schemas/PayloadsPipelinePayload'
+      required:
+      - pipeline
+      type: object
+    PayloadsCompactionConfig:
+      properties:
+        enabled:
           type: boolean
-        individualDeployment:
+        everySeconds:
+          type: integer
+        quietWindow:
+          $ref: '#/components/schemas/PayloadsCompactionQuietWindow'
+      type: object
+    PayloadsTableAdvancedSettings:
+      properties:
+        alias:
+          type: string
+        backfillFromDatabases:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        backfillFromSchemas:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        bigQueryPartitionSettings:
+          $ref: '#/components/schemas/PayloadsBigQuerySettings'
+        bufferRows:
+          type: integer
+        columnsToCompress:
+          items:
+            type: string
+          type: array
+        columnsToEncrypt:
+          items:
+            type: string
+          type: array
+        columnsToHash:
+          items:
+            type: string
+          type: array
+        ctidSettings:
+          $ref: '#/components/schemas/PayloadsCTIDSettings'
+        encryptJSONBColumns:
+          type: boolean
+        endingPrimaryKey:
+          type: string
+        excludeColumns:
+          items:
+            type: string
+          type: array
+        flushIntervalSeconds:
+          type: integer
+        flushSizeKb:
+          type: integer
+        historyTableBackfillFromSchemas:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        includeColumns:
+          items:
+            type: string
+          type: array
+        k8sRequestCPU:
+          minimum: 0
+          type: integer
+        k8sRequestMemoryMB:
+          minimum: 0
+          type: integer
+        mergePredicates:
+          items:
+            $ref: '#/components/schemas/PayloadsMergePredicates'
+          type: array
+        msmFlushCount:
+          minimum: 0
+          type: integer
+        primaryKeysOverride:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        rangeSettings:
+          $ref: '#/components/schemas/PayloadsRangeSettings'
+        shouldBackfillHistoryTable:
           type:
           - 'null'
           - boolean
+        skipBackfill:
+          type: boolean
+        skipDelete:
+          type: boolean
+        skipNoOpUpdates:
+          type: boolean
+        softPartitioning:
+          $ref: '#/components/schemas/PayloadsSoftPartitioning'
+        startingPrimaryKey:
+          type: string
+        streamARN:
+          type: string
+        unifyAcrossDatabases:
+          type: boolean
+        unifyAcrossSchemas:
+          type: boolean
+      type: object
+    EnumsPipelineStatus:
+      enum:
+      - draft
+      - paused
+      - transfer paused
+      - running
+      type: string
+    PayloadsSourceReaderTable:
+      properties:
+        excludeColumns:
+          items:
+            type: string
+          type: array
+        includeColumns:
+          items:
+            type: string
+          type: array
         name:
           type: string
         schema:
           type: string
+        unifyAcrossDatabases:
+          type: boolean
+        unifyAcrossSchemas:
+          type: boolean
+      type: object
+    RouterPipelineUpdateStatusRequest:
+      properties:
         status:
+          $ref: '#/components/schemas/EnumsPipelineStatus'
+      required:
+      - status
+      type: object
+    PayloadsCTIDSettings:
+      properties:
+        chunkSize:
+          minimum: 0
+          type: integer
+        enabled:
+          type: boolean
+        maxParallelism:
+          minimum: 0
+          type: integer
+      type: object
+    RouterPipelineValidateUnsavedDestinationRequest:
+      properties:
+        advancedSettings:
+          $ref: '#/components/schemas/PayloadsAdvancedPipelineSettingsPayload'
+        destination:
+          $ref: '#/components/schemas/PayloadsConnectorPayload'
+        destinationUUID:
+          format: uuid
           type:
           - 'null'
           - string
+        sourceReaderUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        sourceType:
+          type:
+          - 'null'
+          - string
+        specificCfg:
+          $ref: '#/components/schemas/PayloadsSpecificConfig'
+        tables:
+          items:
+            $ref: '#/components/schemas/PayloadsTable'
+          type:
+          - array
+          - 'null'
+      required:
+      - specificCfg
+      type: object
+    PayloadsBigQuerySettings:
+      properties:
+        partitionBy:
+          type: string
+        partitionField:
+          type: string
+        partitionType:
+          type: string
+      type: object
+    PayloadsCompactionQuietWindow:
+      properties:
+        end:
+          type: string
+        start:
+          type: string
+      type: object
+    PayloadsMergePredicates:
+      properties:
+        partitionBy:
+          type: string
+        partitionField:
+          type: string
+        partitionType:
+          type: string
+      type: object
+    RouterPipelineUpdateWithSourceReaderRequest:
+      properties:
+        pipeline:
+          $ref: '#/components/schemas/PayloadsPipelinePayload'
+        sourceReader:
+          $ref: '#/components/schemas/PayloadsSourceReader'
+      required:
+      - pipeline
+      - sourceReader
+      type: object
+    PayloadsFullConnector:
+      properties:
+        companyUUID:
+          format: uuid
+          type: string
+        connectionLabel:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        dataPlaneName:
+          type:
+          - 'null'
+          - string
+        defaultDatabase:
+          type: string
+        environmentUUID:
+          format: uuid
+          type: string
+        isValid:
+          type: boolean
+        label:
+          type: string
+        privateLinkUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        sharedConfig: {}
+        snapshotPrivateLinkUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        sshTunnelUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        type:
+          $ref: '#/components/schemas/EnumsConnectorSlug'
+        updatedAt:
+          format: date-time
+          type: string
         uuid:
           format: uuid
           type: string
+      required:
+      - label
+      - uuid
+      - createdAt
+      - updatedAt
+      - type
+      - companyUUID
+      - environmentUUID
+      - isValid
+      type: object
+    PayloadsSourceReaderSettingsPayload:
+      properties:
+        archiveLogPassword:
+          type:
+          - 'null'
+          - string
+        archiveLogPath:
+          type:
+          - 'null'
+          - string
+        azureBlobStorageConfig:
+          $ref: '#/components/schemas/PayloadsAzureBlobStorageConfig'
+        backfillBatchSize:
+          minimum: 0
+          type:
+          - 'null'
+          - integer
+        compositeTypesAsText:
+          type:
+          - 'null'
+          - boolean
+        databasesToSync:
+          items:
+            type: string
+          type:
+          - 'null'
+          - array
+        disableAutoFetchTables:
+          type:
+          - 'null'
+          - boolean
+        disableFullDocumentBeforeChange:
+          type:
+          - 'null'
+          - boolean
+        disableNoCursorTimeout:
+          type:
+          - 'null'
+          - boolean
+        enableClientSideFullDocumentLookup:
+          type:
+          - 'null'
+          - boolean
+        enableHeartbeats:
+          type:
+          - 'null'
+          - boolean
+        enableSchemaHistoryCompaction:
+          type:
+          - 'null'
+          - boolean
+        maxConnIdleTimeSeconds:
+          type:
+          - 'null'
+          - integer
+        messageCompression:
+          enum:
+          - gzip
+          - ''
+          type:
+          - 'null'
+          - string
+        mssqlChangeTrackingConcurrency:
+          type:
+          - 'null'
+          - integer
+        mssqlChangeTrackingMaxIdleConns:
+          type:
+          - 'null'
+          - integer
+        mssqlChangeTrackingPollIntervalMs:
+          minimum: 0
+          type:
+          - 'null'
+          - integer
+        mssqlReplicationMethod:
+          type:
+          - 'null'
+          - string
+        oneTopicPerSchema:
+          type:
+          - 'null'
+          - boolean
+        publicationAutoCreateMode:
+          type:
+          - 'null'
+          - string
+        publicationNameOverride:
+          type:
+          - 'null'
+          - string
+        publishViaPartitionRoot:
+          type:
+          - 'null'
+          - boolean
+        replicationSlotOverride:
+          type:
+          - 'null'
+          - string
+        unifyAcrossDatabases:
+          type:
+          - 'null'
+          - boolean
+        unifyAcrossSchemas:
+          type:
+          - 'null'
+          - boolean
+        unifyAcrossSchemasMaxParallelism:
+          maximum: 3
+          minimum: 0
+          type:
+          - 'null'
+          - integer
+        unifyAcrossSchemasRegex:
+          type:
+          - 'null'
+          - string
+        useAdvanceOnPrimaryKeepAlive:
+          type:
+          - 'null'
+          - boolean
+        useNumericTypesForMoney:
+          type:
+          - 'null'
+          - boolean
+        useReaderForOracleStreaming:
+          type:
+          - 'null'
+          - boolean
+      type: object
+    EnumsConnectorSlug:
+      enum:
+      - api
+      - bigquery
+      - clickhouse
+      - cockroach
+      - databricks
+      - documentdb
+      - delta
+      - dynamodb
+      - gcs
+      - iceberg
+      - keyspaces
+      - mongodb
+      - motherduck
+      - mssql
+      - mysql
+      - oracle
+      - planetscale
+      - postgresql
+      - redis
+      - redshift
+      - s3
+      - snowflake
+      type: string
+    RouterPipelineUpdateStatusResponse:
+      properties:
+        pipeline:
+          $ref: '#/components/schemas/PayloadsFullPipeline'
+      required:
+      - pipeline
+      type: object
+    PayloadsSourceReaderTablesConfig:
+      additionalProperties:
+        $ref: '#/components/schemas/PayloadsSourceReaderTable'
+      type:
+      - 'null'
+      - object
+    PayloadsSourceReader:
+      properties:
+        apiBaseURL:
+          type: string
+        companyUUID:
+          format: uuid
+          type: string
+        connectorUUID:
+          format: uuid
+          type: string
+        containerName:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        dataPlaneName:
+          type: string
+        database:
+          type: string
+        environmentUUID:
+          format: uuid
+          type: string
+        isShared:
+          type:
+          - 'null'
+          - boolean
+        isValid:
+          type: boolean
+        name:
+          type: string
+        settings:
+          $ref: '#/components/schemas/PayloadsSourceReaderSettingsPayload'
+        status:
+          $ref: '#/components/schemas/EnumsSourceReaderStatus'
+        tablesConfig:
+          $ref: '#/components/schemas/PayloadsSourceReaderTablesConfig'
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - name
+      - companyUUID
+      - dataPlaneName
+      - environmentUUID
+      - connectorUUID
+      - status
+      - isValid
+      - database
+      - containerName
+      - settings
+      type: object
+    PayloadsPipelineAdvancedSettings:
+      properties:
+        appendOnly:
+          type: boolean
+        autoEnableHistoryForNewTables:
+          type: boolean
+        autoReplicateIgnoreRegex:
+          type: string
+        autoReplicateNewTables:
+          type: boolean
+        bigQueryReservation:
+          type: string
+        bufferRows:
+          type: integer
+        castAllColumnsToString:
+          type: boolean
+        defaultSourceSchema:
+          type: string
+        disableAlerts:
+          type: boolean
+        dropDeletedColumns:
+          type: boolean
+        dynamoDBBackfillConfig:
+          $ref: '#/components/schemas/PayloadsDynamoDBSnapshotConfig'
+        enableSoftDelete:
+          type: boolean
+        flushIntervalSeconds:
+          type: integer
+        flushSizeKb:
+          type: integer
+        forceUTCTimezone:
+          type: boolean
+        includeArtieOperationColumn:
+          type: boolean
+        includeArtieUpdatedAtColumn:
+          type: boolean
+        includeDatabaseUpdatedAtColumn:
+          type: boolean
+        includeFullSourceTableNameColumn:
+          type: boolean
+        includeFullSourceTableNameColumnAsPrimaryKey:
+          type: boolean
+        includeSourceMetadataColumn:
+          type: boolean
+        maxConcurrentSnapshots:
+          minimum: 0
+          type: integer
+        nullOutInvalidValues:
+          type: boolean
+        reuseStagingTable:
+          type: boolean
+        sessionDriverMemory:
+          type: string
+        sessionExecutorMemory:
+          type: string
+        snowpipeStreamingMaxChannels:
+          type: integer
+        splitEventsByType:
+          type: boolean
+        stagingSchema:
+          type: string
+        staticColumns:
+          items:
+            $ref: '#/components/schemas/PayloadsStaticColumn'
+          type:
+          - array
+          - 'null'
+        tablesPerTransferPod:
+          minimum: 0
+          type: integer
+        truncateExceededValues:
+          type: boolean
+        turboLatencyThresholdMinutes:
+          type: integer
+        turboRowThreshold:
+          type: integer
+        turboWarehouse:
+          type: string
+        useBQBatchPriority:
+          type: boolean
+        useBigNumericForVariableNumeric:
+          type: boolean
+        useNewStringMethod:
+          type:
+          - 'null'
+          - boolean
+        useSnowpipeStreaming:
+          type: boolean
+        waitForTopics:
+          type: boolean
+        writeRawBinaryValues:
+          type: boolean
       type: object
     PayloadsFullPipeline:
       properties:
@@ -493,80 +1215,35 @@ components:
       - specificDestCfg
       - advancedSettings
       type: object
-    RouterPipelineUpdateRequest:
+    EnumsSourceReaderStatus:
+      enum:
+      - draft
+      - paused
+      - running
+      type: string
+    PayloadsTablePayload:
       properties:
-        pipeline:
-          $ref: '#/components/schemas/PayloadsPipelinePayload'
-      required:
-      - pipeline
-      type: object
-    RouterPipelineCreateFromSourceRequest:
-      properties:
-        dataPlaneName:
-          type: string
-        destinationType:
-          type: string
-        environmentUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        sourceConnectorUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        sourceType:
-          type: string
-      type: object
-    RouterPipelineDetailResponse:
-      properties:
-        destinationConnector:
-          $ref: '#/components/schemas/PayloadsFullConnector'
-        pipeline:
-          $ref: '#/components/schemas/PayloadsFullPipeline'
-        sourceConnector:
-          $ref: '#/components/schemas/PayloadsFullConnector'
-        sourceReader:
-          $ref: '#/components/schemas/PayloadsSourceReader'
-      required:
-      - pipeline
-      - sourceReader
-      - sourceConnector
-      type: object
-    PayloadsCompactionConfig:
-      properties:
-        enabled:
+        advancedSettings:
+          $ref: '#/components/schemas/PayloadsAdvancedTableSettingsPayload'
+        disableReplication:
           type: boolean
-        everySeconds:
-          type: integer
-        quietWindow:
-          $ref: '#/components/schemas/PayloadsCompactionQuietWindow'
-      type: object
-    PayloadsStaticColumn:
-      properties:
-        column:
+        enableHistoryMode:
+          type: boolean
+        individualDeployment:
+          type:
+          - 'null'
+          - boolean
+        name:
           type: string
-        value:
+        schema:
           type: string
-      type: object
-    RouterPipelineCancelBackfillRequest:
-      properties:
-        historyTableUUIDs:
-          items:
-            format: uuid
-            type: string
-          type: array
-        optionalReason:
+        status:
+          type:
+          - 'null'
+          - string
+        uuid:
+          format: uuid
           type: string
-        tableUUIDs:
-          items:
-            format: uuid
-            type: string
-          type: array
-      required:
-      - tableUUIDs
-      - historyTableUUIDs
       type: object
     PayloadsAdvancedPipelineSettingsPayload:
       properties:
@@ -712,336 +1389,76 @@ components:
           - 'null'
           - boolean
       type: object
-    PayloadsCTIDSettings:
+    PayloadsLightPipeline:
       properties:
-        chunkSize:
-          minimum: 0
-          type: integer
-        enabled:
-          type: boolean
-        maxParallelism:
-          minimum: 0
-          type: integer
-      type: object
-    PayloadsSpecificConfig:
-      properties:
-        bucketName:
-          type: string
-        checkpointInterval:
-          type: integer
-        compaction:
-          $ref: '#/components/schemas/PayloadsCompactionConfig'
-        containerName:
-          type: string
-        database:
-          type: string
-        dynamicallyCreateNamespaces:
-          type: boolean
-        externalStageName:
-          type: string
-        externalStageS3Bucket:
-          type: string
-        externalStageS3Prefix:
-          type: string
-        folderName:
-          type: string
-        schema:
-          type: string
-        schemaNamePrefix:
-          type: string
-        tableNameSeparator:
-          type: string
-        useSameSchemaAsSource:
-          type: boolean
-      type: object
-    PayloadsTable:
-      properties:
-        advancedSettings:
-          $ref: '#/components/schemas/PayloadsTableAdvancedSettings'
-        backfillStage:
-          type: string
-        createdAt:
-          format: date-time
-          type: string
-        destinationTableName:
-          type: string
-        disableReplication:
-          type: boolean
-        enableHistoryMode:
-          type: boolean
-        historyTableBackfillStage:
-          type: string
-        historyTableStatus:
-          type: string
-        individualDeployment:
-          type: boolean
-        name:
-          type: string
-        schema:
-          type: string
-        status:
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-        uuid:
-          format: uuid
-          type: string
-      type: object
-    PayloadsSoftPartitioning:
-      properties:
-        enabled:
-          type: boolean
-        maxPartitions:
-          type: integer
-        partitionColumn:
-          type: string
-        partitionFrequency:
-          type: string
-        partitionSchema:
-          type: string
-      type: object
-    PayloadsConnectorPayload:
-      properties:
-        dataPlaneName:
-          type: string
-        defaultDatabase:
-          type:
-          - 'null'
-          - string
-        environmentUUID:
+        columnHashingSaltUUID:
           format: uuid
           type:
           - 'null'
           - string
-        label:
-          type: string
-        privateLinkUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        sharedConfig:
-          additionalProperties: {}
-          type:
-          - object
-          - 'null'
-        snapshotPrivateLinkUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        sshTunnelUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        type:
-          type: string
-        uuid:
-          type: string
-      type: object
-    RouterPipelineUpdateWithSourceReaderResponse:
-      properties:
-        pipeline:
-          $ref: '#/components/schemas/PayloadsFullPipeline'
-        sourceReader:
-          $ref: '#/components/schemas/PayloadsSourceReader'
-      required:
-      - pipeline
-      - sourceReader
-      type: object
-    PayloadsBigQuerySettings:
-      properties:
-        partitionBy:
-          type: string
-        partitionField:
-          type: string
-        partitionType:
-          type: string
-      type: object
-    PayloadsSourceReader:
-      properties:
-        apiBaseURL:
-          type: string
         companyUUID:
           format: uuid
           type: string
-        connectorUUID:
-          format: uuid
-          type: string
-        containerName:
-          type: string
         createdAt:
           format: date-time
           type: string
         dataPlaneName:
           type: string
-        database:
-          type: string
+        destinationUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        encryptionKeyUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
         environmentUUID:
           format: uuid
           type: string
-        isShared:
+        hasBackfillingTables:
+          type: boolean
+        hasUndeployedChanges:
+          type: boolean
+        isDeploying:
+          type: boolean
+        lastDeployedAt:
+          format: date-time
           type:
           - 'null'
-          - boolean
-        isValid:
-          type: boolean
-        name:
-          type: string
-        settings:
-          $ref: '#/components/schemas/PayloadsSourceReaderSettingsPayload'
-        status:
-          $ref: '#/components/schemas/EnumsSourceReaderStatus'
-        tablesConfig:
-          $ref: '#/components/schemas/PayloadsSourceReaderTablesConfig'
-        updatedAt:
+          - string
+        lastUpdatedAt:
           format: date-time
           type: string
+        name:
+          type: string
+        snowflakeEcoScheduleUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        sourceReaderUUID:
+          format: uuid
+          type: string
+        sourceType:
+          $ref: '#/components/schemas/EnumsConnectorSlug'
+        status:
+          $ref: '#/components/schemas/EnumsPipelineStatus'
         uuid:
           format: uuid
           type: string
       required:
       - uuid
-      - name
       - companyUUID
       - dataPlaneName
       - environmentUUID
-      - connectorUUID
-      - status
-      - isValid
-      - database
-      - containerName
-      - settings
-      type: object
-    RouterPipelineStartRequest:
-      properties:
-        disableBackFill:
-          type: boolean
-        keepPaused:
-          type: boolean
-      type: object
-    ListResponseBodyLightPipeline:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/PayloadsLightPipeline'
-          type: array
-      required:
-      - items
-      type: object
-    RouterPipelineUpdateWithSourceReaderRequest:
-      properties:
-        pipeline:
-          $ref: '#/components/schemas/PayloadsPipelinePayload'
-        sourceReader:
-          $ref: '#/components/schemas/PayloadsSourceReader'
-      required:
-      - pipeline
-      - sourceReader
-      type: object
-    PayloadsPipelineAdvancedSettings:
-      properties:
-        appendOnly:
-          type: boolean
-        autoEnableHistoryForNewTables:
-          type: boolean
-        autoReplicateIgnoreRegex:
-          type: string
-        autoReplicateNewTables:
-          type: boolean
-        bigQueryReservation:
-          type: string
-        bufferRows:
-          type: integer
-        castAllColumnsToString:
-          type: boolean
-        defaultSourceSchema:
-          type: string
-        disableAlerts:
-          type: boolean
-        dropDeletedColumns:
-          type: boolean
-        dynamoDBBackfillConfig:
-          $ref: '#/components/schemas/PayloadsDynamoDBSnapshotConfig'
-        enableSoftDelete:
-          type: boolean
-        flushIntervalSeconds:
-          type: integer
-        flushSizeKb:
-          type: integer
-        forceUTCTimezone:
-          type: boolean
-        includeArtieOperationColumn:
-          type: boolean
-        includeArtieUpdatedAtColumn:
-          type: boolean
-        includeDatabaseUpdatedAtColumn:
-          type: boolean
-        includeFullSourceTableNameColumn:
-          type: boolean
-        includeFullSourceTableNameColumnAsPrimaryKey:
-          type: boolean
-        includeSourceMetadataColumn:
-          type: boolean
-        maxConcurrentSnapshots:
-          minimum: 0
-          type: integer
-        nullOutInvalidValues:
-          type: boolean
-        reuseStagingTable:
-          type: boolean
-        sessionDriverMemory:
-          type: string
-        sessionExecutorMemory:
-          type: string
-        snowpipeStreamingMaxChannels:
-          type: integer
-        splitEventsByType:
-          type: boolean
-        stagingSchema:
-          type: string
-        staticColumns:
-          items:
-            $ref: '#/components/schemas/PayloadsStaticColumn'
-          type:
-          - array
-          - 'null'
-        tablesPerTransferPod:
-          minimum: 0
-          type: integer
-        truncateExceededValues:
-          type: boolean
-        turboLatencyThresholdMinutes:
-          type: integer
-        turboRowThreshold:
-          type: integer
-        turboWarehouse:
-          type: string
-        useBQBatchPriority:
-          type: boolean
-        useBigNumericForVariableNumeric:
-          type: boolean
-        useNewStringMethod:
-          type:
-          - 'null'
-          - boolean
-        useSnowpipeStreaming:
-          type: boolean
-        waitForTopics:
-          type: boolean
-        writeRawBinaryValues:
-          type: boolean
-      type: object
-    PayloadsAzureBlobStorageConfig:
-      properties:
-        accountURL:
-          type: string
-        containerName:
-          type: string
-        sasToken:
-          type: string
+      - name
+      - createdAt
+      - lastUpdatedAt
+      - isDeploying
+      - sourceType
+      - hasUndeployedChanges
       type: object
     PayloadsDynamoDBSnapshotConfig:
       properties:
@@ -1052,177 +1469,6 @@ components:
         exportArn:
           type: string
         optionalFolder:
-          type: string
-      type: object
-    PayloadsRangeSettings:
-      properties:
-        batchSize:
-          minimum: 0
-          type: integer
-        chunksSize:
-          minimum: 0
-          type: integer
-        enabled:
-          type: boolean
-        maxParallelism:
-          minimum: 0
-          type: integer
-      type: object
-    EnumsPipelineStatus:
-      enum:
-      - draft
-      - paused
-      - transfer paused
-      - running
-      type: string
-    PayloadsSourceReaderTablesConfig:
-      additionalProperties:
-        $ref: '#/components/schemas/PayloadsSourceReaderTable'
-      type:
-      - 'null'
-      - object
-    RouterPipelineUpdateStatusRequest:
-      properties:
-        status:
-          $ref: '#/components/schemas/EnumsPipelineStatus'
-      required:
-      - status
-      type: object
-    PayloadsSourceReaderSettingsPayload:
-      properties:
-        archiveLogPassword:
-          type:
-          - 'null'
-          - string
-        archiveLogPath:
-          type:
-          - 'null'
-          - string
-        azureBlobStorageConfig:
-          $ref: '#/components/schemas/PayloadsAzureBlobStorageConfig'
-        backfillBatchSize:
-          minimum: 0
-          type:
-          - 'null'
-          - integer
-        compositeTypesAsText:
-          type:
-          - 'null'
-          - boolean
-        databasesToSync:
-          items:
-            type: string
-          type:
-          - 'null'
-          - array
-        disableAutoFetchTables:
-          type:
-          - 'null'
-          - boolean
-        disableFullDocumentBeforeChange:
-          type:
-          - 'null'
-          - boolean
-        disableNoCursorTimeout:
-          type:
-          - 'null'
-          - boolean
-        enableClientSideFullDocumentLookup:
-          type:
-          - 'null'
-          - boolean
-        enableHeartbeats:
-          type:
-          - 'null'
-          - boolean
-        enableSchemaHistoryCompaction:
-          type:
-          - 'null'
-          - boolean
-        maxConnIdleTimeSeconds:
-          type:
-          - 'null'
-          - integer
-        messageCompression:
-          enum:
-          - gzip
-          - ''
-          type:
-          - 'null'
-          - string
-        mssqlChangeTrackingConcurrency:
-          type:
-          - 'null'
-          - integer
-        mssqlChangeTrackingMaxIdleConns:
-          type:
-          - 'null'
-          - integer
-        mssqlChangeTrackingPollIntervalMs:
-          minimum: 0
-          type:
-          - 'null'
-          - integer
-        mssqlReplicationMethod:
-          type:
-          - 'null'
-          - string
-        oneTopicPerSchema:
-          type:
-          - 'null'
-          - boolean
-        publicationAutoCreateMode:
-          type:
-          - 'null'
-          - string
-        publicationNameOverride:
-          type:
-          - 'null'
-          - string
-        publishViaPartitionRoot:
-          type:
-          - 'null'
-          - boolean
-        replicationSlotOverride:
-          type:
-          - 'null'
-          - string
-        unifyAcrossDatabases:
-          type:
-          - 'null'
-          - boolean
-        unifyAcrossSchemas:
-          type:
-          - 'null'
-          - boolean
-        unifyAcrossSchemasMaxParallelism:
-          maximum: 3
-          minimum: 0
-          type:
-          - 'null'
-          - integer
-        unifyAcrossSchemasRegex:
-          type:
-          - 'null'
-          - string
-        useAdvanceOnPrimaryKeepAlive:
-          type:
-          - 'null'
-          - boolean
-        useNumericTypesForMoney:
-          type:
-          - 'null'
-          - boolean
-        useReaderForOracleStreaming:
-          type:
-          - 'null'
-          - boolean
-      type: object
-    PayloadsCompactionQuietWindow:
-      properties:
-        end:
-          type: string
-        start:
           type: string
       type: object
     PayloadsAdvancedTableSettingsPayload:
@@ -1327,335 +1573,115 @@ components:
           - 'null'
           - boolean
       type: object
-    RouterPipelineValidateUnsavedSourceRequest:
+    PayloadsAzureBlobStorageConfig:
       properties:
-        dataPlaneName:
+        accountURL:
           type: string
-        dynamoDBBackfillConfig:
-          $ref: '#/components/schemas/PayloadsDynamoDBSnapshotConfig'
+        containerName:
+          type: string
+        sasToken:
+          type: string
+      type: object
+    PayloadsSoftPartitioning:
+      properties:
+        enabled:
+          type: boolean
+        maxPartitions:
+          type: integer
+        partitionColumn:
+          type: string
+        partitionFrequency:
+          type: string
+        partitionSchema:
+          type: string
+      type: object
+    RouterPipelineStartRequest:
+      properties:
+        disableBackFill:
+          type: boolean
+        keepPaused:
+          type: boolean
+      type: object
+    RouterPipelineDetailResponse:
+      properties:
+        destinationConnector:
+          $ref: '#/components/schemas/PayloadsFullConnector'
+        pipeline:
+          $ref: '#/components/schemas/PayloadsFullPipeline'
         sourceConnector:
-          $ref: '#/components/schemas/PayloadsConnectorPayload'
+          $ref: '#/components/schemas/PayloadsFullConnector'
         sourceReader:
           $ref: '#/components/schemas/PayloadsSourceReader'
-        sourceReaderUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        tables:
-          items:
-            $ref: '#/components/schemas/PayloadsTable'
-          type: array
-        validateTables:
-          type: boolean
       required:
-      - validateTables
-      - tables
+      - pipeline
+      - sourceReader
+      - sourceConnector
       type: object
-    PayloadsTableAdvancedSettings:
+    RouterPipelineCancelBackfillRequest:
       properties:
-        alias:
+        historyTableUUIDs:
+          items:
+            format: uuid
+            type: string
+          type: array
+        optionalReason:
           type: string
-        backfillFromDatabases:
+        tableUUIDs:
           items:
-            type: string
-          type:
-          - array
-          - 'null'
-        backfillFromSchemas:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-        bigQueryPartitionSettings:
-          $ref: '#/components/schemas/PayloadsBigQuerySettings'
-        bufferRows:
-          type: integer
-        columnsToCompress:
-          items:
+            format: uuid
             type: string
           type: array
-        columnsToEncrypt:
-          items:
-            type: string
-          type: array
-        columnsToHash:
-          items:
-            type: string
-          type: array
-        ctidSettings:
-          $ref: '#/components/schemas/PayloadsCTIDSettings'
-        encryptJSONBColumns:
-          type: boolean
-        endingPrimaryKey:
-          type: string
-        excludeColumns:
-          items:
-            type: string
-          type: array
-        flushIntervalSeconds:
-          type: integer
-        flushSizeKb:
-          type: integer
-        historyTableBackfillFromSchemas:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-        includeColumns:
-          items:
-            type: string
-          type: array
-        k8sRequestCPU:
-          minimum: 0
-          type: integer
-        k8sRequestMemoryMB:
-          minimum: 0
-          type: integer
-        mergePredicates:
-          items:
-            $ref: '#/components/schemas/PayloadsMergePredicates'
-          type: array
-        msmFlushCount:
-          minimum: 0
-          type: integer
-        primaryKeysOverride:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-        rangeSettings:
-          $ref: '#/components/schemas/PayloadsRangeSettings'
-        shouldBackfillHistoryTable:
-          type:
-          - 'null'
-          - boolean
-        skipBackfill:
-          type: boolean
-        skipDelete:
-          type: boolean
-        skipNoOpUpdates:
-          type: boolean
-        softPartitioning:
-          $ref: '#/components/schemas/PayloadsSoftPartitioning'
-        startingPrimaryKey:
-          type: string
-        streamARN:
-          type: string
-        unifyAcrossDatabases:
-          type: boolean
-        unifyAcrossSchemas:
-          type: boolean
+      required:
+      - tableUUIDs
+      - historyTableUUIDs
       type: object
-    EnumsSourceReaderStatus:
-      enum:
-      - draft
-      - paused
-      - running
-      type: string
-    PayloadsLightPipeline:
+    PayloadsRangeSettings:
       properties:
-        columnHashingSaltUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        companyUUID:
-          format: uuid
+        batchSize:
+          minimum: 0
+          type: integer
+        chunksSize:
+          minimum: 0
+          type: integer
+        enabled:
+          type: boolean
+        maxParallelism:
+          minimum: 0
+          type: integer
+      type: object
+    PayloadsTable:
+      properties:
+        advancedSettings:
+          $ref: '#/components/schemas/PayloadsTableAdvancedSettings'
+        backfillStage:
           type: string
         createdAt:
           format: date-time
           type: string
-        dataPlaneName:
+        destinationTableName:
           type: string
-        destinationUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        encryptionKeyUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        environmentUUID:
-          format: uuid
-          type: string
-        hasBackfillingTables:
+        disableReplication:
           type: boolean
-        hasUndeployedChanges:
+        enableHistoryMode:
           type: boolean
-        isDeploying:
+        historyTableBackfillStage:
+          type: string
+        historyTableStatus:
+          type: string
+        individualDeployment:
           type: boolean
-        lastDeployedAt:
-          format: date-time
-          type:
-          - 'null'
-          - string
-        lastUpdatedAt:
-          format: date-time
-          type: string
-        name:
-          type: string
-        snowflakeEcoScheduleUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        sourceReaderUUID:
-          format: uuid
-          type: string
-        sourceType:
-          $ref: '#/components/schemas/EnumsConnectorSlug'
-        status:
-          $ref: '#/components/schemas/EnumsPipelineStatus'
-        uuid:
-          format: uuid
-          type: string
-      required:
-      - uuid
-      - companyUUID
-      - dataPlaneName
-      - environmentUUID
-      - name
-      - createdAt
-      - lastUpdatedAt
-      - isDeploying
-      - sourceType
-      - hasUndeployedChanges
-      type: object
-    PayloadsMergePredicates:
-      properties:
-        partitionBy:
-          type: string
-        partitionField:
-          type: string
-        partitionType:
-          type: string
-      type: object
-    RouterPipelineValidateUnsavedDestinationRequest:
-      properties:
-        advancedSettings:
-          $ref: '#/components/schemas/PayloadsAdvancedPipelineSettingsPayload'
-        destination:
-          $ref: '#/components/schemas/PayloadsConnectorPayload'
-        destinationUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        sourceReaderUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        sourceType:
-          type:
-          - 'null'
-          - string
-        specificCfg:
-          $ref: '#/components/schemas/PayloadsSpecificConfig'
-        tables:
-          items:
-            $ref: '#/components/schemas/PayloadsTable'
-          type:
-          - array
-          - 'null'
-      required:
-      - specificCfg
-      type: object
-    PayloadsSourceReaderTable:
-      properties:
-        excludeColumns:
-          items:
-            type: string
-          type: array
-        includeColumns:
-          items:
-            type: string
-          type: array
         name:
           type: string
         schema:
           type: string
-        unifyAcrossDatabases:
-          type: boolean
-        unifyAcrossSchemas:
-          type: boolean
-      type: object
-    RouterPipelineUpdateStatusResponse:
-      properties:
-        pipeline:
-          $ref: '#/components/schemas/PayloadsFullPipeline'
-      required:
-      - pipeline
-      type: object
-    RouterPipelineCreateRequest:
-      properties:
-        pipeline:
-          $ref: '#/components/schemas/PayloadsPipelinePayload'
-      required:
-      - pipeline
-      type: object
-    PayloadsFullConnector:
-      properties:
-        companyUUID:
-          format: uuid
+        status:
           type: string
-        connectionLabel:
-          type: string
-        createdAt:
-          format: date-time
-          type: string
-        dataPlaneName:
-          type:
-          - 'null'
-          - string
-        defaultDatabase:
-          type: string
-        environmentUUID:
-          format: uuid
-          type: string
-        isValid:
-          type: boolean
-        label:
-          type: string
-        privateLinkUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        sharedConfig: {}
-        snapshotPrivateLinkUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        sshTunnelUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        type:
-          $ref: '#/components/schemas/EnumsConnectorSlug'
         updatedAt:
           format: date-time
           type: string
         uuid:
           format: uuid
           type: string
-      required:
-      - label
-      - uuid
-      - createdAt
-      - updatedAt
-      - type
-      - companyUUID
-      - environmentUUID
-      - isValid
       type: object
   securitySchemes:
     ApiKey:

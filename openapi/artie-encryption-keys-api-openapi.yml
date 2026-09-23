@@ -25,6 +25,8 @@ paths:
       summary: List encryption keys
       tags:
       - Encryption Keys
+      operationId: getEncryptionKeys
+      x-operation-id-source: derived
     post:
       description: Creates a new encryption key for the authenticated company.
       requestBody:
@@ -46,6 +48,8 @@ paths:
       summary: Create an encryption key
       tags:
       - Encryption Keys
+      operationId: postEncryptionKeys
+      x-operation-id-source: derived
   /encryption-keys/{uuid}:
     delete:
       description: Deletes an encryption key by UUID.
@@ -65,6 +69,8 @@ paths:
       summary: Delete an encryption key
       tags:
       - Encryption Keys
+      operationId: deleteEncryptionKeysByUuid
+      x-operation-id-source: derived
     get:
       description: Retrieves an encryption key by UUID, including the decrypted key. Requires company admin.
       parameters:
@@ -87,6 +93,8 @@ paths:
       summary: Get an encryption key
       tags:
       - Encryption Keys
+      operationId: getEncryptionKeysByUuid
+      x-operation-id-source: derived
     post:
       description: Updates the name and description of an encryption key.
       parameters:
@@ -114,8 +122,37 @@ paths:
       summary: Update an encryption key
       tags:
       - Encryption Keys
+      operationId: postEncryptionKeysByUuid
+      x-operation-id-source: derived
 components:
   schemas:
+    PayloadsEncryptionKey:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        description:
+          type: string
+        kmsKeyUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+        type:
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - name
+      - type
+      type: object
     RouterCreateEncryptionKeyRequest:
       properties:
         description:
@@ -130,15 +167,6 @@ components:
       required:
       - name
       type: object
-    RouterUpdateEncryptionKeyRequest:
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-      required:
-      - name
-      type: object
     RouterCreateEncryptionKeyResponse:
       properties:
         encryptionKey:
@@ -148,6 +176,15 @@ components:
       required:
       - encryptionKey
       - key
+      type: object
+    RouterUpdateEncryptionKeyRequest:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      required:
+      - name
       type: object
     PayloadsEncryptionKeyDetail:
       properties:
@@ -187,33 +224,6 @@ components:
           type: array
       required:
       - items
-      type: object
-    PayloadsEncryptionKey:
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-        description:
-          type: string
-        kmsKeyUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        name:
-          type: string
-        type:
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-        uuid:
-          format: uuid
-          type: string
-      required:
-      - uuid
-      - name
-      - type
       type: object
   securitySchemes:
     ApiKey:

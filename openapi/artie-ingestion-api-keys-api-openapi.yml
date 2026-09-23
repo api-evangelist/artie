@@ -32,6 +32,8 @@ paths:
       summary: Create an ingestion API key
       tags:
       - Ingestion API Keys
+      operationId: postIngestionApiKeys
+      x-operation-id-source: derived
   /ingestion-api-keys/{uuid}:
     delete:
       description: Deletes an ingestion API key by UUID.
@@ -49,6 +51,8 @@ paths:
       summary: Delete an ingestion API key
       tags:
       - Ingestion API Keys
+      operationId: deleteIngestionApiKeysByUuid
+      x-operation-id-source: derived
     post:
       description: Updates an existing ingestion API key by UUID.
       parameters:
@@ -76,6 +80,8 @@ paths:
       summary: Update an ingestion API key
       tags:
       - Ingestion API Keys
+      operationId: postIngestionApiKeysByUuid
+      x-operation-id-source: derived
 components:
   schemas:
     PayloadsIngestionAPIKey:

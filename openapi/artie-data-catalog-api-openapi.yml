@@ -30,34 +30,13 @@ paths:
       summary: Search the data catalog
       tags:
       - Data Catalog
+      operationId: postDataCatalogSearch
+      x-operation-id-source: derived
 components:
   schemas:
-    PayloadsDataCatalogSchema:
-      properties:
-        databaseName:
-          type: string
-        name:
-          type: string
-      type: object
-    PayloadsDataCatalogMatch:
-      properties:
-        connectorUUID:
-          format: uuid
-          type: string
-        object:
-          $ref: '#/components/schemas/PayloadsDataCatalogMatchedObject'
-        score:
-          format: double
-          type: number
-      type: object
     PayloadsDataCatalogSearchRequest:
       properties:
         query:
-          type: string
-      type: object
-    PayloadsDataCatalogDatabase:
-      properties:
-        name:
           type: string
       type: object
     ListResponseBodyDataCatalogMatch:
@@ -78,6 +57,22 @@ components:
         schemaName:
           type: string
       type: object
+    PayloadsDataCatalogMatch:
+      properties:
+        connectorUUID:
+          format: uuid
+          type: string
+        object:
+          $ref: '#/components/schemas/PayloadsDataCatalogMatchedObject'
+        score:
+          format: double
+          type: number
+      type: object
+    PayloadsDataCatalogDatabase:
+      properties:
+        name:
+          type: string
+      type: object
     PayloadsDataCatalogMatchedObject:
       properties:
         database:
@@ -86,6 +81,13 @@ components:
           $ref: '#/components/schemas/PayloadsDataCatalogSchema'
         table:
           $ref: '#/components/schemas/PayloadsDataCatalogTable'
+      type: object
+    PayloadsDataCatalogSchema:
+      properties:
+        databaseName:
+          type: string
+        name:
+          type: string
       type: object
   securitySchemes:
     ApiKey:

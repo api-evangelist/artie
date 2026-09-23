@@ -47,9 +47,11 @@
     "artie-openapi-original.yml: declared missing tag: Pipelines",
     "artie-openapi-original.yml: declared missing tag: PrivateLink Connections",
     "artie-openapi-original.yml: declared missing tag: SSH Tunnels",
-    "artie-openapi-original.yml: declared missing tag: Source Readers"
+    "artie-openapi-original.yml: declared missing tag: Source Readers",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
+    "artie-artie-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "artie-column-hashing-salts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "artie-connectors-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "artie-data-catalog-api-openapi.yml: previously refined output, superseded by openapi/_original/",

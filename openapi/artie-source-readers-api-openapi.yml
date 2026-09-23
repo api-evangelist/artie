@@ -27,6 +27,8 @@ paths:
       summary: List source readers
       tags:
       - Source Readers
+      operationId: getSourceReaders
+      x-operation-id-source: derived
     post:
       description: Creates a new source reader for the authenticated company.
       requestBody:
@@ -48,6 +50,8 @@ paths:
       summary: Create a source reader
       tags:
       - Source Readers
+      operationId: postSourceReaders
+      x-operation-id-source: derived
   /source-readers/{uuid}:
     delete:
       description: Permanently deletes a source reader by UUID. The source reader must not be associated with any active pipelines before deletion.
@@ -67,6 +71,8 @@ paths:
       summary: Delete a source reader
       tags:
       - Source Readers
+      operationId: deleteSourceReadersByUuid
+      x-operation-id-source: derived
     get:
       description: Retrieves the details of a source reader by UUID, including its configuration, status, connector association, and table settings.
       parameters:
@@ -89,6 +95,8 @@ paths:
       summary: Get a source reader
       tags:
       - Source Readers
+      operationId: getSourceReadersByUuid
+      x-operation-id-source: derived
     post:
       description: Updates an existing source reader by UUID. You can modify the name, settings, table configuration, and shared status of the source reader.
       parameters:
@@ -116,6 +124,8 @@ paths:
       summary: Update a source reader
       tags:
       - Source Readers
+      operationId: postSourceReadersByUuid
+      x-operation-id-source: derived
   /source-readers/{uuid}/deploy:
     post:
       description: Deploys a shared source reader to the data plane. The source reader must be shared and pass validation before it can be deployed.
@@ -135,6 +145,8 @@ paths:
       summary: Deploy a source reader
       tags:
       - Source Readers
+      operationId: postSourceReadersByUuidDeploy
+      x-operation-id-source: derived
   /source-readers/{uuid}/status:
     post:
       description: Changes the status of a shared source reader (e.g. running, paused). Only shared source readers are supported; for non-shared source readers, use the pipeline status endpoint instead.
@@ -163,6 +175,8 @@ paths:
       summary: Update source reader status
       tags:
       - Source Readers
+      operationId: postSourceReadersByUuidStatus
+      x-operation-id-source: derived
   /source-readers/validate-unsaved:
     post:
       description: Validates a source reader configuration without persisting it.
@@ -185,6 +199,8 @@ paths:
       summary: Validate an unsaved source reader
       tags:
       - Source Readers
+      operationId: postSourceReadersValidateUnsaved
+      x-operation-id-source: derived
 components:
   schemas:
     RouterSourceReaderUpdateStatusRequest:
@@ -194,95 +210,22 @@ components:
       required:
       - status
       type: object
-    PayloadsSourceReaderTablesConfig:
-      additionalProperties:
-        $ref: '#/components/schemas/PayloadsSourceReaderTable'
-      type:
-      - 'null'
-      - object
-    RouterSourceReaderCreateRequest:
+    RouterSourceReaderValidateUnsavedResponse:
       properties:
-        connectorUUID:
-          format: uuid
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    PayloadsAzureBlobStorageConfig:
+      properties:
+        accountURL:
           type: string
         containerName:
           type: string
-        dataPlaneName:
+        sasToken:
           type: string
-        database:
-          type: string
-        isShared:
-          type: boolean
-        name:
-          type: string
-        settings:
-          $ref: '#/components/schemas/PayloadsSourceReaderSettingsPayload'
-        tablesConfig:
-          $ref: '#/components/schemas/PayloadsSourceReaderTablesConfig'
-      required:
-      - connectorUUID
       type: object
-    PayloadsSourceReader:
-      properties:
-        apiBaseURL:
-          type: string
-        companyUUID:
-          format: uuid
-          type: string
-        connectorUUID:
-          format: uuid
-          type: string
-        containerName:
-          type: string
-        createdAt:
-          format: date-time
-          type: string
-        dataPlaneName:
-          type: string
-        database:
-          type: string
-        environmentUUID:
-          format: uuid
-          type: string
-        isShared:
-          type:
-          - 'null'
-          - boolean
-        isValid:
-          type: boolean
-        name:
-          type: string
-        settings:
-          $ref: '#/components/schemas/PayloadsSourceReaderSettingsPayload'
-        status:
-          $ref: '#/components/schemas/EnumsSourceReaderStatus'
-        tablesConfig:
-          $ref: '#/components/schemas/PayloadsSourceReaderTablesConfig'
-        updatedAt:
-          format: date-time
-          type: string
-        uuid:
-          format: uuid
-          type: string
-      required:
-      - uuid
-      - name
-      - companyUUID
-      - dataPlaneName
-      - environmentUUID
-      - connectorUUID
-      - status
-      - isValid
-      - database
-      - containerName
-      - settings
-      type: object
-    EnumsSourceReaderStatus:
-      enum:
-      - draft
-      - paused
-      - running
-      type: string
     PayloadsSourceReaderSettingsPayload:
       properties:
         archiveLogPassword:
@@ -413,12 +356,95 @@ components:
           - 'null'
           - boolean
       type: object
-    RouterSourceReaderValidateUnsavedResponse:
+    RouterSourceReaderValidateUnsavedRequest:
       properties:
-        error:
+        sourceReader:
+          $ref: '#/components/schemas/PayloadsSourceReader'
+      required:
+      - sourceReader
+      type: object
+    PayloadsSourceReaderTablesConfig:
+      additionalProperties:
+        $ref: '#/components/schemas/PayloadsSourceReaderTable'
+      type:
+      - 'null'
+      - object
+    PayloadsSourceReader:
+      properties:
+        apiBaseURL:
+          type: string
+        companyUUID:
+          format: uuid
+          type: string
+        connectorUUID:
+          format: uuid
+          type: string
+        containerName:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        dataPlaneName:
+          type: string
+        database:
+          type: string
+        environmentUUID:
+          format: uuid
+          type: string
+        isShared:
+          type:
+          - 'null'
+          - boolean
+        isValid:
+          type: boolean
+        name:
+          type: string
+        settings:
+          $ref: '#/components/schemas/PayloadsSourceReaderSettingsPayload'
+        status:
+          $ref: '#/components/schemas/EnumsSourceReaderStatus'
+        tablesConfig:
+          $ref: '#/components/schemas/PayloadsSourceReaderTablesConfig'
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
           type: string
       required:
-      - error
+      - uuid
+      - name
+      - companyUUID
+      - dataPlaneName
+      - environmentUUID
+      - connectorUUID
+      - status
+      - isValid
+      - database
+      - containerName
+      - settings
+      type: object
+    RouterSourceReaderCreateRequest:
+      properties:
+        connectorUUID:
+          format: uuid
+          type: string
+        containerName:
+          type: string
+        dataPlaneName:
+          type: string
+        database:
+          type: string
+        isShared:
+          type: boolean
+        name:
+          type: string
+        settings:
+          $ref: '#/components/schemas/PayloadsSourceReaderSettingsPayload'
+        tablesConfig:
+          $ref: '#/components/schemas/PayloadsSourceReaderTablesConfig'
+      required:
+      - connectorUUID
       type: object
     PayloadsSourceReaderTable:
       properties:
@@ -439,22 +465,12 @@ components:
         unifyAcrossSchemas:
           type: boolean
       type: object
-    RouterSourceReaderValidateUnsavedRequest:
-      properties:
-        sourceReader:
-          $ref: '#/components/schemas/PayloadsSourceReader'
-      required:
-      - sourceReader
-      type: object
-    PayloadsAzureBlobStorageConfig:
-      properties:
-        accountURL:
-          type: string
-        containerName:
-          type: string
-        sasToken:
-          type: string
-      type: object
+    EnumsSourceReaderStatus:
+      enum:
+      - draft
+      - paused
+      - running
+      type: string
   securitySchemes:
     ApiKey:
       description: API key passed as a Bearer token in the Authorization header.
