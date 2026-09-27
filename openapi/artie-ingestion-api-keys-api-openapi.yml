@@ -119,6 +119,16 @@ components:
       - sourceReaderUUID
       - companyUUID
       type: object
+    RouterUpdateIngestionAPIKeyRequest:
+      properties:
+        expiresAt:
+          format: date-time
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+      type: object
     RouterCreateIngestionAPIKeyRequest:
       properties:
         name:
@@ -138,16 +148,6 @@ components:
       required:
       - ingestionAPIKey
       - secret
-      type: object
-    RouterUpdateIngestionAPIKeyRequest:
-      properties:
-        expiresAt:
-          format: date-time
-          type:
-          - 'null'
-          - string
-        name:
-          type: string
       type: object
   securitySchemes:
     ApiKey:

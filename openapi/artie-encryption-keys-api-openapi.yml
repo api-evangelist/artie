@@ -126,6 +126,29 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ListResponseBodyEncryptionKey:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsEncryptionKey'
+          type: array
+      required:
+      - items
+      type: object
+    RouterCreateEncryptionKeyRequest:
+      properties:
+        description:
+          type: string
+        kmsKeyUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+      required:
+      - name
+      type: object
     PayloadsEncryptionKey:
       properties:
         createdAt:
@@ -152,39 +175,6 @@ components:
       - uuid
       - name
       - type
-      type: object
-    RouterCreateEncryptionKeyRequest:
-      properties:
-        description:
-          type: string
-        kmsKeyUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        name:
-          type: string
-      required:
-      - name
-      type: object
-    RouterCreateEncryptionKeyResponse:
-      properties:
-        encryptionKey:
-          $ref: '#/components/schemas/PayloadsEncryptionKey'
-        key:
-          type: string
-      required:
-      - encryptionKey
-      - key
-      type: object
-    RouterUpdateEncryptionKeyRequest:
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-      required:
-      - name
       type: object
     PayloadsEncryptionKeyDetail:
       properties:
@@ -216,14 +206,24 @@ components:
       - type
       - key
       type: object
-    ListResponseBodyEncryptionKey:
+    RouterCreateEncryptionKeyResponse:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/PayloadsEncryptionKey'
-          type: array
+        encryptionKey:
+          $ref: '#/components/schemas/PayloadsEncryptionKey'
+        key:
+          type: string
       required:
-      - items
+      - encryptionKey
+      - key
+      type: object
+    RouterUpdateEncryptionKeyRequest:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      required:
+      - name
       type: object
   securitySchemes:
     ApiKey:

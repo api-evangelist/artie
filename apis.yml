@@ -64,7 +64,6 @@ tags_raw:
 - Streaming
 - Databases
 - Data Warehouse
-- CDC
 - Data Engineering
 maintainers:
 - FN: Kin Lane

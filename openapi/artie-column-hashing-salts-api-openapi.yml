@@ -158,23 +158,12 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    RouterCreateColumnHashingSaltRequest:
+    RouterPreviewColumnHashingSaltRequest:
       properties:
-        description:
-          type: string
-        name:
-          type: string
-        salt:
+        value:
           type: string
       required:
-      - name
-      type: object
-    RouterPreviewColumnHashingSaltResponse:
-      properties:
-        hash:
-          type: string
-      required:
-      - hash
+      - value
       type: object
     RouterCreateColumnHashingSaltResponse:
       properties:
@@ -185,6 +174,22 @@ components:
       required:
       - columnHashingSalt
       - salt
+      type: object
+    RouterPreviewColumnHashingSaltResponse:
+      properties:
+        hash:
+          type: string
+      required:
+      - hash
+      type: object
+    RouterUpdateColumnHashingSaltRequest:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      required:
+      - name
       type: object
     PayloadsColumnHashingSaltDetail:
       properties:
@@ -208,21 +213,25 @@ components:
       - name
       - salt
       type: object
-    RouterUpdateColumnHashingSaltRequest:
+    ListResponseBodyColumnHashingSalt:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsColumnHashingSalt'
+          type: array
+      required:
+      - items
+      type: object
+    RouterCreateColumnHashingSaltRequest:
       properties:
         description:
           type: string
         name:
           type: string
-      required:
-      - name
-      type: object
-    RouterPreviewColumnHashingSaltRequest:
-      properties:
-        value:
+        salt:
           type: string
       required:
-      - value
+      - name
       type: object
     PayloadsColumnHashingSalt:
       properties:
@@ -242,15 +251,6 @@ components:
       required:
       - uuid
       - name
-      type: object
-    ListResponseBodyColumnHashingSalt:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/PayloadsColumnHashingSalt'
-          type: array
-      required:
-      - items
       type: object
   securitySchemes:
     ApiKey:
