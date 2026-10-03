@@ -129,16 +129,6 @@ components:
         name:
           type: string
       type: object
-    RouterCreateIngestionAPIKeyRequest:
-      properties:
-        name:
-          type: string
-        sourceReaderUUID:
-          format: uuid
-          type: string
-      required:
-      - sourceReaderUUID
-      type: object
     RouterCreateIngestionAPIKeyResponse:
       properties:
         ingestionAPIKey:
@@ -148,6 +138,16 @@ components:
       required:
       - ingestionAPIKey
       - secret
+      type: object
+    RouterCreateIngestionAPIKeyRequest:
+      properties:
+        name:
+          type: string
+        sourceReaderUUID:
+          format: uuid
+          type: string
+      required:
+      - sourceReaderUUID
       type: object
   securitySchemes:
     ApiKey:

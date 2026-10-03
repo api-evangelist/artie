@@ -34,6 +34,32 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    PayloadsDataCatalogSchema:
+      properties:
+        databaseName:
+          type: string
+        name:
+          type: string
+      type: object
+    PayloadsDataCatalogSearchRequest:
+      properties:
+        query:
+          type: string
+      type: object
+    PayloadsDataCatalogTable:
+      properties:
+        databaseName:
+          type: string
+        name:
+          type: string
+        schemaName:
+          type: string
+      type: object
+    PayloadsDataCatalogDatabase:
+      properties:
+        name:
+          type: string
+      type: object
     PayloadsDataCatalogMatch:
       properties:
         connectorUUID:
@@ -45,25 +71,6 @@ components:
           format: double
           type: number
       type: object
-    ListResponseBodyDataCatalogMatch:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/PayloadsDataCatalogMatch'
-          type: array
-      required:
-      - items
-      type: object
-    PayloadsDataCatalogDatabase:
-      properties:
-        name:
-          type: string
-      type: object
-    PayloadsDataCatalogSearchRequest:
-      properties:
-        query:
-          type: string
-      type: object
     PayloadsDataCatalogMatchedObject:
       properties:
         database:
@@ -73,21 +80,14 @@ components:
         table:
           $ref: '#/components/schemas/PayloadsDataCatalogTable'
       type: object
-    PayloadsDataCatalogSchema:
+    ListResponseBodyDataCatalogMatch:
       properties:
-        databaseName:
-          type: string
-        name:
-          type: string
-      type: object
-    PayloadsDataCatalogTable:
-      properties:
-        databaseName:
-          type: string
-        name:
-          type: string
-        schemaName:
-          type: string
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsDataCatalogMatch'
+          type: array
+      required:
+      - items
       type: object
   securitySchemes:
     ApiKey:

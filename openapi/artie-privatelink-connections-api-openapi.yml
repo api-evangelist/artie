@@ -129,6 +129,29 @@ components:
       - vpcServiceName
       - availabilityZoneIds
       type: object
+    RouterPrivateLinkConnectionCreateRequest:
+      properties:
+        availabilityZoneIds:
+          items:
+            type: string
+          type: array
+        dataPlaneName:
+          type:
+          - 'null'
+          - string
+        environmentUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+        vpcServiceName:
+          type: string
+      required:
+      - vpcServiceName
+      - availabilityZoneIds
+      type: object
     PayloadsPrivateLinkConnection:
       properties:
         approvedAt:
@@ -186,29 +209,6 @@ components:
       - status
       - region
       - dnsEntry
-      - availabilityZoneIds
-      type: object
-    RouterPrivateLinkConnectionCreateRequest:
-      properties:
-        availabilityZoneIds:
-          items:
-            type: string
-          type: array
-        dataPlaneName:
-          type:
-          - 'null'
-          - string
-        environmentUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        name:
-          type: string
-        vpcServiceName:
-          type: string
-      required:
-      - vpcServiceName
       - availabilityZoneIds
       type: object
   securitySchemes:

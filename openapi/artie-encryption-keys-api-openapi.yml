@@ -126,55 +126,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ListResponseBodyEncryptionKey:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/PayloadsEncryptionKey'
-          type: array
-      required:
-      - items
-      type: object
-    RouterCreateEncryptionKeyRequest:
+    RouterUpdateEncryptionKeyRequest:
       properties:
         description:
           type: string
-        kmsKeyUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
         name:
           type: string
       required:
       - name
-      type: object
-    PayloadsEncryptionKey:
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-        description:
-          type: string
-        kmsKeyUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        name:
-          type: string
-        type:
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-        uuid:
-          format: uuid
-          type: string
-      required:
-      - uuid
-      - name
-      - type
       type: object
     PayloadsEncryptionKeyDetail:
       properties:
@@ -206,6 +165,47 @@ components:
       - type
       - key
       type: object
+    PayloadsEncryptionKey:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        description:
+          type: string
+        kmsKeyUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+        type:
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - name
+      - type
+      type: object
+    RouterCreateEncryptionKeyRequest:
+      properties:
+        description:
+          type: string
+        kmsKeyUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+      required:
+      - name
+      type: object
     RouterCreateEncryptionKeyResponse:
       properties:
         encryptionKey:
@@ -216,14 +216,14 @@ components:
       - encryptionKey
       - key
       type: object
-    RouterUpdateEncryptionKeyRequest:
+    ListResponseBodyEncryptionKey:
       properties:
-        description:
-          type: string
-        name:
-          type: string
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsEncryptionKey'
+          type: array
       required:
-      - name
+      - items
       type: object
   securitySchemes:
     ApiKey:

@@ -158,6 +158,25 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    PayloadsColumnHashingSalt:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - name
+      type: object
     RouterPreviewColumnHashingSaltRequest:
       properties:
         value:
@@ -175,21 +194,21 @@ components:
       - columnHashingSalt
       - salt
       type: object
+    ListResponseBodyColumnHashingSalt:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsColumnHashingSalt'
+          type: array
+      required:
+      - items
+      type: object
     RouterPreviewColumnHashingSaltResponse:
       properties:
         hash:
           type: string
       required:
       - hash
-      type: object
-    RouterUpdateColumnHashingSaltRequest:
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-      required:
-      - name
       type: object
     PayloadsColumnHashingSaltDetail:
       properties:
@@ -213,15 +232,6 @@ components:
       - name
       - salt
       type: object
-    ListResponseBodyColumnHashingSalt:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/PayloadsColumnHashingSalt'
-          type: array
-      required:
-      - items
-      type: object
     RouterCreateColumnHashingSaltRequest:
       properties:
         description:
@@ -233,23 +243,13 @@ components:
       required:
       - name
       type: object
-    PayloadsColumnHashingSalt:
+    RouterUpdateColumnHashingSaltRequest:
       properties:
-        createdAt:
-          format: date-time
-          type: string
         description:
           type: string
         name:
           type: string
-        updatedAt:
-          format: date-time
-          type: string
-        uuid:
-          format: uuid
-          type: string
       required:
-      - uuid
       - name
       type: object
   securitySchemes:
