@@ -203,12 +203,67 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    PayloadsSourceReaderTable:
+      properties:
+        excludeColumns:
+          items:
+            type: string
+          type: array
+        includeColumns:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        schema:
+          type: string
+        unifyAcrossDatabases:
+          type: boolean
+        unifyAcrossSchemas:
+          type: boolean
+      type: object
+    RouterSourceReaderValidateUnsavedRequest:
+      properties:
+        sourceReader:
+          $ref: '#/components/schemas/PayloadsSourceReader'
+      required:
+      - sourceReader
+      type: object
     EnumsSourceReaderStatus:
       enum:
       - draft
       - paused
       - running
       type: string
+    RouterSourceReaderUpdateStatusRequest:
+      properties:
+        status:
+          $ref: '#/components/schemas/EnumsSourceReaderStatus'
+      required:
+      - status
+      type: object
+    RouterSourceReaderCreateRequest:
+      properties:
+        connectorUUID:
+          format: uuid
+          type: string
+        containerName:
+          type: string
+        dataPlaneName:
+          type: string
+        database:
+          type: string
+        isShared:
+          type: boolean
+        name:
+          type: string
+        settings:
+          $ref: '#/components/schemas/PayloadsSourceReaderSettingsPayload'
+        tablesConfig:
+          $ref: '#/components/schemas/PayloadsSourceReaderTablesConfig'
+      required:
+      - connectorUUID
+      type: object
     PayloadsSourceReaderSettingsPayload:
       properties:
         archiveLogPassword:
@@ -338,61 +393,6 @@ components:
           type:
           - 'null'
           - boolean
-      type: object
-    PayloadsSourceReaderTable:
-      properties:
-        excludeColumns:
-          items:
-            type: string
-          type: array
-        includeColumns:
-          items:
-            type: string
-          type: array
-        name:
-          type: string
-        schema:
-          type: string
-        unifyAcrossDatabases:
-          type: boolean
-        unifyAcrossSchemas:
-          type: boolean
-      type: object
-    RouterSourceReaderUpdateStatusRequest:
-      properties:
-        status:
-          $ref: '#/components/schemas/EnumsSourceReaderStatus'
-      required:
-      - status
-      type: object
-    RouterSourceReaderCreateRequest:
-      properties:
-        connectorUUID:
-          format: uuid
-          type: string
-        containerName:
-          type: string
-        dataPlaneName:
-          type: string
-        database:
-          type: string
-        isShared:
-          type: boolean
-        name:
-          type: string
-        settings:
-          $ref: '#/components/schemas/PayloadsSourceReaderSettingsPayload'
-        tablesConfig:
-          $ref: '#/components/schemas/PayloadsSourceReaderTablesConfig'
-      required:
-      - connectorUUID
-      type: object
-    RouterSourceReaderValidateUnsavedRequest:
-      properties:
-        sourceReader:
-          $ref: '#/components/schemas/PayloadsSourceReader'
-      required:
-      - sourceReader
       type: object
     PayloadsAzureBlobStorageConfig:
       properties:

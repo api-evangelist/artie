@@ -158,6 +158,15 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    RouterUpdateColumnHashingSaltRequest:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      required:
+      - name
+      type: object
     PayloadsColumnHashingSalt:
       properties:
         createdAt:
@@ -177,6 +186,22 @@ components:
       - uuid
       - name
       type: object
+    RouterPreviewColumnHashingSaltResponse:
+      properties:
+        hash:
+          type: string
+      required:
+      - hash
+      type: object
+    ListResponseBodyColumnHashingSalt:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsColumnHashingSalt'
+          type: array
+      required:
+      - items
+      type: object
     RouterPreviewColumnHashingSaltRequest:
       properties:
         value:
@@ -193,22 +218,6 @@ components:
       required:
       - columnHashingSalt
       - salt
-      type: object
-    ListResponseBodyColumnHashingSalt:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/PayloadsColumnHashingSalt'
-          type: array
-      required:
-      - items
-      type: object
-    RouterPreviewColumnHashingSaltResponse:
-      properties:
-        hash:
-          type: string
-      required:
-      - hash
       type: object
     PayloadsColumnHashingSaltDetail:
       properties:
@@ -239,15 +248,6 @@ components:
         name:
           type: string
         salt:
-          type: string
-      required:
-      - name
-      type: object
-    RouterUpdateColumnHashingSaltRequest:
-      properties:
-        description:
-          type: string
-        name:
           type: string
       required:
       - name
