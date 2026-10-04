@@ -173,6 +173,9 @@ apis:
     url: openapi/artie-artie-api-api-openapi.yml
 maintainersHistory: []
 common:
+- type: CapabilityMap
+  url: capabilities/artie-capability-edges.yml
+  name: Artie Business Capability Map
 - type: Overlay
   url: overlays/artie-openapi-overlay.yaml
 - type: DomainSecurity
