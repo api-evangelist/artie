@@ -1,22 +1,27 @@
-generated: '2026-07-18'
+generated: '2026-09-23'
 method: generated
-source: openapi/artie-openapi-original.yml
+source: openapi/artie-column-hashing-salts-api-openapi.yml, openapi/artie-connectors-api-openapi.yml,
+  openapi/artie-data-catalog-api-openapi.yml, openapi/artie-encryption-keys-api-openapi.yml,
+  openapi/artie-ingestion-api-keys-api-openapi.yml, openapi/artie-pipelines-api-openapi.yml,
+  openapi/artie-privatelink-connections-api-openapi.yml, openapi/artie-source-readers-api-openapi.yml,
+  openapi/artie-ssh-tunnels-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 60
   by_action_class:
-    connected: 12
-    acting: 48
+    connected: 17
+    acting: 43
   by_consequence:
-    read: 12
-    write: 47
+    read: 17
+    write: 42
     physical: 1
   human_in_the_loop_required: 0
 operations:
 - path: /column-hashing-salts
   method: get
+  operationId: getColumnHashingSalts
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -26,6 +31,7 @@ operations:
     audit: none
 - path: /column-hashing-salts
   method: post
+  operationId: postColumnHashingSalts
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -41,6 +47,7 @@ operations:
     audit: required
 - path: /column-hashing-salts/{uuid}
   method: delete
+  operationId: deleteColumnHashingSaltsByUuid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -56,6 +63,7 @@ operations:
     audit: required
 - path: /column-hashing-salts/{uuid}
   method: get
+  operationId: getColumnHashingSaltsByUuid
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -65,6 +73,7 @@ operations:
     audit: none
 - path: /column-hashing-salts/{uuid}
   method: post
+  operationId: postColumnHashingSaltsByUuid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -80,6 +89,7 @@ operations:
     audit: required
 - path: /column-hashing-salts/{uuid}/preview
   method: post
+  operationId: postColumnHashingSaltsByUuidPreview
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -95,6 +105,7 @@ operations:
     audit: required
 - path: /connectors
   method: post
+  operationId: postConnectors
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -110,6 +121,7 @@ operations:
     audit: required
 - path: /connectors/{uuid}
   method: delete
+  operationId: deleteConnectorsByUuid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -125,6 +137,7 @@ operations:
     audit: required
 - path: /connectors/{uuid}
   method: get
+  operationId: getConnectorsByUuid
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -134,6 +147,7 @@ operations:
     audit: none
 - path: /connectors/{uuid}
   method: post
+  operationId: postConnectorsByUuid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -149,6 +163,7 @@ operations:
     audit: required
 - path: /connectors/{uuid}/detail
   method: get
+  operationId: getConnectorsByUuidDetail
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -158,6 +173,7 @@ operations:
     audit: none
 - path: /connectors/{uuid}/generate-shadow-script
   method: post
+  operationId: postConnectorsByUuidGenerateShadowScript
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -173,6 +189,7 @@ operations:
     audit: required
 - path: /connectors/{uuid}/postgres-drop-replication-slot
   method: post
+  operationId: postConnectorsByUuidPostgresDropReplicationSlot
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -188,6 +205,7 @@ operations:
     audit: required
 - path: /connectors/{uuid}/start-dynamodb-export
   method: post
+  operationId: postConnectorsByUuidStartDynamodbExport
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -203,21 +221,17 @@ operations:
     audit: required
 - path: /connectors/databases
   method: post
+  operationId: postConnectorsDatabases
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /connectors/new-database
   method: post
+  operationId: postConnectorsNewDatabase
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -233,6 +247,7 @@ operations:
     audit: required
 - path: /connectors/new-schema
   method: post
+  operationId: postConnectorsNewSchema
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -248,6 +263,7 @@ operations:
     audit: required
 - path: /connectors/new-snowflake-warehouse
   method: post
+  operationId: postConnectorsNewSnowflakeWarehouse
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -263,6 +279,7 @@ operations:
     audit: required
 - path: /connectors/ping
   method: post
+  operationId: postConnectorsPing
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -278,66 +295,47 @@ operations:
     audit: required
 - path: /connectors/postgres-publications
   method: post
+  operationId: postConnectorsPostgresPublications
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /connectors/schemas
   method: post
+  operationId: postConnectorsSchemas
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /connectors/tables
   method: post
+  operationId: postConnectorsTables
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /data-catalog/search
   method: post
+  operationId: postDataCatalogSearch
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /encryption-keys
   method: get
+  operationId: getEncryptionKeys
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -347,6 +345,7 @@ operations:
     audit: none
 - path: /encryption-keys
   method: post
+  operationId: postEncryptionKeys
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -362,6 +361,7 @@ operations:
     audit: required
 - path: /encryption-keys/{uuid}
   method: delete
+  operationId: deleteEncryptionKeysByUuid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -377,6 +377,7 @@ operations:
     audit: required
 - path: /encryption-keys/{uuid}
   method: get
+  operationId: getEncryptionKeysByUuid
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -386,6 +387,7 @@ operations:
     audit: none
 - path: /encryption-keys/{uuid}
   method: post
+  operationId: postEncryptionKeysByUuid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -401,6 +403,7 @@ operations:
     audit: required
 - path: /ingestion-api-keys
   method: post
+  operationId: postIngestionApiKeys
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -416,6 +419,7 @@ operations:
     audit: required
 - path: /ingestion-api-keys/{uuid}
   method: delete
+  operationId: deleteIngestionApiKeysByUuid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -431,6 +435,7 @@ operations:
     audit: required
 - path: /ingestion-api-keys/{uuid}
   method: post
+  operationId: postIngestionApiKeysByUuid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -446,6 +451,7 @@ operations:
     audit: required
 - path: /pipelines
   method: get
+  operationId: getPipelines
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -455,6 +461,7 @@ operations:
     audit: none
 - path: /pipelines
   method: post
+  operationId: postPipelines
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -470,6 +477,7 @@ operations:
     audit: required
 - path: /pipelines/{uuid}
   method: delete
+  operationId: deletePipelinesByUuid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -485,6 +493,7 @@ operations:
     audit: required
 - path: /pipelines/{uuid}
   method: get
+  operationId: getPipelinesByUuid
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -494,6 +503,7 @@ operations:
     audit: none
 - path: /pipelines/{uuid}
   method: post
+  operationId: postPipelinesByUuid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -509,6 +519,7 @@ operations:
     audit: required
 - path: /pipelines/{uuid}/backfill/cancel
   method: post
+  operationId: postPipelinesByUuidBackfillCancel
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -524,6 +535,7 @@ operations:
     audit: required
 - path: /pipelines/{uuid}/detect-schema-changes
   method: post
+  operationId: postPipelinesByUuidDetectSchemaChanges
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -539,6 +551,7 @@ operations:
     audit: required
 - path: /pipelines/{uuid}/start
   method: post
+  operationId: postPipelinesByUuidStart
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -554,6 +567,7 @@ operations:
     audit: required
 - path: /pipelines/{uuid}/status
   method: post
+  operationId: postPipelinesByUuidStatus
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -569,6 +583,7 @@ operations:
     audit: required
 - path: /pipelines/{uuid}/update-with-source-reader
   method: post
+  operationId: postPipelinesByUuidUpdateWithSourceReader
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -584,6 +599,7 @@ operations:
     audit: required
 - path: /pipelines/create-from-source
   method: post
+  operationId: postPipelinesCreateFromSource
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -599,6 +615,7 @@ operations:
     audit: required
 - path: /pipelines/validate-unsaved-destination
   method: post
+  operationId: postPipelinesValidateUnsavedDestination
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -614,6 +631,7 @@ operations:
     audit: required
 - path: /pipelines/validate-unsaved-source
   method: post
+  operationId: postPipelinesValidateUnsavedSource
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -629,6 +647,7 @@ operations:
     audit: required
 - path: /privatelink-connections
   method: post
+  operationId: postPrivatelinkConnections
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -644,6 +663,7 @@ operations:
     audit: required
 - path: /privatelink-connections/{uuid}
   method: delete
+  operationId: deletePrivatelinkConnectionsByUuid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -659,6 +679,7 @@ operations:
     audit: required
 - path: /privatelink-connections/{uuid}
   method: get
+  operationId: getPrivatelinkConnectionsByUuid
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -668,6 +689,7 @@ operations:
     audit: none
 - path: /privatelink-connections/{uuid}
   method: post
+  operationId: postPrivatelinkConnectionsByUuid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -683,6 +705,7 @@ operations:
     audit: required
 - path: /source-readers
   method: get
+  operationId: getSourceReaders
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -692,6 +715,7 @@ operations:
     audit: none
 - path: /source-readers
   method: post
+  operationId: postSourceReaders
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -707,6 +731,7 @@ operations:
     audit: required
 - path: /source-readers/{uuid}
   method: delete
+  operationId: deleteSourceReadersByUuid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -722,6 +747,7 @@ operations:
     audit: required
 - path: /source-readers/{uuid}
   method: get
+  operationId: getSourceReadersByUuid
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -731,6 +757,7 @@ operations:
     audit: none
 - path: /source-readers/{uuid}
   method: post
+  operationId: postSourceReadersByUuid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -746,6 +773,7 @@ operations:
     audit: required
 - path: /source-readers/{uuid}/deploy
   method: post
+  operationId: postSourceReadersByUuidDeploy
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -763,6 +791,7 @@ operations:
     audit: required
 - path: /source-readers/{uuid}/status
   method: post
+  operationId: postSourceReadersByUuidStatus
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -778,6 +807,7 @@ operations:
     audit: required
 - path: /source-readers/validate-unsaved
   method: post
+  operationId: postSourceReadersValidateUnsaved
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -793,6 +823,7 @@ operations:
     audit: required
 - path: /ssh-tunnels
   method: post
+  operationId: postSshTunnels
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -808,6 +839,7 @@ operations:
     audit: required
 - path: /ssh-tunnels/{uuid}
   method: delete
+  operationId: deleteSshTunnelsByUuid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -823,6 +855,7 @@ operations:
     audit: required
 - path: /ssh-tunnels/{uuid}
   method: get
+  operationId: getSshTunnelsByUuid
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -832,6 +865,7 @@ operations:
     audit: none
 - path: /ssh-tunnels/{uuid}
   method: post
+  operationId: postSshTunnelsByUuid
   x-agentic-access:
     action-class: acting
     consequence: write
