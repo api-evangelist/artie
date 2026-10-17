@@ -84,16 +84,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    RouterCreateIngestionAPIKeyResponse:
-      properties:
-        ingestionAPIKey:
-          $ref: '#/components/schemas/PayloadsIngestionAPIKey'
-        secret:
-          type: string
-      required:
-      - ingestionAPIKey
-      - secret
-      type: object
     PayloadsIngestionAPIKey:
       properties:
         companyUUID:
@@ -148,6 +138,16 @@ components:
           - string
         name:
           type: string
+      type: object
+    RouterCreateIngestionAPIKeyResponse:
+      properties:
+        ingestionAPIKey:
+          $ref: '#/components/schemas/PayloadsIngestionAPIKey'
+        secret:
+          type: string
+      required:
+      - ingestionAPIKey
+      - secret
       type: object
   securitySchemes:
     ApiKey:

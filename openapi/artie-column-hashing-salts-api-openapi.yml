@@ -158,32 +158,15 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    RouterUpdateColumnHashingSaltRequest:
+    RouterCreateColumnHashingSaltRequest:
       properties:
         description:
           type: string
         name:
           type: string
-      required:
-      - name
-      type: object
-    PayloadsColumnHashingSalt:
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-        description:
-          type: string
-        name:
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-        uuid:
-          format: uuid
+        salt:
           type: string
       required:
-      - uuid
       - name
       type: object
     RouterPreviewColumnHashingSaltResponse:
@@ -193,31 +176,14 @@ components:
       required:
       - hash
       type: object
-    ListResponseBodyColumnHashingSalt:
+    RouterUpdateColumnHashingSaltRequest:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/PayloadsColumnHashingSalt'
-          type: array
-      required:
-      - items
-      type: object
-    RouterPreviewColumnHashingSaltRequest:
-      properties:
-        value:
+        description:
+          type: string
+        name:
           type: string
       required:
-      - value
-      type: object
-    RouterCreateColumnHashingSaltResponse:
-      properties:
-        columnHashingSalt:
-          $ref: '#/components/schemas/PayloadsColumnHashingSalt'
-        salt:
-          type: string
-      required:
-      - columnHashingSalt
-      - salt
+      - name
       type: object
     PayloadsColumnHashingSaltDetail:
       properties:
@@ -241,16 +207,50 @@ components:
       - name
       - salt
       type: object
-    RouterCreateColumnHashingSaltRequest:
+    ListResponseBodyColumnHashingSalt:
       properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsColumnHashingSalt'
+          type: array
+      required:
+      - items
+      type: object
+    PayloadsColumnHashingSalt:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
         description:
           type: string
         name:
           type: string
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - name
+      type: object
+    RouterCreateColumnHashingSaltResponse:
+      properties:
+        columnHashingSalt:
+          $ref: '#/components/schemas/PayloadsColumnHashingSalt'
         salt:
           type: string
       required:
-      - name
+      - columnHashingSalt
+      - salt
+      type: object
+    RouterPreviewColumnHashingSaltRequest:
+      properties:
+        value:
+          type: string
+      required:
+      - value
       type: object
   securitySchemes:
     ApiKey:

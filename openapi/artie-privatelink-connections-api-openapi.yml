@@ -110,25 +110,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    RouterPrivateLinkConnectionUpdateRequest:
-      properties:
-        availabilityZoneIds:
-          items:
-            type: string
-          type: array
-        dataPlaneName:
-          type:
-          - 'null'
-          - string
-        name:
-          type: string
-        vpcServiceName:
-          type: string
-      required:
-      - name
-      - vpcServiceName
-      - availabilityZoneIds
-      type: object
     RouterPrivateLinkConnectionCreateRequest:
       properties:
         availabilityZoneIds:
@@ -149,6 +130,25 @@ components:
         vpcServiceName:
           type: string
       required:
+      - vpcServiceName
+      - availabilityZoneIds
+      type: object
+    RouterPrivateLinkConnectionUpdateRequest:
+      properties:
+        availabilityZoneIds:
+          items:
+            type: string
+          type: array
+        dataPlaneName:
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+        vpcServiceName:
+          type: string
+      required:
+      - name
       - vpcServiceName
       - availabilityZoneIds
       type: object

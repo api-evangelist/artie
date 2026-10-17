@@ -34,32 +34,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    PayloadsDataCatalogSearchRequest:
-      properties:
-        query:
-          type: string
-      type: object
-    PayloadsDataCatalogDatabase:
-      properties:
-        name:
-          type: string
-      type: object
-    PayloadsDataCatalogMatchedObject:
-      properties:
-        database:
-          $ref: '#/components/schemas/PayloadsDataCatalogDatabase'
-        schema:
-          $ref: '#/components/schemas/PayloadsDataCatalogSchema'
-        table:
-          $ref: '#/components/schemas/PayloadsDataCatalogTable'
-      type: object
-    PayloadsDataCatalogSchema:
-      properties:
-        databaseName:
-          type: string
-        name:
-          type: string
-      type: object
     PayloadsDataCatalogTable:
       properties:
         databaseName:
@@ -68,15 +42,6 @@ components:
           type: string
         schemaName:
           type: string
-      type: object
-    ListResponseBodyDataCatalogMatch:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/PayloadsDataCatalogMatch'
-          type: array
-      required:
-      - items
       type: object
     PayloadsDataCatalogMatch:
       properties:
@@ -88,6 +53,41 @@ components:
         score:
           format: double
           type: number
+      type: object
+    PayloadsDataCatalogMatchedObject:
+      properties:
+        database:
+          $ref: '#/components/schemas/PayloadsDataCatalogDatabase'
+        schema:
+          $ref: '#/components/schemas/PayloadsDataCatalogSchema'
+        table:
+          $ref: '#/components/schemas/PayloadsDataCatalogTable'
+      type: object
+    PayloadsDataCatalogSearchRequest:
+      properties:
+        query:
+          type: string
+      type: object
+    PayloadsDataCatalogSchema:
+      properties:
+        databaseName:
+          type: string
+        name:
+          type: string
+      type: object
+    PayloadsDataCatalogDatabase:
+      properties:
+        name:
+          type: string
+      type: object
+    ListResponseBodyDataCatalogMatch:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsDataCatalogMatch'
+          type: array
+      required:
+      - items
       type: object
   securitySchemes:
     ApiKey:
