@@ -171,6 +171,26 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/artie-artie-api-api-openapi.yml
+- aid: artie:artie-company-api
+  name: Artie Company API
+  description: The Company API from Artie — 1 operation(s) for company.
+  humanURL: https://www.artie.com/docs/api-reference
+  baseURL: https://api.artie.com
+  tags:
+  - Company
+  properties:
+  - type: OpenAPI
+    url: openapi/artie-company-api-openapi.yml
+- aid: artie:artie-kafka-clusters-api
+  name: Artie Kafka Clusters API
+  description: The Kafka Clusters API from Artie — 19 operation(s) for kafka clusters.
+  humanURL: https://www.artie.com/docs/api-reference
+  baseURL: https://api.artie.com
+  tags:
+  - Kafka Clusters
+  properties:
+  - type: OpenAPI
+    url: openapi/artie-kafka-clusters-api-openapi.yml
 maintainersHistory: []
 common:
 - type: CapabilityMap

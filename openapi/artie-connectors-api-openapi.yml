@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   description: External API endpoints for Artie
   title: Artie Connectors API
-  version: v1.0.51
+  version: v1.0.139
 servers:
 - url: https://api.artie.com
 security:
@@ -11,13 +11,49 @@ tags:
 - name: Connectors
 paths:
   /connectors:
+    get:
+      description: Returns all destination connectors for the authenticated company. Pass includeSourceConnectors=true to also include source connectors.
+      operationId: connector_list
+      parameters:
+      - in: query
+        name: includeSourceConnectors
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseBodyLightConnector'
+          description: OK
+        '500':
+          description: Internal Server Error
+      summary: List connectors
+      tags:
+      - Connectors
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: connector_list
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - connectors:read
+        retrySemantics: safe
+        title: List connectors
+        triggerDescription: Lists saved connectors. Defaults to destinations; pass includeSourceConnectors=true for sources. Call this before connector_fetch_databases, connector_fetch_schemas, connector_fetch_tables, or connector_fetch_table_detail — those tools need a uuid from this list, not a pipeline uuid or sourceReaderUUID from pipeline_list.
     post:
       description: Creates a new source or destination connector for your Artie deployment. Configure database connections, authentication, and replication settings programmatically.
+      operationId: connector_create
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PayloadsConnectorPayload'
+        required: true
       responses:
         '200':
           content:
@@ -32,11 +68,24 @@ paths:
       summary: Create a connector
       tags:
       - Connectors
-      operationId: postConnectors
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: restricted-credentials
+        openWorldHint: false
+        operationId: connector_create
+        outputSensitivity: restricted-credentials
+        readOnlyHint: false
+        requiredScopes:
+        - connectors:write
+        retrySemantics: unsafe
+        title: Create a connector
+        triggerDescription: Creates a saved source or destination connector. Pass type, label, and sharedConfig (host, user, password, and type-specific fields). Keep the returned UUID for pipeline_create_from_source.
   /connectors/{uuid}:
     delete:
       description: Permanently removes a connector and its associated configuration. This stops any active replication pipelines that depend on the connector.
+      operationId: connector_delete
       parameters:
       - in: path
         name: uuid
@@ -53,10 +102,24 @@ paths:
       summary: Delete a connector
       tags:
       - Connectors
-      operationId: deleteConnectorsByUuid
-      x-operation-id-source: derived
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: true
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: connector_delete
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - connectors:delete
+        retrySemantics: safe-after-state-check
+        title: Delete a connector
+        triggerDescription: Permanently deletes a saved connector by UUID and stops pipelines that depend on it.
     get:
-      description: Retrieves the full configuration and status of a connector by its unique identifier, including connection settings and current replication state.
+      description: Retrieves the full configuration of a saved connector by uuid from connector_list, including type, label, and sharedConfig. Sensitive fields may be masked.
+      operationId: connector_detail
       parameters:
       - in: path
         name: uuid
@@ -74,13 +137,26 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-      summary: Get a connector
+      summary: Get a saved connector
       tags:
       - Connectors
-      operationId: getConnectorsByUuid
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: connector_detail
+        outputSensitivity: restricted-credentials
+        readOnlyHint: true
+        requiredScopes:
+        - connectors:read
+        retrySemantics: safe
+        title: Get a saved connector
+        triggerDescription: Returns a saved connector by uuid from connector_list, not a pipeline uuid or sourceReaderUUID. Includes type, label, and sharedConfig. Sensitive fields may be masked placeholders. To ping that connector, pass this payload into unsaved_connector_ping and keep uuid set so stored secrets unmask.
     post:
       description: Updates the configuration of an existing source or destination connector. Modify connection settings, credentials, or replication parameters for a running pipeline.
+      operationId: connector_update
       parameters:
       - in: path
         name: uuid
@@ -92,6 +168,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/PayloadsConnectorPayload'
+        required: true
       responses:
         '200':
           content:
@@ -106,17 +183,91 @@ paths:
       summary: Update a connector
       tags:
       - Connectors
-      operationId: postConnectorsByUuid
-      x-operation-id-source: derived
-  /connectors/{uuid}/detail:
+      x-artie-mcp:
+        destructiveHint: false
+        exclusionReason: Accepts and returns connector configuration that can contain credentials.
+        exposure: excluded
+        idempotentHint: false
+        inputSensitivity: restricted-credentials
+        openWorldHint: false
+        operationId: connector_update
+        outputSensitivity: restricted-credentials
+        readOnlyHint: false
+        remediation: Update connector credentials through the authenticated Dashboard setup flow.
+        requiredScopes:
+        - connectors:write
+        retrySemantics: unsafe
+        title: Update a connector
+        triggerDescription: Use when you need to update a connector.
+  /connectors/{uuid}/databases:
     get:
-      description: Returns detailed metadata for a specific table on the saved connector. Requires 'schemaName' and 'tableName' query parameters; 'isView' is optional.
+      description: Lists available databases on the target using a saved connector's configuration. Response metadata may include Iceberg S3 table bucket maintenance defaults.
+      operationId: connector_fetch_databases
       parameters:
       - in: path
         name: uuid
         required: true
         schema:
           type: string
+      - in: query
+        name: databaseName
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsConnectorFetchDatabasesResponse'
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Fetch databases for a saved connector
+      tags:
+      - Connectors
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: true
+        operationId: connector_fetch_databases
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - connectors:read
+        retrySemantics: safe
+        title: Fetch databases for a saved connector
+        triggerDescription: Lists database names a saved source can see. uuid must come from connector_list with includeSourceConnectors=true. Do not pass a pipeline uuid or sourceReaderUUID.
+  /connectors/{uuid}/detail:
+    get:
+      description: Returns detailed metadata for a specific table on the saved connector. tableName is required; databaseName defaults to the connector's configured database, schemaName defaults to the connector type's default schema, and isView is optional.
+      operationId: connector_fetch_table_detail
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: databaseName
+        schema:
+          type: string
+      - in: query
+        name: schemaName
+        schema:
+          type: string
+      - in: query
+        name: tableName
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: isView
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -131,11 +282,24 @@ paths:
       summary: Fetch table detail for a saved connector
       tags:
       - Connectors
-      operationId: getConnectorsByUuidDetail
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: true
+        operationId: connector_fetch_table_detail
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - connectors:read
+        retrySemantics: safe
+        title: Fetch table detail for a saved connector
+        triggerDescription: Returns columns and metadata for one table on a saved connector. uuid must come from connector_list (includeSourceConnectors=true for sources). Do not pass a pipeline uuid or sourceReaderUUID. tableName is required. This is column metadata, not pipeline lag or row counts.
   /connectors/{uuid}/generate-shadow-script:
     post:
       description: Generates the SQL script to create shadow tables required for Oracle change data capture (CDC). Run this script on your Oracle source before starting replication.
+      operationId: connector_generate_shadow_script
       parameters:
       - in: path
         name: uuid
@@ -147,6 +311,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterConnectorGenerateShadowScriptRequest'
+        required: true
       responses:
         '200':
           content:
@@ -161,11 +326,24 @@ paths:
       summary: Generate Oracle shadow table script
       tags:
       - Connectors
-      operationId: postConnectorsByUuidGenerateShadowScript
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: connector_generate_shadow_script
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - connectors:read
+        retrySemantics: safe
+        title: Generate Oracle shadow table script
+        triggerDescription: Returns SQL to create Oracle shadow tables for CDC. Oracle sources only.
   /connectors/{uuid}/postgres-drop-replication-slot:
     post:
       description: Drops a PostgreSQL replication slot that is inactive or orphaned. Use this to clean up stale replication slots that may be preventing WAL cleanup on the source.
+      operationId: connector_drop_postgres_replication_slot
       parameters:
       - in: path
         name: uuid
@@ -177,6 +355,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterConnectorDropReplicationSlotRequest'
+        required: true
       responses:
         '204':
           description: No Content
@@ -189,11 +368,157 @@ paths:
       summary: Drop a PostgreSQL replication slot
       tags:
       - Connectors
-      operationId: postConnectorsByUuidPostgresDropReplicationSlot
-      x-operation-id-source: derived
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: true
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: true
+        operationId: connector_drop_postgres_replication_slot
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - connectors:write
+        retrySemantics: unsafe
+        title: Drop a PostgreSQL replication slot
+        triggerDescription: 'Drops an inactive PostgreSQL replication slot. Check connector_fetch_postgres_replication_slots first: only an inactive or lost slot can be dropped.'
+  /connectors/{uuid}/postgres-replication-slots:
+    get:
+      description: Lists replication slots on the PostgreSQL source for the specified connector.
+      operationId: connector_fetch_postgres_replication_slots
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: databaseName
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseBodyPostgresReplicationSlot'
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: List PostgreSQL replication slots
+      tags:
+      - Connectors
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: true
+        operationId: connector_fetch_postgres_replication_slots
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - connectors:read
+        retrySemantics: safe
+        title: List PostgreSQL replication slots
+        triggerDescription: Lists replication slots on a saved Postgres source (name, database, active, walStatus, retainedWALBytes, isReplica). uuid must come from connector_list with includeSourceConnectors=true, not a pipeline uuid or sourceReaderUUID; pass databaseName for the pipeline's reader database. Use for slot health and WAL retention, and to confirm a slot is inactive before connector_drop_postgres_replication_slot.
+  /connectors/{uuid}/postgres-settings:
+    get:
+      description: Returns PostgreSQL server configuration settings relevant to replication for the specified connector.
+      operationId: connector_fetch_postgres_settings
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: databaseName
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PayloadsPostgresSetting'
+                type: array
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Fetch PostgreSQL settings
+      tags:
+      - Connectors
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: true
+        operationId: connector_fetch_postgres_settings
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - connectors:read
+        retrySemantics: safe
+        title: Fetch PostgreSQL settings
+        triggerDescription: Returns replication-relevant server settings (name, value, unit, category) for a saved Postgres source, such as wal_level, max_replication_slots, max_wal_senders, and max_slot_wal_keep_size. uuid must come from connector_list with includeSourceConnectors=true. Use to check CDC prerequisites (wal_level must be logical) before pipeline_start or after it fails. Settings are changed on the database, not through Artie.
+  /connectors/{uuid}/schemas:
+    get:
+      description: Lists available schemas on the target using a saved connector's configuration. Pass 'databaseName' as a query parameter.
+      operationId: connector_fetch_schemas
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: databaseName
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseBodySchemaResponse'
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Fetch schemas for a saved connector
+      tags:
+      - Connectors
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: true
+        operationId: connector_fetch_schemas
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - connectors:read
+        retrySemantics: safe
+        title: Fetch schemas for a saved connector
+        triggerDescription: Lists schemas on a saved connector. uuid must come from connector_list. Do not pass a pipeline uuid or sourceReaderUUID. Pass schemaName into connector_fetch_tables when the destination requires it.
   /connectors/{uuid}/start-dynamodb-export:
     post:
       description: Initiates a point-in-time export from Amazon DynamoDB for the specified connector. Use this to backfill your destination with existing DynamoDB table data.
+      operationId: connector_start_dynamo_db_export
       parameters:
       - in: path
         name: uuid
@@ -205,6 +530,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterConnectorStartDynamoDBExportRequest'
+        required: true
       responses:
         '200':
           content:
@@ -217,16 +543,76 @@ paths:
       summary: Start a DynamoDB export
       tags:
       - Connectors
-      operationId: postConnectorsByUuidStartDynamodbExport
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: true
+        operationId: connector_start_dynamo_db_export
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - connectors:write
+        retrySemantics: unsafe
+        title: Start a DynamoDB export
+        triggerDescription: Starts a DynamoDB point-in-time export. DynamoDB sources only; for SQL CDC use pipeline_start.
+  /connectors/{uuid}/tables:
+    get:
+      description: Lists available tables on the target using a saved connector's configuration. databaseName defaults to the connector's configured database; schemaName defaults to the connector type's default schema (e.g. 'public' for Postgres, 'dbo' for SQL Server).
+      operationId: connector_fetch_tables
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: databaseName
+        schema:
+          type: string
+      - in: query
+        name: schemaName
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseBodyConnectorTableDetailResponse'
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      summary: Fetch tables for a saved connector
+      tags:
+      - Connectors
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: true
+        operationId: connector_fetch_tables
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - connectors:read
+        retrySemantics: safe
+        title: Fetch tables for a saved connector
+        triggerDescription: Lists tables on a saved connector. uuid must come from connector_list. Do not pass a pipeline uuid or sourceReaderUUID. Use to choose names for pipeline_update.tables.
   /connectors/databases:
     post:
       description: Lists available databases on the target using an unsaved connector configuration. Useful during connector setup to discover existing databases. Response metadata may include Iceberg S3 table bucket maintenance defaults.
+      operationId: unsaved_connector_fetch_databases
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PayloadsConnectorPayload'
+        required: true
       responses:
         '200':
           content:
@@ -241,16 +627,32 @@ paths:
       summary: Fetch databases for an unsaved connector
       tags:
       - Connectors
-      operationId: postConnectorsDatabases
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exclusionReason: Accepts an unsaved connector configuration that can contain credentials.
+        exposure: excluded
+        idempotentHint: true
+        inputSensitivity: restricted-credentials
+        openWorldHint: true
+        operationId: unsaved_connector_fetch_databases
+        outputSensitivity: none
+        readOnlyHint: true
+        remediation: Save the connector before discovering databases.
+        requiredScopes:
+        - connectors:read
+        retrySemantics: safe
+        title: Fetch databases for an unsaved connector
+        triggerDescription: Use when you need to fetch databases for an unsaved connector.
   /connectors/new-database:
     post:
       description: Creates a new database on the target destination using a connector configuration that has not yet been saved. Useful during initial setup to prepare the destination.
+      operationId: unsaved_connector_create_database
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterConnectorCreateDatabaseRequest'
+        required: true
       responses:
         '204':
           description: No Content
@@ -261,16 +663,33 @@ paths:
       summary: Create a database on an unsaved connector
       tags:
       - Connectors
-      operationId: postConnectorsNewDatabase
-      x-operation-id-source: derived
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: false
+        exclusionReason: Accepts an unsaved connector configuration that can contain credentials.
+        exposure: excluded
+        idempotentHint: false
+        inputSensitivity: restricted-credentials
+        openWorldHint: true
+        operationId: unsaved_connector_create_database
+        outputSensitivity: none
+        readOnlyHint: false
+        remediation: Create the database through the authenticated Dashboard setup flow.
+        requiredScopes:
+        - connectors:write
+        retrySemantics: unsafe
+        title: Create a database on an unsaved connector
+        triggerDescription: Use when you need to create a database on an unsaved connector.
   /connectors/new-schema:
     post:
       description: Creates a new schema on the target destination using a connector configuration that has not yet been saved. Useful during initial setup to organize destination tables.
+      operationId: unsaved_connector_create_schema
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterConnectorCreateSchemaRequest'
+        required: true
       responses:
         '204':
           description: No Content
@@ -281,16 +700,33 @@ paths:
       summary: Create a schema on an unsaved connector
       tags:
       - Connectors
-      operationId: postConnectorsNewSchema
-      x-operation-id-source: derived
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: false
+        exclusionReason: Accepts an unsaved connector configuration that can contain credentials.
+        exposure: excluded
+        idempotentHint: false
+        inputSensitivity: restricted-credentials
+        openWorldHint: true
+        operationId: unsaved_connector_create_schema
+        outputSensitivity: none
+        readOnlyHint: false
+        remediation: Create the schema through the authenticated Dashboard setup flow.
+        requiredScopes:
+        - connectors:write
+        retrySemantics: unsafe
+        title: Create a schema on an unsaved connector
+        triggerDescription: Use when you need to create a schema on an unsaved connector.
   /connectors/new-snowflake-warehouse:
     post:
       description: Creates a new Snowflake virtual warehouse using an unsaved connector configuration. Useful during initial setup to provision compute resources for data replication.
+      operationId: unsaved_connector_create_snowflake_warehouse
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterConnectorCreateSnowflakeWarehouseRequest'
+        required: true
       responses:
         '204':
           description: No Content
@@ -301,16 +737,33 @@ paths:
       summary: Create a Snowflake warehouse on an unsaved connector
       tags:
       - Connectors
-      operationId: postConnectorsNewSnowflakeWarehouse
-      x-operation-id-source: derived
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: false
+        exclusionReason: Accepts an unsaved connector configuration that can contain credentials.
+        exposure: excluded
+        idempotentHint: false
+        inputSensitivity: restricted-credentials
+        openWorldHint: true
+        operationId: unsaved_connector_create_snowflake_warehouse
+        outputSensitivity: none
+        readOnlyHint: false
+        remediation: Create the warehouse through the authenticated Dashboard setup flow.
+        requiredScopes:
+        - connectors:write
+        retrySemantics: unsafe
+        title: Create a Snowflake warehouse on an unsaved connector
+        triggerDescription: Use when you need to create a Snowflake warehouse on an unsaved connector.
   /connectors/ping:
     post:
-      description: Tests network connectivity and authentication for a connector configuration before saving it. Use this to validate connection settings during connector setup.
+      description: Tests network connectivity and authentication for a connector configuration before saving it. Pass type, sharedConfig, and connectionRole. Success is 204; a failed connection attempt returns 200 with an error message.
+      operationId: unsaved_connector_ping
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PayloadsConnectorPayload'
+              $ref: '#/components/schemas/RouterConnectorPingRequest'
+        required: true
       responses:
         '200':
           content:
@@ -325,16 +778,31 @@ paths:
       summary: Ping a connector
       tags:
       - Connectors
-      operationId: postConnectorsPing
-      x-operation-id-source: derived
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: restricted-credentials
+        openWorldHint: true
+        operationId: unsaved_connector_ping
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - connectors:read
+        retrySemantics: safe
+        title: Ping a connector
+        triggerDescription: 'Pings a connector before connector_create. Pass type, sharedConfig (host, user, password, and type-specific fields), and connectionRole (source or destination). This is not a uuid ping — do not pass a pipeline uuid or sourceReaderUUID. Postgres needs a database name, Oracle a service name, S3 a bucket. Success is {"success": true}; a JSON error field means the host or credentials failed.'
   /connectors/postgres-publications:
     post:
       description: Lists logical replication publications on a PostgreSQL source using an unsaved connector configuration. Useful during connector setup to let users select an existing publication.
+      operationId: unsaved_connector_fetch_postgres_publications
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterConnectorFetchPostgresPublicationsRequest'
+        required: true
       responses:
         '200':
           content:
@@ -349,18 +817,38 @@ paths:
       summary: List PostgreSQL publications for an unsaved connector
       tags:
       - Connectors
-      operationId: postConnectorsPostgresPublications
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exclusionReason: Accepts an unsaved connector configuration that can contain credentials.
+        exposure: excluded
+        idempotentHint: true
+        inputSensitivity: restricted-credentials
+        openWorldHint: true
+        operationId: unsaved_connector_fetch_postgres_publications
+        outputSensitivity: none
+        readOnlyHint: true
+        remediation: Save the connector before discovering PostgreSQL publications.
+        requiredScopes:
+        - connectors:read
+        retrySemantics: safe
+        title: List PostgreSQL publications for an unsaved connector
+        triggerDescription: Use when you need to list PostgreSQL publications for an unsaved connector.
   /connectors/schemas:
     post:
       description: Lists available schemas in a specific database using an unsaved connector configuration. Useful during connector setup to discover existing schemas.
+      operationId: unsaved_connector_fetch_schemas
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterConnectorFetchSchemasRequest'
+        required: true
       responses:
         '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseBodySchemaResponse'
           description: OK
         '400':
           description: Bad Request
@@ -369,16 +857,32 @@ paths:
       summary: Fetch schemas for an unsaved connector
       tags:
       - Connectors
-      operationId: postConnectorsSchemas
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exclusionReason: Accepts an unsaved connector configuration that can contain credentials.
+        exposure: excluded
+        idempotentHint: true
+        inputSensitivity: restricted-credentials
+        openWorldHint: true
+        operationId: unsaved_connector_fetch_schemas
+        outputSensitivity: none
+        readOnlyHint: true
+        remediation: Save the connector before discovering schemas.
+        requiredScopes:
+        - connectors:read
+        retrySemantics: safe
+        title: Fetch schemas for an unsaved connector
+        triggerDescription: Use when you need to fetch schemas for an unsaved connector.
   /connectors/tables:
     post:
       description: Lists available tables in a specific database and schema using an unsaved connector configuration. Results are cached when a connector UUID is provided.
+      operationId: unsaved_connector_fetch_tables
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterConnectorFetchTablesRequest'
+        required: true
       responses:
         '200':
           content:
@@ -393,30 +897,24 @@ paths:
       summary: Fetch tables for an unsaved connector
       tags:
       - Connectors
-      operationId: postConnectorsTables
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exclusionReason: Accepts an unsaved connector configuration that can contain credentials.
+        exposure: excluded
+        idempotentHint: true
+        inputSensitivity: restricted-credentials
+        openWorldHint: true
+        operationId: unsaved_connector_fetch_tables
+        outputSensitivity: none
+        readOnlyHint: true
+        remediation: Save the connector before discovering tables.
+        requiredScopes:
+        - connectors:read
+        retrySemantics: safe
+        title: Fetch tables for an unsaved connector
+        triggerDescription: Use when you need to fetch tables for an unsaved connector.
 components:
   schemas:
-    RouterConnectorGenerateShadowScriptResponse:
-      properties:
-        script:
-          type: string
-      required:
-      - script
-      type: object
-    PayloadsConnectorFetchDatabasesResponse:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/PayloadsDatabaseListItem'
-          type:
-          - array
-          - 'null'
-        metadata:
-          items:
-            $ref: '#/components/schemas/PayloadsCatalogTableProperty'
-          type: array
-      type: object
     RouterConnectorTable:
       properties:
         approxDateAdded:
@@ -450,235 +948,19 @@ components:
           type: string
         unreadable:
           type: boolean
-      type: object
-    ListResponseBodyPostgresPublication:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/PayloadsPostgresPublication'
-          type: array
-      required:
-      - items
-      type: object
-    RouterConnectorStartDynamoDBExportRequest:
-      properties:
-        s3Bucket:
-          type: string
-        s3Prefix:
-          type:
-          - 'null'
-          - string
-      required:
-      - s3Bucket
-      type: object
-    PayloadsSeenTableColumnMetadata:
-      properties:
-        dataType:
-          type: string
-        defaultValue:
-          type:
-          - 'null'
-          - string
-        isPrimaryKey:
-          type:
-          - 'null'
-          - boolean
-        notNull:
-          type: boolean
-      required:
-      - dataType
-      - notNull
-      type: object
-    PayloadsConnectorColumn:
-      properties:
-        metadata:
-          $ref: '#/components/schemas/PayloadsConnectorColumnMetadata'
-        name:
-          type: string
-      type: object
-    PayloadsSeenTableColumn:
-      properties:
-        metadata:
-          $ref: '#/components/schemas/PayloadsSeenTableColumnMetadata'
-        name:
-          type: string
-      required:
-      - name
-      - metadata
-      type: object
-    RouterConnectorCreateSchemaRequest:
-      properties:
-        connector:
-          $ref: '#/components/schemas/PayloadsConnectorPayload'
-        databaseName:
-          type: string
-        name:
-          type: string
-        volume:
-          type: string
-      required:
-      - connector
-      - databaseName
-      - name
-      type: object
-    RouterConnectorFetchSchemasRequest:
-      properties:
-        connector:
-          $ref: '#/components/schemas/PayloadsConnectorPayload'
-        databaseName:
-          type: string
-      required:
-      - connector
-      - databaseName
-      type: object
-    RouterConnectorStartDynamoDBExportResponse:
-      properties:
-        exportARN:
-          type: string
-      required:
-      - exportARN
-      type: object
-    RouterConnectorCreateDatabaseRequest:
-      properties:
-        connector:
-          $ref: '#/components/schemas/PayloadsConnectorPayload'
-        name:
-          type: string
-      required:
-      - connector
-      - name
-      type: object
-    PayloadsConnectorPayload:
-      properties:
-        dataPlaneName:
-          type: string
-        defaultDatabase:
-          type:
-          - 'null'
-          - string
-        environmentUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        label:
-          type: string
-        privateLinkUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        sharedConfig:
-          additionalProperties: {}
-          type:
-          - object
-          - 'null'
-        snapshotPrivateLinkUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        sshTunnelUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
-        type:
-          type: string
-        uuid:
-          type: string
-      type: object
-    RouterConnectorGenerateShadowScriptRequest:
-      properties:
-        database:
-          type: string
-        tables:
-          items:
-            $ref: '#/components/schemas/RouterConnectorShadowScriptTable'
-          type: array
-      required:
-      - database
-      - tables
-      type: object
-    PayloadsPostgresPublication:
-      properties:
-        allTables:
-          type: boolean
-        name:
-          type: string
-        publishViaPartitionRoot:
-          type: boolean
-      required:
-      - name
-      type: object
-    RouterConnectorDropReplicationSlotRequest:
-      properties:
-        slotName:
-          type: string
-      required:
-      - slotName
-      type: object
-    RouterConnectorShadowScriptTable:
-      properties:
-        columns:
-          items:
-            $ref: '#/components/schemas/PayloadsSeenTableColumn'
-          type: array
-        name:
-          type: string
-        schema:
-          type: string
       required:
       - schema
       - name
-      - columns
+      - isView
+      - createdAt
+      - modifiedAt
+      - unreadable
+      - approxDateAdded
       type: object
-    RouterConnectorPingResponse:
-      properties:
-        error:
-          type: string
-      type: object
-    PayloadsDatabaseListItem:
-      properties:
-        name:
-          type: string
-      type: object
-    PayloadsConnectorColumnMetadata:
-      properties:
-        comment:
-          type: string
-        dataType:
-          type: string
-        defaultValue:
-          type:
-          - 'null'
-          - string
-        isPrimaryKey:
-          type:
-          - 'null'
-          - boolean
-        notNull:
-          type: boolean
-      type: object
-    ListResponseBodyConnectorTable:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/RouterConnectorTable'
-          type: array
-      required:
-      - items
-      type: object
-    RouterConnectorCreateSnowflakeWarehouseRequest:
-      properties:
-        connector:
-          $ref: '#/components/schemas/PayloadsConnectorPayload'
-        name:
-          type: string
-      required:
-      - connector
-      - name
-      type: object
+    PayloadsJsonValueNumber:
+      oneOf:
+      - type: number
+      type: number
     RouterConnectorFetchPostgresPublicationsRequest:
       properties:
         connector:
@@ -689,58 +971,11 @@ components:
       - connector
       - databaseName
       type: object
-    PayloadsConnectorTableDetailResponse:
-      properties:
-        columns:
-          items:
-            $ref: '#/components/schemas/PayloadsConnectorColumn'
-          type: array
-        createdAt:
-          format: date-time
-          type:
-          - 'null'
-          - string
-        isView:
-          type: boolean
-        metadata:
-          items:
-            $ref: '#/components/schemas/PayloadsCatalogTableProperty'
-          type: array
-        modifiedAt:
-          format: date-time
-          type:
-          - 'null'
-          - string
-        name:
-          type: string
-        schema:
-          type: string
-        unreadable:
-          type: boolean
-      type: object
-    RouterConnectorFetchTablesRequest:
-      properties:
-        connector:
-          $ref: '#/components/schemas/PayloadsConnectorPayload'
-        databaseName:
-          type: string
-        forceRefresh:
-          type: boolean
-        schemaName:
-          type: string
-      required:
-      - connector
-      - databaseName
-      type: object
-    PayloadsCatalogTableProperty:
-      properties:
-        isDate:
-          type: boolean
-        key:
-          type: string
-        value: {}
-      type: object
-    PayloadsFullConnector:
+    PayloadsJsonValueNull:
+      oneOf:
+      - type: 'null'
+      type: 'null'
+    PayloadsLightConnector:
       properties:
         companyUUID:
           format: uuid
@@ -754,8 +989,12 @@ components:
           type:
           - 'null'
           - string
-        defaultDatabase:
-          type: string
+        draftPipelineUUID:
+          description: The draft pipeline this connector was created for. Unset once a pipeline or source reader past draft uses it.
+          format: uuid
+          type:
+          - 'null'
+          - string
         environmentUUID:
           format: uuid
           type: string
@@ -768,7 +1007,6 @@ components:
           type:
           - 'null'
           - string
-        sharedConfig: {}
         snapshotPrivateLinkUUID:
           format: uuid
           type:
@@ -820,8 +1058,579 @@ components:
       - redis
       - redshift
       - s3
+      - smb_share
       - snowflake
       type: string
+    PayloadsSeenTableColumn:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/PayloadsSeenTableColumnMetadata'
+        name:
+          type: string
+      required:
+      - name
+      - metadata
+      type: object
+    PayloadsPostgresSetting:
+      properties:
+        category:
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+        unit:
+          type: string
+        value:
+          type: string
+      required:
+      - name
+      - value
+      - unit
+      - category
+      - description
+      type: object
+    PayloadsConnectorColumn:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/PayloadsConnectorColumnMetadata'
+        name:
+          type: string
+      required:
+      - name
+      - metadata
+      type: object
+    PayloadsConnectorPayload:
+      properties:
+        dataPlaneName:
+          type: string
+        defaultDatabase:
+          type:
+          - 'null'
+          - string
+        draftPipelineUUID:
+          description: 'On create only: the draft pipeline this connector is for.'
+          format: uuid
+          type:
+          - 'null'
+          - string
+        environmentUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        label:
+          type: string
+        privateLinkUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        sharedConfig:
+          additionalProperties: {}
+          type:
+          - object
+          - 'null'
+        snapshotPrivateLinkUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        sshTunnelUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        type:
+          type: string
+        uuid:
+          type: string
+      type: object
+    PayloadsSchemaResponse:
+      properties:
+        name:
+          type: string
+        unreadable:
+          type: boolean
+        unreadableReason:
+          type: string
+      required:
+      - name
+      - unreadable
+      type: object
+    PayloadsCatalogTableProperty:
+      properties:
+        isDate:
+          type: boolean
+        key:
+          type: string
+        value:
+          $ref: '#/components/schemas/PayloadsJSONValue'
+      required:
+      - key
+      - value
+      - isDate
+      type: object
+    PayloadsPostgresPublication:
+      properties:
+        allTables:
+          type: boolean
+        name:
+          type: string
+        publishViaPartitionRoot:
+          type: boolean
+      required:
+      - name
+      - allTables
+      - publishViaPartitionRoot
+      type: object
+    ListResponseBodyPostgresPublication:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsPostgresPublication'
+          type: array
+      required:
+      - items
+      type: object
+    RouterConnectorStartDynamoDBExportRequest:
+      properties:
+        s3Bucket:
+          type: string
+        s3Prefix:
+          type:
+          - 'null'
+          - string
+      required:
+      - s3Bucket
+      type: object
+    PayloadsPostgresReplicationSlot:
+      properties:
+        active:
+          type: boolean
+        database:
+          type:
+          - 'null'
+          - string
+        hotStandbyFeedback:
+          type: string
+        isReplica:
+          type: boolean
+        name:
+          type: string
+        notFound:
+          type: boolean
+        retainedWALBytes:
+          minimum: 0
+          type: integer
+        walStatus:
+          type: string
+      required:
+      - name
+      - database
+      - notFound
+      - active
+      - walStatus
+      - retainedWALBytes
+      - isReplica
+      - hotStandbyFeedback
+      type: object
+    RouterConnectorShadowScriptTable:
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/PayloadsSeenTableColumn'
+          type: array
+        name:
+          type: string
+        schema:
+          type: string
+      required:
+      - schema
+      - name
+      - columns
+      type: object
+    RouterConnectorDropReplicationSlotRequest:
+      properties:
+        slotName:
+          type: string
+      required:
+      - slotName
+      type: object
+    ListResponseBodyLightConnector:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsLightConnector'
+          type: array
+      required:
+      - items
+      type: object
+    PayloadsJSONValue:
+      anyOf:
+      - $ref: '#/components/schemas/PayloadsJsonValueString'
+      - $ref: '#/components/schemas/PayloadsJsonValueNumber'
+      - $ref: '#/components/schemas/PayloadsJsonValueBoolean'
+      - $ref: '#/components/schemas/PayloadsJsonValueObject'
+      - $ref: '#/components/schemas/PayloadsJsonValueArray'
+      - $ref: '#/components/schemas/PayloadsJsonValueNull'
+    PayloadsJsonValueObject:
+      additionalProperties: true
+      type: object
+    RouterConnectorStartDynamoDBExportResponse:
+      properties:
+        exportARN:
+          type: string
+      required:
+      - exportARN
+      type: object
+    RouterConnectorConnectionRole:
+      enum:
+      - source
+      - destination
+      type: string
+    ListResponseBodyConnectorTable:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/RouterConnectorTable'
+          type: array
+      required:
+      - items
+      type: object
+    RouterConnectorFetchSchemasRequest:
+      properties:
+        connector:
+          $ref: '#/components/schemas/PayloadsConnectorPayload'
+        databaseName:
+          type: string
+      required:
+      - connector
+      - databaseName
+      type: object
+    PayloadsJsonValueBoolean:
+      oneOf:
+      - type: boolean
+      type: boolean
+    PayloadsJsonValueArray:
+      items:
+        $ref: '#/components/schemas/PayloadsJsonValueArrayItem'
+      type: array
+    RouterConnectorPingRequest:
+      properties:
+        connectionRole:
+          $ref: '#/components/schemas/RouterConnectorConnectionRole'
+        dataPlaneName:
+          type: string
+        defaultDatabase:
+          type:
+          - 'null'
+          - string
+        draftPipelineUUID:
+          description: 'On create only: the draft pipeline this connector is for.'
+          format: uuid
+          type:
+          - 'null'
+          - string
+        environmentUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        label:
+          type: string
+        privateLinkUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        sharedConfig:
+          additionalProperties: {}
+          type:
+          - object
+          - 'null'
+        snapshotPrivateLinkUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        sshTunnelUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        type:
+          type: string
+        uuid:
+          type: string
+      type: object
+    RouterConnectorGenerateShadowScriptResponse:
+      properties:
+        script:
+          type: string
+      required:
+      - script
+      type: object
+    RouterConnectorCreateSnowflakeWarehouseRequest:
+      properties:
+        connector:
+          $ref: '#/components/schemas/PayloadsConnectorPayload'
+        name:
+          type: string
+      required:
+      - connector
+      - name
+      type: object
+    PayloadsSeenTableColumnMetadata:
+      properties:
+        dataType:
+          type: string
+        defaultValue:
+          type:
+          - 'null'
+          - string
+        isPrimaryKey:
+          type:
+          - 'null'
+          - boolean
+        notNull:
+          type: boolean
+      required:
+      - dataType
+      - notNull
+      type: object
+    PayloadsDatabaseListItem:
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    ListResponseBodyPostgresReplicationSlot:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsPostgresReplicationSlot'
+          type: array
+      required:
+      - items
+      type: object
+    PayloadsConnectorTableDetailResponse:
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/PayloadsConnectorColumn'
+          type: array
+        createdAt:
+          format: date-time
+          type:
+          - 'null'
+          - string
+        isView:
+          type: boolean
+        metadata:
+          items:
+            $ref: '#/components/schemas/PayloadsCatalogTableProperty'
+          type: array
+        modifiedAt:
+          format: date-time
+          type:
+          - 'null'
+          - string
+        name:
+          type: string
+        schema:
+          type: string
+        unreadable:
+          type: boolean
+      required:
+      - schema
+      - name
+      - isView
+      - createdAt
+      - modifiedAt
+      - unreadable
+      type: object
+    ListResponseBodySchemaResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsSchemaResponse'
+          type: array
+      required:
+      - items
+      type: object
+    PayloadsJsonValueString:
+      oneOf:
+      - type: string
+      type: string
+    RouterConnectorCreateSchemaRequest:
+      properties:
+        connector:
+          $ref: '#/components/schemas/PayloadsConnectorPayload'
+        databaseName:
+          type: string
+        name:
+          type: string
+        volume:
+          type: string
+      required:
+      - connector
+      - databaseName
+      - name
+      type: object
+    RouterConnectorFetchTablesRequest:
+      properties:
+        connector:
+          $ref: '#/components/schemas/PayloadsConnectorPayload'
+        databaseName:
+          type: string
+        forceRefresh:
+          type: boolean
+        schemaName:
+          type: string
+      required:
+      - connector
+      - databaseName
+      type: object
+    ListResponseBodyConnectorTableDetailResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsConnectorTableDetailResponse'
+          type: array
+      required:
+      - items
+      type: object
+    PayloadsConnectorFetchDatabasesResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsDatabaseListItem'
+          type: array
+        metadata:
+          items:
+            $ref: '#/components/schemas/PayloadsCatalogTableProperty'
+          type: array
+      required:
+      - items
+      type: object
+    PayloadsConnectorColumnMetadata:
+      properties:
+        comment:
+          type: string
+        dataType:
+          type: string
+        defaultValue:
+          type: string
+        isPrimaryKey:
+          type: boolean
+        notNull:
+          type: boolean
+      required:
+      - dataType
+      - notNull
+      type: object
+    RouterConnectorGenerateShadowScriptRequest:
+      properties:
+        database:
+          type: string
+        tables:
+          items:
+            $ref: '#/components/schemas/RouterConnectorShadowScriptTable'
+          type: array
+      required:
+      - database
+      - tables
+      type: object
+    RouterConnectorPingResponse:
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    PayloadsJsonValueArrayItem:
+      anyOf:
+      - $ref: '#/components/schemas/PayloadsJsonValueString'
+      - $ref: '#/components/schemas/PayloadsJsonValueNumber'
+      - $ref: '#/components/schemas/PayloadsJsonValueBoolean'
+      - $ref: '#/components/schemas/PayloadsJsonValueObject'
+      - $ref: '#/components/schemas/PayloadsJsonValueNull'
+    PayloadsFullConnector:
+      properties:
+        companyUUID:
+          format: uuid
+          type: string
+        connectionLabel:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        dataPlaneName:
+          type:
+          - 'null'
+          - string
+        defaultDatabase:
+          type: string
+        draftPipelineUUID:
+          description: The draft pipeline this connector was created for. Unset once a pipeline or source reader past draft uses it.
+          format: uuid
+          type:
+          - 'null'
+          - string
+        environmentUUID:
+          format: uuid
+          type: string
+        isValid:
+          type: boolean
+        label:
+          type: string
+        privateLinkUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        sharedConfig:
+          $ref: '#/components/schemas/PayloadsJSONValue'
+        snapshotPrivateLinkUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        sshTunnelUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        type:
+          $ref: '#/components/schemas/EnumsConnectorSlug'
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - label
+      - uuid
+      - createdAt
+      - updatedAt
+      - type
+      - companyUUID
+      - environmentUUID
+      - isValid
+      type: object
+    RouterConnectorCreateDatabaseRequest:
+      properties:
+        connector:
+          $ref: '#/components/schemas/PayloadsConnectorPayload'
+        name:
+          type: string
+      required:
+      - connector
+      - name
+      type: object
   securitySchemes:
     ApiKey:
       description: API key passed as a Bearer token in the Authorization header.

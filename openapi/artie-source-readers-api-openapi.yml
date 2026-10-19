@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   description: External API endpoints for Artie
   title: Artie Source Readers API
-  version: v1.0.51
+  version: v1.0.139
 servers:
 - url: https://api.artie.com
 security:
@@ -13,6 +13,7 @@ paths:
   /source-readers:
     get:
       description: Lists all source readers for the authenticated company.
+      operationId: source_reader_list
       responses:
         '200':
           content:
@@ -27,15 +28,31 @@ paths:
       summary: List source readers
       tags:
       - Source Readers
-      operationId: getSourceReaders
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exclusionReason: Returns source-reader configuration that can contain credentials.
+        exposure: excluded
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: source_reader_list
+        outputSensitivity: restricted-credentials
+        readOnlyHint: true
+        remediation: Use safe pipeline metadata tools and manage source-reader credentials outside MCP.
+        requiredScopes:
+        - source_readers:read
+        retrySemantics: safe
+        title: List source readers
+        triggerDescription: Use when you need to list source readers.
     post:
       description: Creates a new source reader for the authenticated company.
+      operationId: source_reader_create
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterSourceReaderCreateRequest'
+        required: true
       responses:
         '200':
           content:
@@ -50,11 +67,26 @@ paths:
       summary: Create a source reader
       tags:
       - Source Readers
-      operationId: postSourceReaders
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exclusionReason: Accepts and returns source-reader configuration that can contain credentials.
+        exposure: excluded
+        idempotentHint: false
+        inputSensitivity: restricted-credentials
+        openWorldHint: false
+        operationId: source_reader_create
+        outputSensitivity: restricted-credentials
+        readOnlyHint: false
+        remediation: Create source readers through the authenticated Dashboard setup flow.
+        requiredScopes:
+        - source_readers:write
+        retrySemantics: unsafe
+        title: Create a source reader
+        triggerDescription: Use when you need to create a source reader.
   /source-readers/{uuid}:
     delete:
       description: Permanently deletes a source reader by UUID. The source reader must not be associated with any active pipelines before deletion.
+      operationId: source_reader_delete
       parameters:
       - in: path
         name: uuid
@@ -71,10 +103,24 @@ paths:
       summary: Delete a source reader
       tags:
       - Source Readers
-      operationId: deleteSourceReadersByUuid
-      x-operation-id-source: derived
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: true
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: true
+        operationId: source_reader_delete
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - source_readers:delete
+        retrySemantics: safe-after-state-check
+        title: Delete a source reader
+        triggerDescription: Deletes a source reader unused by any active pipeline. Does not delete the source connector.
     get:
-      description: Retrieves the details of a source reader by UUID, including its configuration, status, connector association, and table settings.
+      description: Retrieves a source reader by UUID, including database, settings, and table configuration. Sensitive fields may be present. MCP clients should echo this payload into source_reader_update.
+      operationId: source_reader_detail
       parameters:
       - in: path
         name: uuid
@@ -95,10 +141,23 @@ paths:
       summary: Get a source reader
       tags:
       - Source Readers
-      operationId: getSourceReadersByUuid
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: source_reader_detail
+        outputSensitivity: restricted-credentials
+        readOnlyHint: true
+        requiredScopes:
+        - source_readers:read
+        retrySemantics: safe
+        title: Get a source reader
+        triggerDescription: Returns a source reader by uuid from pipeline_detail.sourceReaderUUID, not a pipeline uuid or connector uuid. Includes database, tablesConfig, and settings (replicationSlotOverride, publicationNameOverride, heartbeats). Sensitive fields may be present. Echo this into source_reader_update; do not invent a partial body. If pipeline_start 400s that two readers share slot artie, GET this, set settings.replicationSlotOverride to a unique lowercase name (digits and underscores, <=63), POST source_reader_update, then retry start.
     post:
-      description: Updates an existing source reader by UUID. You can modify the name, settings, table configuration, and shared status of the source reader.
+      description: Updates an existing source reader by UUID. Echo the last source_reader_detail payload and change only the intended fields; omitting name, database, or connectorUUID overwrites them with empty values.
+      operationId: source_reader_update
       parameters:
       - in: path
         name: uuid
@@ -110,6 +169,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/PayloadsSourceReader'
+        required: true
       responses:
         '200':
           content:
@@ -124,11 +184,24 @@ paths:
       summary: Update a source reader
       tags:
       - Source Readers
-      operationId: postSourceReadersByUuid
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: restricted-credentials
+        openWorldHint: false
+        operationId: source_reader_update
+        outputSensitivity: restricted-credentials
+        readOnlyHint: false
+        requiredScopes:
+        - source_readers:write
+        retrySemantics: unsafe
+        title: Update a source reader
+        triggerDescription: Applies a SourceReader from source_reader_detail. Echo the last GET and change only the intended fields. Omitting name, database, or connectorUUID blanks them. To fix a duplicate Postgres slot (pipeline_start 400 that two readers share artie), set settings.replicationSlotOverride to a unique lowercase name, then pipeline_start. This is not pipeline_update or connector_update.
   /source-readers/{uuid}/deploy:
     post:
       description: Deploys a shared source reader to the data plane. The source reader must be shared and pass validation before it can be deployed.
+      operationId: source_reader_deploy
       parameters:
       - in: path
         name: uuid
@@ -145,11 +218,25 @@ paths:
       summary: Deploy a source reader
       tags:
       - Source Readers
-      operationId: postSourceReadersByUuidDeploy
-      x-operation-id-source: derived
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: true
+        operationId: source_reader_deploy
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - source_readers:write
+        retrySemantics: safe-after-state-check
+        title: Deploy a source reader
+        triggerDescription: Deploys a shared, validated source reader. To take a draft pipeline live, use pipeline_start.
   /source-readers/{uuid}/status:
     post:
       description: Changes the status of a shared source reader (e.g. running, paused). Only shared source readers are supported; for non-shared source readers, use the pipeline status endpoint instead.
+      operationId: source_reader_update_status
       parameters:
       - in: path
         name: uuid
@@ -161,6 +248,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterSourceReaderUpdateStatusRequest'
+        required: true
       responses:
         '200':
           content:
@@ -175,16 +263,32 @@ paths:
       summary: Update source reader status
       tags:
       - Source Readers
-      operationId: postSourceReadersByUuidStatus
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exclusionReason: Returns source-reader configuration that can contain credentials.
+        exposure: excluded
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: true
+        operationId: source_reader_update_status
+        outputSensitivity: restricted-credentials
+        readOnlyHint: false
+        remediation: Change source-reader status through the authenticated Dashboard setup flow.
+        requiredScopes:
+        - source_readers:write
+        retrySemantics: safe-after-state-check
+        title: Update source reader status
+        triggerDescription: Use when you need to update source reader status.
   /source-readers/validate-unsaved:
     post:
       description: Validates a source reader configuration without persisting it.
+      operationId: source_reader_validate_unsaved
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterSourceReaderValidateUnsavedRequest'
+        required: true
       responses:
         '200':
           content:
@@ -199,17 +303,97 @@ paths:
       summary: Validate an unsaved source reader
       tags:
       - Source Readers
-      operationId: postSourceReadersValidateUnsaved
-      x-operation-id-source: derived
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: false
+        exclusionReason: Accepts unsaved source-reader configuration that can contain credentials.
+        exposure: excluded
+        idempotentHint: true
+        inputSensitivity: restricted-credentials
+        openWorldHint: true
+        operationId: source_reader_validate_unsaved
+        outputSensitivity: none
+        readOnlyHint: true
+        remediation: Validate source-reader credentials through the authenticated Dashboard setup flow.
+        requiredScopes:
+        - source_readers:read
+        retrySemantics: safe
+        title: Validate an unsaved source reader
+        triggerDescription: Use when you need to validate an unsaved source reader.
 components:
   schemas:
+    RouterSourceReaderUpdateStatusRequest:
+      properties:
+        status:
+          $ref: '#/components/schemas/EnumsSourceReaderStatus'
+      required:
+      - status
+      type: object
+    PayloadsSourceReaderTable:
+      properties:
+        excludeColumns:
+          items:
+            type: string
+          type: array
+        includeColumns:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        schema:
+          type: string
+        unifyAcrossDatabases:
+          type: boolean
+        unifyAcrossSchemas:
+          type: boolean
+      type: object
+    PayloadsAzureBlobStorageConfig:
+      properties:
+        accountURL:
+          type: string
+        containerName:
+          type: string
+        sasToken:
+          type: string
+      type: object
+    RouterSourceReaderValidateUnsavedRequest:
+      properties:
+        sourceReader:
+          $ref: '#/components/schemas/PayloadsSourceReader'
+      required:
+      - sourceReader
+      type: object
+    RouterSourceReaderValidateUnsavedResponse:
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    EnumsMSSQLArchiveLocationType:
+      enum:
+      - azure_blob
+      - smb_share
+      type: string
     PayloadsSourceReaderSettingsPayload:
       properties:
+        archiveLocationType:
+          $ref: '#/components/schemas/EnumsMSSQLArchiveLocationType'
         archiveLogPassword:
           type:
           - 'null'
           - string
         archiveLogPath:
+          type:
+          - 'null'
+          - string
+        archiveLogPrivateLinkUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        archiveLogUsername:
           type:
           - 'null'
           - string
@@ -220,6 +404,12 @@ components:
           type:
           - 'null'
           - integer
+        backfillDefaults:
+          $ref: '#/components/schemas/PayloadsBackfillDefaultsPayload'
+        collectionScopedMode:
+          type:
+          - 'null'
+          - boolean
         compositeTypesAsText:
           type:
           - 'null'
@@ -250,6 +440,10 @@ components:
           type:
           - 'null'
           - boolean
+        enableRelationMessageCaching:
+          type:
+          - 'null'
+          - boolean
         enableSchemaHistoryCompaction:
           type:
           - 'null'
@@ -262,6 +456,7 @@ components:
           enum:
           - gzip
           - ''
+          - null
           type:
           - 'null'
           - string
@@ -302,10 +497,20 @@ components:
           type:
           - 'null'
           - string
+        s3PathMappings:
+          items:
+            $ref: '#/components/schemas/PayloadsS3PathMapping'
+          type:
+          - 'null'
+          - array
         unifyAcrossDatabases:
           type:
           - 'null'
           - boolean
+        unifyAcrossDatabasesRegex:
+          type:
+          - 'null'
+          - string
         unifyAcrossSchemas:
           type:
           - 'null'
@@ -324,6 +529,10 @@ components:
           type:
           - 'null'
           - boolean
+        useFailoverReplicationSlot:
+          type:
+          - 'null'
+          - boolean
         useNumericTypesForMoney:
           type:
           - 'null'
@@ -339,41 +548,70 @@ components:
       type:
       - 'null'
       - object
+    PayloadsS3Parser:
+      properties:
+        columnOrder:
+          items:
+            type: string
+          type: array
+        csv:
+          $ref: '#/components/schemas/PayloadsS3CSVParser'
+        type:
+          enum:
+          - csv
+          - json
+          - parquet
+          - ach
+          type: string
+      required:
+      - type
+      type: object
+    PayloadsBackfillDefaultsPayload:
+      properties:
+        chunkSize:
+          maximum: 1e+08
+          minimum: 100000
+          type: integer
+        pagination:
+          enum:
+          - client
+          - server
+          type: string
+        parallelism:
+          maximum: 50
+          minimum: 1
+          type: integer
+        preset:
+          enum:
+          - normal
+          - performance
+          type: string
+        readMode:
+          enum:
+          - primaryKey
+          - range
+          - ctid
+          type: string
+      type: object
     EnumsSourceReaderStatus:
       enum:
       - draft
       - paused
       - running
       type: string
-    RouterSourceReaderValidateUnsavedRequest:
+    PayloadsS3MetadataColumns:
       properties:
-        sourceReader:
-          $ref: '#/components/schemas/PayloadsSourceReader'
-      required:
-      - sourceReader
-      type: object
-    PayloadsAzureBlobStorageConfig:
-      properties:
-        accountURL:
-          type: string
-        containerName:
-          type: string
-        sasToken:
-          type: string
-      type: object
-    RouterSourceReaderUpdateStatusRequest:
-      properties:
-        status:
-          $ref: '#/components/schemas/EnumsSourceReaderStatus'
-      required:
-      - status
-      type: object
-    RouterSourceReaderValidateUnsavedResponse:
-      properties:
-        error:
-          type: string
-      required:
-      - error
+        columns:
+          items:
+            enum:
+            - artieSourcePath
+            - artieSourceFileName
+            - artieSourceLastModified
+            - artieSourceETag
+            - artieSourceRecordNumber
+            - artieSourceIngestedAt
+            type: string
+          type: array
       type: object
     RouterSourceReaderCreateRequest:
       properties:
@@ -397,23 +635,52 @@ components:
       required:
       - connectorUUID
       type: object
-    PayloadsSourceReaderTable:
+    PayloadsS3Match:
       properties:
-        excludeColumns:
+        fileNameRegex:
+          type: string
+      type: object
+    PayloadsS3PathMapping:
+      properties:
+        id:
+          type: string
+        match:
+          $ref: '#/components/schemas/PayloadsS3Match'
+        metadata:
+          $ref: '#/components/schemas/PayloadsS3MetadataColumns'
+        parser:
+          $ref: '#/components/schemas/PayloadsS3Parser'
+        prefix:
+          type: string
+        primaryKey:
           items:
             type: string
           type: array
-        includeColumns:
+        referenceID:
+          type: string
+      required:
+      - id
+      - referenceID
+      - prefix
+      - match
+      - parser
+      - metadata
+      type: object
+    PayloadsS3CSVParser:
+      properties:
+        commentPrefix:
+          type: string
+        delimiter:
+          type: string
+        headers:
           items:
             type: string
           type: array
-        name:
-          type: string
-        schema:
-          type: string
-        unifyAcrossDatabases:
-          type: boolean
-        unifyAcrossSchemas:
+        nullValues:
+          items:
+            type: string
+          type: array
+        trimWhitespace:
           type: boolean
       type: object
     PayloadsSourceReader:

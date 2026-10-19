@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   description: External API endpoints for Artie
   title: Artie SSH Tunnels API
-  version: v1.0.51
+  version: v1.0.139
 servers:
 - url: https://api.artie.com
 security:
@@ -13,11 +13,13 @@ paths:
   /ssh-tunnels:
     post:
       description: Creates a new SSH tunnel for the authenticated company.
+      operationId: ssh_tunnel_create
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterSSHTunnelCreateRequest'
+        required: true
       responses:
         '200':
           content:
@@ -32,11 +34,24 @@ paths:
       summary: Create an SSH tunnel
       tags:
       - SSH Tunnels
-      operationId: postSshTunnels
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: ssh_tunnel_create
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - ssh_tunnels:write
+        retrySemantics: unsafe
+        title: Create an SSH tunnel
+        triggerDescription: Creates an SSH tunnel record. Keep the returned UUID; there is no list tool.
   /ssh-tunnels/{uuid}:
     delete:
       description: Permanently deletes an SSH tunnel by UUID. The tunnel must not be in use by any connectors or pipelines before it can be deleted.
+      operationId: ssh_tunnel_delete
       parameters:
       - in: path
         name: uuid
@@ -53,10 +68,24 @@ paths:
       summary: Delete an SSH tunnel
       tags:
       - SSH Tunnels
-      operationId: deleteSshTunnelsByUuid
-      x-operation-id-source: derived
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: true
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: ssh_tunnel_delete
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - ssh_tunnels:delete
+        retrySemantics: safe-after-state-check
+        title: Delete an SSH tunnel
+        triggerDescription: Deletes an SSH tunnel unused by any connector or pipeline.
     get:
       description: Retrieves the details of an SSH tunnel by UUID, including its host, port, username, public key, and whether it is currently in use.
+      operationId: ssh_tunnel_detail
       parameters:
       - in: path
         name: uuid
@@ -77,10 +106,23 @@ paths:
       summary: Get an SSH tunnel
       tags:
       - SSH Tunnels
-      operationId: getSshTunnelsByUuid
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: ssh_tunnel_detail
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - ssh_tunnels:read
+        retrySemantics: safe
+        title: Get an SSH tunnel
+        triggerDescription: Returns one SSH tunnel by UUID (no private key).
     post:
       description: Updates an existing SSH tunnel by UUID. You can modify the name, host, port, and username. Changes will mark associated pipelines as having undeployed changes.
+      operationId: ssh_tunnel_update
       parameters:
       - in: path
         name: uuid
@@ -91,7 +133,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PayloadsSSHTunnel'
+              $ref: '#/components/schemas/RouterSSHTunnelUpdateRequest'
+        required: true
       responses:
         '200':
           content:
@@ -106,10 +149,42 @@ paths:
       summary: Update an SSH tunnel
       tags:
       - SSH Tunnels
-      operationId: postSshTunnelsByUuid
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: ssh_tunnel_update
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - ssh_tunnels:write
+        retrySemantics: unsafe
+        title: Update an SSH tunnel
+        triggerDescription: Updates name, host, port, or username on an existing SSH tunnel. Does not rotate keys.
 components:
   schemas:
+    RouterSSHTunnelCreateRequest:
+      properties:
+        environmentUUID:
+          format: uuid
+          type:
+          - 'null'
+          - string
+        host:
+          type: string
+        name:
+          type: string
+        port:
+          type: integer
+        username:
+          type: string
+      required:
+      - host
+      - port
+      - username
+      type: object
     PayloadsSSHTunnel:
       properties:
         companyUUID:
@@ -151,13 +226,8 @@ components:
       - publicKey
       - username
       type: object
-    RouterSSHTunnelCreateRequest:
+    RouterSSHTunnelUpdateRequest:
       properties:
-        environmentUUID:
-          format: uuid
-          type:
-          - 'null'
-          - string
         host:
           type: string
         name:
@@ -167,6 +237,7 @@ components:
         username:
           type: string
       required:
+      - name
       - host
       - port
       - username

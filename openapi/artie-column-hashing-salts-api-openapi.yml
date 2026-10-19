@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   description: External API endpoints for Artie
   title: Artie Column Hashing Salts API
-  version: v1.0.51
+  version: v1.0.139
 servers:
 - url: https://api.artie.com
 security:
@@ -13,6 +13,7 @@ paths:
   /column-hashing-salts:
     get:
       description: Lists all column hashing salts for the authenticated company.
+      operationId: column_hashing_salt_list
       responses:
         '200':
           content:
@@ -25,15 +26,29 @@ paths:
       summary: List column hashing salts
       tags:
       - Column Hashing Salts
-      operationId: getColumnHashingSalts
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: column_hashing_salt_list
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - column_hashing_salts:read
+        retrySemantics: safe
+        title: List column hashing salts
+        triggerDescription: Lists column hashing salt names and UUIDs (no secret).
     post:
       description: Creates a new column hashing salt for the authenticated company.
+      operationId: column_hashing_salt_create
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterCreateColumnHashingSaltRequest'
+        required: true
       responses:
         '200':
           content:
@@ -48,11 +63,26 @@ paths:
       summary: Create a column hashing salt
       tags:
       - Column Hashing Salts
-      operationId: postColumnHashingSalts
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exclusionReason: Accepts and returns a column-hashing salt.
+        exposure: excluded
+        idempotentHint: false
+        inputSensitivity: restricted-credentials
+        openWorldHint: false
+        operationId: column_hashing_salt_create
+        outputSensitivity: restricted-credentials
+        readOnlyHint: false
+        remediation: Create column-hashing salts through the authenticated Dashboard setup flow.
+        requiredScopes:
+        - column_hashing_salts:write
+        retrySemantics: unsafe
+        title: Create a column hashing salt
+        triggerDescription: Use when you need to create a column hashing salt.
   /column-hashing-salts/{uuid}:
     delete:
       description: Deletes a column hashing salt by UUID.
+      operationId: column_hashing_salt_delete
       parameters:
       - in: path
         name: uuid
@@ -69,10 +99,24 @@ paths:
       summary: Delete a column hashing salt
       tags:
       - Column Hashing Salts
-      operationId: deleteColumnHashingSaltsByUuid
-      x-operation-id-source: derived
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: true
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: column_hashing_salt_delete
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - column_hashing_salts:delete
+        retrySemantics: safe-after-state-check
+        title: Delete a column hashing salt
+        triggerDescription: Deletes a column hashing salt by UUID. Does not unhash already-landed columns.
     get:
       description: Retrieves a column hashing salt by UUID, including the decrypted salt. Requires company admin.
+      operationId: column_hashing_salt_detail
       parameters:
       - in: path
         name: uuid
@@ -93,10 +137,25 @@ paths:
       summary: Get a column hashing salt
       tags:
       - Column Hashing Salts
-      operationId: getColumnHashingSaltsByUuid
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exclusionReason: Returns the decrypted column-hashing salt.
+        exposure: excluded
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: column_hashing_salt_detail
+        outputSensitivity: restricted-credentials
+        readOnlyHint: true
+        remediation: Use column_hashing_salt_list for non-secret salt references.
+        requiredScopes:
+        - column_hashing_salts:read
+        retrySemantics: safe
+        title: Get a column hashing salt
+        triggerDescription: Use when you need to get a column hashing salt.
     post:
       description: Updates the name and description of a column hashing salt.
+      operationId: column_hashing_salt_update
       parameters:
       - in: path
         name: uuid
@@ -108,6 +167,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterUpdateColumnHashingSaltRequest'
+        required: true
       responses:
         '200':
           content:
@@ -122,11 +182,24 @@ paths:
       summary: Update a column hashing salt
       tags:
       - Column Hashing Salts
-      operationId: postColumnHashingSaltsByUuid
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: column_hashing_salt_update
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - column_hashing_salts:write
+        retrySemantics: unsafe
+        title: Update a column hashing salt
+        triggerDescription: Updates the name and description of an existing column hashing salt. Does not rotate the secret.
   /column-hashing-salts/{uuid}/preview:
     post:
       description: Hashes a sample string value with this salt using the same function used by Artie's pipelines (HMAC-SHA256 keyed on the salt, or SHA-256 if the salt is empty). Returns the hex-encoded hash.
+      operationId: column_hashing_salt_preview
       parameters:
       - in: path
         name: uuid
@@ -138,6 +211,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterPreviewColumnHashingSaltRequest'
+        required: true
       responses:
         '200':
           content:
@@ -154,36 +228,49 @@ paths:
       summary: Preview a column hashing salt
       tags:
       - Column Hashing Salts
-      operationId: postColumnHashingSaltsByUuidPreview
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: column_hashing_salt_preview
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - column_hashing_salts:read
+        retrySemantics: safe
+        title: Preview a column hashing salt
+        triggerDescription: Hashes a sample string with this salt and returns the hex digest.
 components:
   schemas:
-    RouterCreateColumnHashingSaltRequest:
+    PayloadsColumnHashingSalt:
       properties:
+        createdAt:
+          format: date-time
+          type: string
         description:
           type: string
         name:
           type: string
-        salt:
+        updatedAt:
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
           type: string
       required:
+      - uuid
       - name
       type: object
-    RouterPreviewColumnHashingSaltResponse:
+    ListResponseBodyColumnHashingSalt:
       properties:
-        hash:
-          type: string
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsColumnHashingSalt'
+          type: array
       required:
-      - hash
-      type: object
-    RouterUpdateColumnHashingSaltRequest:
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-      required:
-      - name
+      - items
       type: object
     PayloadsColumnHashingSaltDetail:
       properties:
@@ -207,32 +294,13 @@ components:
       - name
       - salt
       type: object
-    ListResponseBodyColumnHashingSalt:
+    RouterUpdateColumnHashingSaltRequest:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/PayloadsColumnHashingSalt'
-          type: array
-      required:
-      - items
-      type: object
-    PayloadsColumnHashingSalt:
-      properties:
-        createdAt:
-          format: date-time
-          type: string
         description:
           type: string
         name:
           type: string
-        updatedAt:
-          format: date-time
-          type: string
-        uuid:
-          format: uuid
-          type: string
       required:
-      - uuid
       - name
       type: object
     RouterCreateColumnHashingSaltResponse:
@@ -251,6 +319,24 @@ components:
           type: string
       required:
       - value
+      type: object
+    RouterCreateColumnHashingSaltRequest:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        salt:
+          type: string
+      required:
+      - name
+      type: object
+    RouterPreviewColumnHashingSaltResponse:
+      properties:
+        hash:
+          type: string
+      required:
+      - hash
       type: object
   securitySchemes:
     ApiKey:

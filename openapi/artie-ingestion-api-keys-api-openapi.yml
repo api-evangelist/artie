@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   description: External API endpoints for Artie
   title: Artie Ingestion API Keys API
-  version: v1.0.51
+  version: v1.0.139
 servers:
 - url: https://api.artie.com
 security:
@@ -13,11 +13,13 @@ paths:
   /ingestion-api-keys:
     post:
       description: Creates a new ingestion API key for a source reader. Returns the key and its secret (only shown once).
+      operationId: ingestion_api_key_create
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterCreateIngestionAPIKeyRequest'
+        required: true
       responses:
         '200':
           content:
@@ -32,11 +34,26 @@ paths:
       summary: Create an ingestion API key
       tags:
       - Ingestion API Keys
-      operationId: postIngestionApiKeys
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exclusionReason: Returns an ingestion API key secret that is shown only once.
+        exposure: excluded
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: ingestion_api_key_create
+        outputSensitivity: restricted-credentials
+        readOnlyHint: false
+        remediation: Create ingestion API keys through the authenticated Dashboard setup flow.
+        requiredScopes:
+        - ingestion_api_keys:write
+        retrySemantics: unsafe
+        title: Create an ingestion API key
+        triggerDescription: Use when you need to create an ingestion API key.
   /ingestion-api-keys/{uuid}:
     delete:
       description: Deletes an ingestion API key by UUID.
+      operationId: ingestion_api_key_delete
       parameters:
       - in: path
         name: uuid
@@ -51,10 +68,24 @@ paths:
       summary: Delete an ingestion API key
       tags:
       - Ingestion API Keys
-      operationId: deleteIngestionApiKeysByUuid
-      x-operation-id-source: derived
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: true
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: ingestion_api_key_delete
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - ingestion_api_keys:delete
+        retrySemantics: safe-after-state-check
+        title: Delete an ingestion API key
+        triggerDescription: Deletes an ingestion API key by UUID.
     post:
       description: Updates an existing ingestion API key by UUID.
+      operationId: ingestion_api_key_update
       parameters:
       - in: path
         name: uuid
@@ -66,6 +97,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RouterUpdateIngestionAPIKeyRequest'
+        required: true
       responses:
         '200':
           content:
@@ -80,10 +112,32 @@ paths:
       summary: Update an ingestion API key
       tags:
       - Ingestion API Keys
-      operationId: postIngestionApiKeysByUuid
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: ingestion_api_key_update
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - ingestion_api_keys:write
+        retrySemantics: unsafe
+        title: Update an ingestion API key
+        triggerDescription: Updates metadata on an existing ingestion API key. Does not mint a new key.
 components:
   schemas:
+    RouterCreateIngestionAPIKeyResponse:
+      properties:
+        ingestionAPIKey:
+          $ref: '#/components/schemas/PayloadsIngestionAPIKey'
+        secret:
+          type: string
+      required:
+      - ingestionAPIKey
+      - secret
+      type: object
     PayloadsIngestionAPIKey:
       properties:
         companyUUID:
@@ -138,16 +192,6 @@ components:
           - string
         name:
           type: string
-      type: object
-    RouterCreateIngestionAPIKeyResponse:
-      properties:
-        ingestionAPIKey:
-          $ref: '#/components/schemas/PayloadsIngestionAPIKey'
-        secret:
-          type: string
-      required:
-      - ingestionAPIKey
-      - secret
       type: object
   securitySchemes:
     ApiKey:

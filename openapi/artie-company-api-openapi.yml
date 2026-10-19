@@ -1,0 +1,47 @@
+openapi: 3.2.0
+info:
+  description: External API endpoints for Artie
+  title: Artie Company API
+  version: v1.0.139
+servers:
+- url: https://api.artie.com
+security:
+- ApiKey: []
+tags:
+- name: Company
+paths:
+  /company/automatic-schema-changes:
+    post:
+      description: Enqueues automatic schema changes for all eligible running pipelines in the authenticated company. The request is accepted before reconciliation completes.
+      operationId: company_trigger_automatic_schema_changes
+      responses:
+        '202':
+          description: Accepted
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      summary: Trigger automatic schema changes
+      tags:
+      - Company
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: true
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: true
+        operationId: company_trigger_automatic_schema_changes
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - pipelines:write
+        retrySemantics: safe-after-state-check
+        title: Trigger automatic schema changes for a company
+        triggerDescription: Enqueues automatic schema changes for all eligible running pipelines. For one pipeline, use pipeline_trigger_automatic_schema_changes.
+components:
+  securitySchemes:
+    ApiKey:
+      description: API key passed as a Bearer token in the Authorization header.
+      scheme: bearer
+      type: http

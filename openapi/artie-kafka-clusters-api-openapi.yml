@@ -1,0 +1,1523 @@
+openapi: 3.2.0
+info:
+  description: External API endpoints for Artie
+  title: Artie Kafka Clusters API
+  version: v1.0.139
+servers:
+- url: https://api.artie.com
+security:
+- ApiKey: []
+tags:
+- name: Kafka Clusters
+paths:
+  /kafka-clusters:
+    get:
+      description: Retrieves the Kafka clusters owned by the authenticated company. Only available for companies with Kafka access enabled.
+      operationId: kafka_cluster_list
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseBodyKafkaCluster'
+          description: OK
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: List Kafka clusters
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_cluster_list
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - kafka:read
+        retrySemantics: safe
+        title: List Kafka clusters
+        triggerDescription: Use when you need to list Kafka clusters.
+  /kafka-clusters/{uuid}:
+    get:
+      description: Retrieves a single Kafka cluster owned by the authenticated company, by UUID.
+      operationId: kafka_cluster_detail
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsKafkaCluster'
+          description: OK
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Get a Kafka cluster
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_cluster_detail
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - kafka:read
+        retrySemantics: safe
+        title: Get a Kafka cluster
+        triggerDescription: Use when you need to get a Kafka cluster.
+  /kafka-clusters/{uuid}/admin-users:
+    post:
+      description: Creates an admin-profile Kafka user and returns its password once. Admin-profile users have cluster-wide Kafka ACLs, including every replicated topic. Company admins only.
+      operationId: kafka_admin_user_create
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterCreateKafkaAdminUserRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouterKafkaUserCreateResponse'
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+        '500':
+          description: Internal Server Error
+      summary: Create an admin Kafka user
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_admin_user_create
+        outputSensitivity: restricted-credentials
+        readOnlyHint: false
+        requiredScopes:
+        - kafka_admin_users:write
+        retrySemantics: safe-after-state-check
+        title: Create an admin Kafka user
+        triggerDescription: Use when you need to create an admin Kafka user.
+  /kafka-clusters/{uuid}/admin-users/{userUUID}:
+    delete:
+      description: Revokes the admin-profile Kafka user's ACLs and broker credentials, then deletes it. Returns 204 once revocation completes, or 200 with a warning while revocation is pending reconciliation.
+      operationId: kafka_admin_user_delete
+      parameters:
+      - in: path
+        name: userUUID
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouterKafkaUserDeleteResponse'
+          description: OK
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+        '500':
+          description: Internal Server Error
+      summary: Delete an admin Kafka user
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: true
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_admin_user_delete
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - kafka_admin_users:delete
+        retrySemantics: safe
+        title: Delete an admin Kafka user
+        triggerDescription: Use when you need to delete an admin Kafka user.
+  /kafka-clusters/{uuid}/admin-users/{userUUID}/credentials:
+    get:
+      description: Returns the admin-profile Kafka user's password, which lets the caller act as that user. Admin-profile users have cluster-wide Kafka ACLs, including every replicated topic. Company admins only.
+      operationId: kafka_admin_user_credentials
+      parameters:
+      - in: path
+        name: userUUID
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouterKafkaUserCredentialsResponse'
+          description: OK
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Get admin Kafka user credentials
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_admin_user_credentials
+        outputSensitivity: restricted-credentials
+        readOnlyHint: true
+        requiredScopes:
+        - kafka_admin_users:read
+        retrySemantics: safe
+        title: Get admin Kafka user credentials
+        triggerDescription: Use when you need to get admin Kafka user credentials.
+  /kafka-clusters/{uuid}/consumer-groups:
+    get:
+      description: Retrieves the consumer groups for the cluster. Results are cached for two minutes unless forceRefresh is true.
+      operationId: kafka_consumer_group_list
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: forceRefresh
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseBodyKafkaConsumerGroup'
+          description: OK
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: List consumer groups
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_consumer_group_list
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - kafka:read
+        retrySemantics: safe
+        title: List Kafka consumer groups
+        triggerDescription: Use when you need to list Kafka consumer groups.
+  /kafka-clusters/{uuid}/consumer-groups/{groupID}:
+    get:
+      description: Retrieves a consumer group's members and per-topic offset lag. Results are cached for two minutes unless forceRefresh is true.
+      operationId: kafka_consumer_group_detail
+      parameters:
+      - in: path
+        name: groupID
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: forceRefresh
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsKafkaConsumerGroupDetail'
+          description: OK
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Get Kafka consumer group detail
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_consumer_group_detail
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - kafka:read
+        retrySemantics: safe
+        title: Get Kafka consumer group detail
+        triggerDescription: Use when you need to get Kafka consumer group detail.
+  /kafka-clusters/{uuid}/metrics-graph:
+    get:
+      description: Retrieves broker, topic, partition, and per-broker CPU user/system metrics for a Strimzi Kafka cluster.
+      operationId: kafka_cluster_metrics_graph
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsKafkaMetricsGraph'
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Get Kafka metrics graphs
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_cluster_metrics_graph
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - kafka:read
+        retrySemantics: safe
+        title: Get Kafka metrics graphs
+        triggerDescription: Use when you need to get Kafka metrics graphs.
+  /kafka-clusters/{uuid}/storage-graph:
+    get:
+      description: Retrieves persistent-volume storage utilization for a Strimzi Kafka cluster.
+      operationId: kafka_cluster_storage_graph
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsKafkaStorageGraph'
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Get Kafka storage graph
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_cluster_storage_graph
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - kafka:read
+        retrySemantics: safe
+        title: Get Kafka storage graph
+        triggerDescription: Use when you need to get Kafka storage graph.
+  /kafka-clusters/{uuid}/summary:
+    get:
+      description: Retrieves cached topic and consumer group counts for the cluster unless forceRefresh is true.
+      operationId: kafka_cluster_summary
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: forceRefresh
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsKafkaClusterSummary'
+          description: OK
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Get Kafka cluster summary
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_cluster_summary
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - kafka:read
+        retrySemantics: safe
+        title: Get Kafka cluster summary
+        triggerDescription: Use when you need to get Kafka cluster summary.
+  /kafka-clusters/{uuid}/topic-sizes:
+    get:
+      description: Retrieves cached, customer-safe partition sizes for every topic unless forceRefresh is true.
+      operationId: kafka_topic_sizes
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: forceRefresh
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseBodyKafkaTopicSize'
+          description: OK
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Get Kafka topic partition sizes
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_topic_sizes
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - kafka:read
+        retrySemantics: safe
+        title: Get Kafka topic partition sizes
+        triggerDescription: Use when you need to get Kafka topic partition sizes.
+  /kafka-clusters/{uuid}/topics:
+    get:
+      description: Retrieves the light topic list for the cluster (no per-topic detail fetch). Results are cached for two minutes unless forceRefresh is true. Includes the owning source reader name and table name when the topic belongs to an Artie pipeline.
+      operationId: kafka_topic_list
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: forceRefresh
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseBodyKafkaTopic'
+          description: OK
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: List Kafka topics
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_topic_list
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - kafka:read
+        retrySemantics: safe
+        title: List Kafka topics
+        triggerDescription: Use when you need to list Kafka topics.
+    post:
+      description: 'Creates a topic in the company''s customer namespace: the name must start with `.customer.`, the namespace customer Kafka users can produce to.'
+      operationId: kafka_topic_create
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterCreateKafkaTopicRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsKafkaTopicCreateResponse'
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+      summary: Create a Kafka topic
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_topic_create
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - kafka:write
+        retrySemantics: safe-after-state-check
+        title: Create a Kafka topic
+        triggerDescription: Use when you need to create a Kafka topic.
+  /kafka-clusters/{uuid}/topics/{topic}:
+    delete:
+      description: Deletes a topic and all of its messages. Only topics in the company's customer namespace (starting with `.customer.`) can be deleted.
+      operationId: kafka_topic_delete
+      parameters:
+      - in: path
+        name: topic
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+      summary: Delete a Kafka topic
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: true
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_topic_delete
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - kafka:delete
+        retrySemantics: safe
+        title: Delete a Kafka topic
+        triggerDescription: Use when you need to delete a Kafka topic.
+    get:
+      description: Retrieves topic metadata and partition sizes. Includes the owning source reader name, table name, and pipeline names and UUIDs when the topic belongs to an Artie pipeline.
+      operationId: kafka_topic_detail
+      parameters:
+      - in: path
+        name: topic
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: forceRefresh
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsKafkaTopicDetail'
+          description: OK
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Get Kafka topic detail
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_topic_detail
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - kafka:read
+        retrySemantics: safe
+        title: Get Kafka topic detail
+        triggerDescription: Use when you need to get Kafka topic detail.
+  /kafka-clusters/{uuid}/topics/{topic}/latest-message:
+    get:
+      description: Retrieves the newest message from partition 0, including its contents. Results are not cached. Only available when the company allows reading Kafka messages.
+      operationId: kafka_topic_latest_message
+      parameters:
+      - in: path
+        name: topic
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadsKafkaMessage'
+          description: OK
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Get latest Kafka topic message
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_topic_latest_message
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - kafka:read
+        retrySemantics: safe
+        title: Get latest Kafka topic message
+        triggerDescription: Use when you need to get latest Kafka topic message.
+  /kafka-clusters/{uuid}/topics/{topic}/partitions:
+    post:
+      description: Increases a topic's partition count. Not allowed on Artie-managed topics (anything under `.` outside the customer namespace, or Kafka-internal `__` topics), because adding partitions breaks per-key ordering for Artie pipelines.
+      operationId: kafka_topic_partitions_increase
+      parameters:
+      - in: path
+        name: topic
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterIncreaseKafkaTopicPartitionsRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+      summary: Increase Kafka topic partitions
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_topic_partitions_increase
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - kafka:write
+        retrySemantics: safe-after-state-check
+        title: Increase Kafka topic partitions
+        triggerDescription: Use when you need to increase Kafka topic partitions.
+  /kafka-clusters/{uuid}/topics/{topic}/retention:
+    post:
+      description: 'Sets a topic''s `retention.ms`. Potentially destructive: Kafka deletes messages older than the new retention, and on Artie-managed topics that can drop change events before Artie pipelines read them.'
+      operationId: kafka_topic_retention_update
+      parameters:
+      - in: path
+        name: topic
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterUpdateKafkaTopicRetentionRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+        '502':
+          description: Bad Gateway
+      summary: Change Kafka topic retention
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: true
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_topic_retention_update
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - kafka:write
+        retrySemantics: safe
+        title: Change Kafka topic retention
+        triggerDescription: Use when you need to change Kafka topic retention.
+  /kafka-clusters/{uuid}/users:
+    get:
+      description: Retrieves the Kafka users for the cluster. Passwords are never included.
+      operationId: kafka_user_list
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseBodyKafkaUser'
+          description: OK
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: List Kafka users
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_user_list
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - kafka_users:read
+        retrySemantics: safe
+        title: List Kafka users
+        triggerDescription: Use when you need to list Kafka users.
+    post:
+      description: Creates a Kafka user and returns its password once. Producer/consumer users can read every topic under the company's prefix, which includes all data Artie replicates, and write to topics under the company's customer prefix. Admin-profile users are managed under /admin-users.
+      operationId: kafka_user_create
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouterCreateKafkaUserRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouterKafkaUserCreateResponse'
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+        '500':
+          description: Internal Server Error
+      summary: Create a Kafka user
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: false
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_user_create
+        outputSensitivity: restricted-credentials
+        readOnlyHint: false
+        requiredScopes:
+        - kafka_users:write
+        retrySemantics: safe-after-state-check
+        title: Create a Kafka user
+        triggerDescription: Use when you need to create a Kafka user.
+  /kafka-clusters/{uuid}/users/{userUUID}:
+    delete:
+      description: Revokes the Kafka user's ACLs and broker credentials, then deletes it. Returns 204 once revocation completes, or 200 with a warning while revocation is pending reconciliation. Admin-profile users are deleted under /admin-users.
+      operationId: kafka_user_delete
+      parameters:
+      - in: path
+        name: userUUID
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouterKafkaUserDeleteResponse'
+          description: OK
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+        '500':
+          description: Internal Server Error
+      summary: Delete a Kafka user
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        bodilessSuccess: true
+        destructiveHint: true
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_user_delete
+        outputSensitivity: none
+        readOnlyHint: false
+        requiredScopes:
+        - kafka_users:delete
+        retrySemantics: safe
+        title: Delete a Kafka user
+        triggerDescription: Use when you need to delete a Kafka user.
+  /kafka-clusters/{uuid}/users/{userUUID}/credentials:
+    get:
+      description: Returns the Kafka user's password, which lets the caller act as that user, so kafka_users:read grants read access to all replicated data. Producer/consumer users can read every topic under the company's prefix, which includes all data Artie replicates, and write to topics under the company's customer prefix. Admin-profile users are managed under /admin-users.
+      operationId: kafka_user_credentials
+      parameters:
+      - in: path
+        name: userUUID
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouterKafkaUserCredentialsResponse'
+          description: OK
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      summary: Get Kafka user credentials
+      tags:
+      - Kafka Clusters
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: kafka_user_credentials
+        outputSensitivity: restricted-credentials
+        readOnlyHint: true
+        requiredScopes:
+        - kafka_users:read
+        retrySemantics: safe
+        title: Get Kafka user credentials
+        triggerDescription: Use when you need to get Kafka user credentials.
+components:
+  schemas:
+    RouterCreateKafkaAdminUserRequest:
+      properties:
+        username:
+          type: string
+      required:
+      - username
+      type: object
+    PayloadsKafkaUser:
+      properties:
+        accessProfile:
+          type: string
+        consumerGroupPrefix:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        status:
+          type: string
+        username:
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - username
+      - accessProfile
+      - status
+      - createdAt
+      - consumerGroupPrefix
+      type: object
+    ListResponseBodyKafkaUser:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaUser'
+          type: array
+      required:
+      - items
+      type: object
+    RouterUpdateKafkaTopicRetentionRequest:
+      properties:
+        retentionMS:
+          description: 'New retention.ms: at least 86400000 (one day), or -1 to keep messages forever.'
+          type: integer
+      required:
+      - retentionMS
+      type: object
+    RouterKafkaUserCredentialsResponse:
+      properties:
+        kafkaUser:
+          $ref: '#/components/schemas/PayloadsKafkaUser'
+        password:
+          type: string
+      required:
+      - kafkaUser
+      - password
+      type: object
+    PayloadsKafkaTopicPartitionSize:
+      properties:
+        partition:
+          format: int32
+          type: integer
+        sizeBytes:
+          format: int64
+          type: integer
+      required:
+      - partition
+      - sizeBytes
+      type: object
+    PayloadsKafkaCluster:
+      properties:
+        cloud:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        disableTLS:
+          type: boolean
+        externalBootstrapURL:
+          type: string
+        name:
+          type: string
+        region:
+          type: string
+        status:
+          $ref: '#/components/schemas/EnumsKafkaStatus'
+        usesScram:
+          type: boolean
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - uuid
+      - name
+      - createdAt
+      - status
+      - externalBootstrapURL
+      - usesScram
+      - disableTLS
+      - cloud
+      - region
+      type: object
+    PayloadsKafkaConsumerGroup:
+      properties:
+        groupID:
+          type: string
+      required:
+      - groupID
+      type: object
+    PayloadsKafkaStorageGraph:
+      properties:
+        reason:
+          type: string
+        series:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaStorageGraphSeries'
+          type:
+          - array
+          - 'null'
+        supported:
+          type: boolean
+        threshold:
+          type: integer
+        unit:
+          type: string
+      required:
+      - supported
+      - unit
+      - threshold
+      - series
+      type: object
+    PayloadsKafkaMetricsGraphPoint:
+      properties:
+        timestamp:
+          format: date-time
+          type: string
+        value:
+          format: double
+          type: number
+      required:
+      - timestamp
+      - value
+      type: object
+    PayloadsKafkaTopicPipeline:
+      properties:
+        name:
+          type: string
+        uuid:
+          type: string
+      required:
+      - uuid
+      - name
+      type: object
+    PayloadsKafkaTopicDetail:
+      properties:
+        partitionSizes:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaTopicPartitionSize'
+          type:
+          - array
+          - 'null'
+        pipelines:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaTopicPipeline'
+          type:
+          - array
+          - 'null'
+        topic:
+          $ref: '#/components/schemas/PayloadsKafkaTopic'
+      required:
+      - topic
+      - partitionSizes
+      - pipelines
+      type: object
+    RouterCreateKafkaUserRequest:
+      properties:
+        accessProfile:
+          description: Must be producer_consumer; create admin-profile users with POST /kafka-clusters/{uuid}/admin-users.
+          type: string
+        username:
+          type: string
+      required:
+      - username
+      - accessProfile
+      type: object
+    ListResponseBodyKafkaTopicSize:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaTopicSize'
+          type: array
+      required:
+      - items
+      type: object
+    EnumsKafkaStatus:
+      enum:
+      - draft
+      - active
+      type: string
+    PayloadsKafkaTopicCreateResponse:
+      properties:
+        topic:
+          type: string
+      required:
+      - topic
+      type: object
+    PayloadsKafkaStorageGraphPoint:
+      properties:
+        timestamp:
+          format: date-time
+          type: string
+        value:
+          format: double
+          type: number
+      required:
+      - timestamp
+      - value
+      type: object
+    RouterCreateKafkaTopicRequest:
+      properties:
+        configEntries:
+          additionalProperties:
+            type: string
+          type:
+          - object
+          - 'null'
+        partitionCount:
+          type: integer
+        replicationFactor:
+          type: integer
+        topic:
+          type: string
+      required:
+      - topic
+      - partitionCount
+      - replicationFactor
+      type: object
+    ListResponseBodyKafkaTopic:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaTopic'
+          type: array
+      required:
+      - items
+      type: object
+    PayloadsKafkaMetricsGraphSeries:
+      properties:
+        label:
+          type: string
+        points:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaMetricsGraphPoint'
+          type:
+          - array
+          - 'null'
+      required:
+      - label
+      - points
+      type: object
+    PayloadsKafkaConsumerGroupDetail:
+      properties:
+        consumerCount:
+          type: integer
+        groupID:
+          type: string
+        state:
+          type: string
+        topics:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaConsumerGroupTopic'
+          type:
+          - array
+          - 'null'
+      required:
+      - groupID
+      - consumerCount
+      - state
+      - topics
+      type: object
+    PayloadsKafkaTopicSize:
+      properties:
+        partitions:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaTopicPartitionSize'
+          type:
+          - array
+          - 'null'
+        topic:
+          type: string
+      required:
+      - topic
+      - partitions
+      type: object
+    PayloadsKafkaClusterSummary:
+      properties:
+        consumerGroupCount:
+          type: integer
+        topicCount:
+          type: integer
+      required:
+      - topicCount
+      - consumerGroupCount
+      type: object
+    RouterKafkaUserCreateResponse:
+      properties:
+        kafkaUser:
+          $ref: '#/components/schemas/PayloadsKafkaUser'
+        password:
+          type: string
+        warning:
+          type: string
+      required:
+      - kafkaUser
+      - password
+      type: object
+    PayloadsKafkaTopic:
+      properties:
+        artieManaged:
+          description: 'Whether Artie manages this topic: a CDC topic under the company prefix outside the customer namespace, or a Kafka-internal __ topic.'
+          type: boolean
+        partitionCount:
+          type: integer
+        retentionMS:
+          type: string
+        sourceName:
+          type: string
+        tableName:
+          type: string
+        topic:
+          type: string
+      required:
+      - topic
+      - retentionMS
+      - partitionCount
+      - artieManaged
+      type: object
+    PayloadsKafkaConsumerGroupTopicPartition:
+      properties:
+        currentOffset:
+          format: int64
+          type: integer
+        lag:
+          format: int64
+          type: integer
+        logEndOffset:
+          format: int64
+          type: integer
+        partition:
+          type: integer
+      required:
+      - partition
+      - currentOffset
+      - logEndOffset
+      - lag
+      type: object
+    PayloadsKafkaMessage:
+      properties:
+        headers:
+          additionalProperties:
+            format: base64
+            type: string
+          type:
+          - object
+          - 'null'
+        key:
+          format: base64
+          type:
+          - string
+          - 'null'
+        offset:
+          format: int64
+          type: integer
+        partition:
+          type: integer
+        timestamp:
+          format: date-time
+          type: string
+        topic:
+          type: string
+        value:
+          format: base64
+          type:
+          - string
+          - 'null'
+      required:
+      - topic
+      - partition
+      - offset
+      - timestamp
+      type: object
+    ListResponseBodyKafkaConsumerGroup:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaConsumerGroup'
+          type: array
+      required:
+      - items
+      type: object
+    PayloadsKafkaMetricsGraph:
+      properties:
+        brokerCount:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaMetricsGraphSeries'
+          type:
+          - array
+          - 'null'
+        cpuSystem:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaMetricsGraphSeries'
+          type:
+          - array
+          - 'null'
+        cpuUser:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaMetricsGraphSeries'
+          type:
+          - array
+          - 'null'
+        memoryUsage:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaMetricsGraphSeries'
+          type:
+          - array
+          - 'null'
+        partitionCount:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaMetricsGraphSeries'
+          type:
+          - array
+          - 'null'
+        reason:
+          type: string
+        supported:
+          type: boolean
+        topicCount:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaMetricsGraphSeries'
+          type:
+          - array
+          - 'null'
+        unit:
+          type: string
+      required:
+      - supported
+      - unit
+      - brokerCount
+      - topicCount
+      - partitionCount
+      - cpuUser
+      - cpuSystem
+      - memoryUsage
+      type: object
+    RouterKafkaUserDeleteResponse:
+      properties:
+        kafkaUser:
+          $ref: '#/components/schemas/PayloadsKafkaUser'
+        warning:
+          type: string
+      required:
+      - kafkaUser
+      type: object
+    RouterIncreaseKafkaTopicPartitionsRequest:
+      properties:
+        currentPartitionCount:
+          type: integer
+        newPartitionCount:
+          type: integer
+      required:
+      - currentPartitionCount
+      - newPartitionCount
+      type: object
+    PayloadsKafkaConsumerGroupTopic:
+      properties:
+        partitions:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaConsumerGroupTopicPartition'
+          type:
+          - array
+          - 'null'
+        topic:
+          type: string
+      required:
+      - topic
+      - partitions
+      type: object
+    PayloadsKafkaStorageGraphSeries:
+      properties:
+        label:
+          type: string
+        points:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaStorageGraphPoint'
+          type:
+          - array
+          - 'null'
+      required:
+      - label
+      - points
+      type: object
+    ListResponseBodyKafkaCluster:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PayloadsKafkaCluster'
+          type: array
+      required:
+      - items
+      type: object
+  securitySchemes:
+    ApiKey:
+      description: API key passed as a Bearer token in the Authorization header.
+      scheme: bearer
+      type: http

@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   description: External API endpoints for Artie
   title: Artie Data Catalog API
-  version: v1.0.51
+  version: v1.0.139
 servers:
 - url: https://api.artie.com
 security:
@@ -13,11 +13,13 @@ paths:
   /data-catalog/search:
     post:
       description: Searches across the company's data catalog using full-text search.
+      operationId: data_catalog_search
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PayloadsDataCatalogSearchRequest'
+        required: true
       responses:
         '200':
           content:
@@ -30,18 +32,42 @@ paths:
       summary: Search the data catalog
       tags:
       - Data Catalog
-      operationId: postDataCatalogSearch
-      x-operation-id-source: derived
+      x-artie-mcp:
+        destructiveHint: false
+        exposure: exposed
+        idempotentHint: true
+        inputSensitivity: none
+        openWorldHint: false
+        operationId: data_catalog_search
+        outputSensitivity: none
+        readOnlyHint: true
+        requiredScopes:
+        - data_catalog:read
+        retrySemantics: safe
+        title: Search the data catalog
+        triggerDescription: Searches ingested catalog metadata. For live source tables, use connector_fetch_tables.
 components:
   schemas:
-    PayloadsDataCatalogTable:
+    PayloadsDataCatalogDatabase:
       properties:
-        databaseName:
-          type: string
         name:
           type: string
-        schemaName:
+      required:
+      - name
+      type: object
+    PayloadsDataCatalogSearchRequest:
+      properties:
+        query:
           type: string
+      type: object
+    PayloadsDataCatalogMatchedObject:
+      properties:
+        database:
+          $ref: '#/components/schemas/PayloadsDataCatalogDatabase'
+        schema:
+          $ref: '#/components/schemas/PayloadsDataCatalogSchema'
+        table:
+          $ref: '#/components/schemas/PayloadsDataCatalogTable'
       type: object
     PayloadsDataCatalogMatch:
       properties:
@@ -53,20 +79,23 @@ components:
         score:
           format: double
           type: number
+      required:
+      - score
+      - connectorUUID
+      - object
       type: object
-    PayloadsDataCatalogMatchedObject:
+    PayloadsDataCatalogTable:
       properties:
-        database:
-          $ref: '#/components/schemas/PayloadsDataCatalogDatabase'
-        schema:
-          $ref: '#/components/schemas/PayloadsDataCatalogSchema'
-        table:
-          $ref: '#/components/schemas/PayloadsDataCatalogTable'
-      type: object
-    PayloadsDataCatalogSearchRequest:
-      properties:
-        query:
+        databaseName:
           type: string
+        name:
+          type: string
+        schemaName:
+          type: string
+      required:
+      - name
+      - schemaName
+      - databaseName
       type: object
     PayloadsDataCatalogSchema:
       properties:
@@ -74,11 +103,9 @@ components:
           type: string
         name:
           type: string
-      type: object
-    PayloadsDataCatalogDatabase:
-      properties:
-        name:
-          type: string
+      required:
+      - name
+      - databaseName
       type: object
     ListResponseBodyDataCatalogMatch:
       properties:
