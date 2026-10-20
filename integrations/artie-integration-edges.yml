@@ -13,36 +13,6 @@ checked:
 - https://rubygems.org/api/v1
 marketplace_apps: []
 edges:
-- partner_name: AWS Marketplace
-  partner: amazon-web-services
-  partner_match: aggregator
-  type: marketplace
-  marketplace: aws-marketplace
-  channel: distribution
-  relationship: distribution-channel
-  direction: third-party
-  evidence: https://aws.amazon.com/marketplace/seller-profile?id=seller-wluzjrf5hdd2e
-  listing_count: 1
-  apps:
-  - Artie real-time data replication platform (Cloud)
-  seller_name: Artie
-  detected_by: sweep-cloud-marketplaces.py
-  detected: '2026-10-13'
-- partner_name: Microsoft Azure Marketplace
-  partner: microsoft-azure
-  partner_match: aggregator
-  type: marketplace
-  marketplace: azure-marketplace
-  channel: distribution
-  relationship: distribution-channel
-  direction: third-party
-  evidence: https://azuremarketplace.microsoft.com/en-us/marketplace/apps?search=ArtieTechnologiesInc
-  listing_count: 1
-  apps:
-  - Artie Real-Time Data Replication
-  seller_name: ArtieTechnologiesInc
-  detected_by: sweep-cloud-marketplaces.py
-  detected: '2026-10-13'
 - partner_name: Datadog (own)
   partner: datadog
   partner_match: mirror
@@ -90,5 +60,36 @@ edges:
     detected: '2026-10-18'
   detected_by: sweep-official-sdks.py
   first_seen: '2026-10-18'
+- partner_name: AWS Marketplace
+  partner: amazon-web-services
+  partner_match: aggregator
+  type: marketplace
+  marketplace: aws-marketplace
+  channel: distribution
+  relationship: distribution-channel
+  direction: third-party
+  evidence: https://aws.amazon.com/marketplace/seller-profile?id=seller-wluzjrf5hdd2e
+  listing_count: 2
+  apps:
+  - Artie real-time data replication platform (Cloud)
+  - Artie Growth Plan
+  seller_name: Artie
+  detected_by: sweep-cloud-marketplaces.py
+  detected: '2026-10-13'
+- partner_name: Microsoft Azure Marketplace
+  partner: microsoft-azure
+  partner_match: aggregator
+  type: marketplace
+  marketplace: azure-marketplace
+  channel: distribution
+  relationship: distribution-channel
+  direction: third-party
+  evidence: https://azuremarketplace.microsoft.com/en-us/marketplace/apps?search=ArtieTechnologiesInc
+  listing_count: 1
+  apps:
+  - Artie Real-Time Data Replication
+  seller_name: ArtieTechnologiesInc
+  detected_by: sweep-cloud-marketplaces.py
+  detected: '2026-10-13'
 source:
 - datadog/integrations/datadog-integration-edges.yml
