@@ -64,6 +64,150 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Artie is a company surfaced as a portfolio company of canaan-partners, general-catalyst and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Artie is a real-time data replication platform that streams database changes to cloud data warehouses and lakehouses with sub-minute latency and exactly-once delivery. It captures change data (CDC) from sources such as PostgreSQL, MySQL, MongoDB, Oracle, and DynamoDB and continuously merges them into destinations including Snowflake, BigQuery, Databricks, Redshift, and Apache Iceberg, eliminating the need to build and operate Kafka or Debezium infrastructure. Artie handles advanced backfills, schema evolution, column-level encryption and hashing, data catalog search, PrivateLink/SSH connectivity, and observability, and exposes a REST API plus a webhook event stream so teams can programmatically manage pipelines, connectors, and source readers. Artie is venture-backed by Canaan Partners and General Catalyst.
 
-Backed by: canaan-partners, general-catalyst
+**Areas:** Company · Data Replication · Change Data Capture · Data Integration · ETL · Streaming · Database · Data Warehouse · Data Engineering
+
+## Artie on APIs.io
+
+Everything profiled for Artie is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/artie/](https://apis.io/providers/artie/)** — or go straight to one of the APIs or properties below.
+
+### APIs (10)
+
+- [Artie Column Hashing Salts API](https://apis.io/apis/artie/artie-column-hashing-salts-api/) — The Column Hashing Salts API from Artie — 3 operation(s) for column hashing salts.
+- [Artie Connectors API](https://apis.io/apis/artie/artie-connectors-api/) — The Connectors API from Artie — 14 operation(s) for connectors.
+- [Artie Data Catalog API](https://apis.io/apis/artie/artie-data-catalog-api/) — The Data Catalog API from Artie — 1 operation(s) for data catalog.
+- [Artie Encryption Keys API](https://apis.io/apis/artie/artie-encryption-keys-api/) — The Encryption Keys API from Artie — 2 operation(s) for encryption keys.
+- [Artie Ingestion API Keys API](https://apis.io/apis/artie/artie-ingestion-api-keys-api/) — The Ingestion API Keys API from Artie — 2 operation(s) for ingestion api keys.
+- [Artie Pipelines API](https://apis.io/apis/artie/artie-pipelines-api/) — The Pipelines API from Artie — 10 operation(s) for pipelines.
+- [Artie PrivateLink Connections API](https://apis.io/apis/artie/artie-privatelink-connections-api/) — The PrivateLink Connections API from Artie — 2 operation(s) for privatelink connections.
+- [Artie Source Readers API](https://apis.io/apis/artie/artie-source-readers-api/) — The Source Readers API from Artie — 5 operation(s) for source readers.
+- [Artie SSH Tunnels API](https://apis.io/apis/artie/artie-ssh-tunnels-api/) — The SSH Tunnels API from Artie — 2 operation(s) for ssh tunnels.
+- [Artie API](https://apis.io/apis/artie/artie-artie-api-api/) — The Artie API API from Artie — 0 operation(s) for artie api.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Artie Webhooks](https://apis.io/asyncapis/artie/artie-webhooks-asyncapi/)
+
+#### Event channels (1)
+
+Individual events and webhooks the provider emits.
+
+- [{subscriberUrl}](https://apis.io/channels/artie/subscriberurl/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [artie](https://apis.io/servers/artie/artie/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Artie Agentic Access](https://apis.io/agentic-access/artie/artie-agentic-access/)
+
+#### Collections (9)
+
+Postman and Open Collection request collections.
+
+- [Artie Column Hashing Salts API](https://apis.io/collections/artie/open-artie-column-hashing-salts-api/)
+- [Artie Column Hashing Salts Connectors API](https://apis.io/collections/artie/open-artie-connectors-api/)
+- [Artie Column Hashing Salts Data Catalog API](https://apis.io/collections/artie/open-artie-data-catalog-api/)
+- [Artie Column Hashing Salts Encryption Keys API](https://apis.io/collections/artie/open-artie-encryption-keys-api/)
+- [Artie Column Hashing Salts Ingestion API Keys API](https://apis.io/collections/artie/open-artie-ingestion-api-keys-api/)
+- [Artie Column Hashing Salts Pipelines API](https://apis.io/collections/artie/open-artie-pipelines-api/)
+- [Artie Column Hashing Salts PrivateLink Connections API](https://apis.io/collections/artie/open-artie-privatelink-connections-api/)
+- [Artie Column Hashing Salts Source Readers API](https://apis.io/collections/artie/open-artie-source-readers-api/)
+- [Artie Column Hashing Salts SSH Tunnels API](https://apis.io/collections/artie/open-artie-ssh-tunnels-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Artie Openapi Overlay](https://apis.io/overlays/artie/artie-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Artie Authentication](https://apis.io/security/artie/artie-authentication/)
+- [Artie Domain Security](https://apis.io/security/artie/artie-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.artie.com)
+- [Documentation](https://www.artie.com/docs)
+- [Getting started](https://www.artie.com/docs/quickstart)
+- [API reference](https://www.artie.com/docs/api-reference)
+- [Pricing](https://www.artie.com/pricing)
+- [Sign up](https://app.artie.com/signup)
+- [Support](https://www.artie.com/contact)
+- [Blog](https://www.artie.com/blogs)
+- [Trust centre](https://trust.artie.com/)
+- [Terms of service](https://www.artie.com/docs/legal/terms-of-service)
+- [Privacy policy](https://www.artie.com/docs/legal/privacy-policy)
+- [GitHub](https://github.com/artie-labs)
+
+## API Evangelist rating
+
+**Kin Score 48.4** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 60.8 |
+| Contract governance | 4.5 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 56.5 |
+| Access clarity | 46.1 |
+
+**Agent readiness 25.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 29.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/artie/](https://apis.io/providers/artie/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Artie: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/artie/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
